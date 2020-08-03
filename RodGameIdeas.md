@@ -42,5 +42,5 @@ These are some of the ideas I have come up with for the Game
 
 ##### Weapons
 - Lasers or some other weapon that attacks at the speed of light
-- Missles they take a little time to get to their target based on the speed/quality of the middle
+- Missles they take a little time to get to their target based on the speed/quality of the missile
 -

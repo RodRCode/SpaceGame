@@ -8,6 +8,7 @@ These are some of the ideas I have come up with for the Game
 ##### Bad ending:
 - You get killed by pirates or whatnot
 - You die between planets because you ran out of fuel, or you run out of money and can't sell enough of anything to buy a ship and/or fuel to do trading
+- You pick up space dysentery and die 
 
 ##### Neutral Ending:
 - You age out

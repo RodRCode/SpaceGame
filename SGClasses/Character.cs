@@ -9,5 +9,7 @@ namespace SGClasses
     public class Character
     {
         // Name, Age, Age Counter, Money
+
+
     }
 }

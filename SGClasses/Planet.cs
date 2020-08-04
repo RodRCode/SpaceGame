@@ -2,7 +2,7 @@
 
 namespace SGClasses
 {
-    public class Class1
+    public class Planet
     {
     }
 }

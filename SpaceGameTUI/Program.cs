@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using SGClasses;
 
 namespace SpaceGameTUI
 {
@@ -6,7 +9,7 @@ namespace SpaceGameTUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
+            Console.WriteLine("Hello Space Gamel");
+        }        
     }
 }

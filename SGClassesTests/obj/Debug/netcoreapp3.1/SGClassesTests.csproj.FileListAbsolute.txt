@@ -1,0 +1,4 @@
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClassesTests\obj\Debug\netcoreapp3.1\SGClassesTests.csprojAssemblyReference.cache
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClassesTests\obj\Debug\netcoreapp3.1\SGClassesTests.AssemblyInfoInputs.cache
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClassesTests\obj\Debug\netcoreapp3.1\SGClassesTests.AssemblyInfo.cs
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClassesTests\obj\Debug\netcoreapp3.1\SGClassesTests.csproj.CoreCompileInputs.cache

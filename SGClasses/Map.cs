@@ -4,6 +4,8 @@ using System.Text;
 
 namespace SGClasses
 {
+    // Map map = new Map(8, 5);
+
     class Map
     {
         public readonly int Width;
@@ -20,5 +22,7 @@ namespace SGClasses
             return point.X >= 0 && point.X < Width &&
                    point.Y >= 0 && point.Y < Height;
         }
+
+      
     }
 }

@@ -10,7 +10,7 @@ namespace SGClasses
         {
             if (!map.OnMap(this))
             {
-                throw new OutOfBoundsException(this + " is outside the boundaries of the map.");
+                //throw new OutOfBoundsException(this + " is outside the boundaries of the map.");
             }
         }
 

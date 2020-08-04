@@ -1,0 +1,16 @@
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SpaceGameTUI.exe
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SpaceGameTUI.deps.json
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SpaceGameTUI.runtimeconfig.json
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SpaceGameTUI.runtimeconfig.dev.json
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SpaceGameTUI.dll
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SpaceGameTUI.pdb
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SGClasses.dll
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\bin\Debug\netcoreapp3.1\SGClasses.pdb
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.csprojAssemblyReference.cache
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.AssemblyInfoInputs.cache
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.AssemblyInfo.cs
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.csproj.CoreCompileInputs.cache
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.csproj.CopyComplete
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.dll
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.pdb
+C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SpaceGameTUI\obj\Debug\netcoreapp3.1\SpaceGameTUI.genruntimeconfig.cache

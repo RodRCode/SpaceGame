@@ -4,10 +4,7 @@ using System.Text;
 
 namespace SGClasses
 {
-
-
-    public class Character
+    public class Tester
     {
-        // Name, Age, Age Counter, Money
     }
 }

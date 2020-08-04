@@ -2,7 +2,7 @@
 
 namespace SGClasses
 {
-    public class Planet
+    public class Ship
     {
         // TODO Type of ship, Name, Total Capacity, Speed, Fuel Level, Offence, Defence, Shield, Cargo hold?
     }

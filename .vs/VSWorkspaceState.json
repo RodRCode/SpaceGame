@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SGClasses",
+    "\\SpaceGameTUI"
   ],
+  "SelectedNode": "\\SGClasses\\Ship.cs",
   "PreviewInSolutionExplorer": false
 }

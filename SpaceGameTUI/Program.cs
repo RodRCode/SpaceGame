@@ -44,8 +44,10 @@ namespace SpaceGameTUI
             double offence = 1;
             double defense = 1;
             double shield = 1;
+            int x = 1;
+            int y = 1;
 
-            var ship = new Ship(shipType, shipName, totalCapacity, speed, fuelLevel, offence, defense, shield);
+            var ship = new Ship(shipType, shipName, totalCapacity, speed, fuelLevel, offence, defense, shield, x, y);
 
             Display.DisplayShipInfo(ship);
 

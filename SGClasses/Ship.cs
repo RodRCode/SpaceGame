@@ -5,7 +5,7 @@ namespace SGClasses
     public class Ship
     {
         // TODO Type of ship, Name, Total Capacity, Speed, Fuel Level, Offence, Defence, Shield, Cargo hold?
-        
+
         public readonly int shipType;
         public readonly string shipName;
         public readonly double totalCapacity;
@@ -14,22 +14,22 @@ namespace SGClasses
         public readonly double offence;
         public readonly double defense;
         public readonly double shield;
-        public readonly int x;
-        public readonly int y;
+        public Location location;
+     //      public readonly int x;
+     //      public readonly int y;
 
-        public Ship (int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield, int x, int y)
+        public Ship(int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield, Location location)
         {
-        this.shipType = shipType;
-        this.shipName = shipName;
-        this.totalCapacity = totalCapacity;
-        this.speed = speed;
-        this.fuelLevel = fuelLevel;
-        this.offence = offence;
-        this.defense = defense;
-        this.shield = shield;
-            this.x = x;
-            this.y = y;
+            this.shipType = shipType;
+            this.shipName = shipName;
+            this.totalCapacity = totalCapacity;
+            this.speed = speed;
+            this.fuelLevel = fuelLevel;
+            this.offence = offence;
+            this.defense = defense;
+            this.shield = shield;
+            this.location = location;
         }
-        
+
     }
 }

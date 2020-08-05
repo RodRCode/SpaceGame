@@ -29,11 +29,12 @@ namespace SpaceGameTUI
 
             Console.WriteLine("\r\n\r\n\r\n");
 
-            new Character(name, type, age, money);
+            var player = new Character(name, type, age, money);
 
-            Display.DisplayYourStatus();
+            Display.DisplayYourStatus(player);
             
-            Display.DisplayPlanetInfo();
+            Display.Ship
+            //DisplayPlanetInfo();
 
 
         }

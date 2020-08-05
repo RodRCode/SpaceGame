@@ -6,9 +6,7 @@ namespace SGClasses
 {
     public class Display
     {
-        public static object Name { get; private set; }
-        public static object Age { get; private set; }
-        public static object Money { get; private set; }
+        
 
         //System.Console.WriteLine("just a test");
 
@@ -44,14 +42,23 @@ namespace SGClasses
             Console.WriteLine();
             Console.WriteLine("***********************");
         }
-
-        public static void DisplayYourStatus()
+        public static void DisplayShipInfo()
+        {
+            Console.WriteLine("***********************");
+            Console.WriteLine("SHIP INFO");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("***********************");
+        }
+        public static void DisplayYourStatus(Character Player)
         {
             Console.WriteLine("***********************");
             Console.WriteLine("YOUR STATUS");
-            Console.WriteLine($"Name:{Name}");
-            Console.WriteLine($"Age:{Age}");
-            Console.WriteLine($"Money:{Money}");
+            Console.WriteLine($"Name:{Player.Name}");
+            Console.WriteLine($"Age:{Player.Age}");
+            Console.WriteLine($"Money:{Player.Money}");
 
             Console.WriteLine("***********************");
 

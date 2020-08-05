@@ -47,7 +47,7 @@ namespace SpaceGameTUI
 
             var ship = new Ship(shipType, shipName, totalCapacity, speed, fuelLevel, offence, defense, shield);
 
-            Display.DisplayShipInfo();
+            Display.DisplayShipInfo(ship);
 
 
 

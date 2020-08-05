@@ -6,7 +6,7 @@ namespace SGClasses
 {
     
     //checks if the ship is on the map or not?
-    class MapLocation : Point
+    class MapLocation : Location
     {
         public MapLocation(int x, int y, Map map) : base(x, y)
         {

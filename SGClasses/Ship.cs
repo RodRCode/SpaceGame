@@ -25,6 +25,6 @@ namespace SGClasses
         this.defense = defense;
         this.shield = shield;
         }
-
+        
     }
 }

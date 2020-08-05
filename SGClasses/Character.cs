@@ -17,10 +17,10 @@ namespace SGClasses
         
         public Character(string name, int characterType, double age, double money)
         {
-            Name = name;
-            CharacterType = characterType;
-            Age = age;
-            Money = money;
+            this.Name = name;
+            this.CharacterType = characterType;
+            this.Age = age;
+            this.Money = money;
         }
 
     }

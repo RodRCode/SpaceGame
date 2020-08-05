@@ -22,7 +22,7 @@ namespace SGClasses
             Height = height;
         }
 
-        public bool OnMap(Point point)
+        public bool OnMap(Location point)
         {
             return point.X >= 0 && point.X < Width &&
                    point.Y >= 0 && point.Y < Height;

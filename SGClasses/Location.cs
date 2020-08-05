@@ -4,12 +4,48 @@ using System.Text;
 
 namespace SGClasses
 {
-    class Point
+    public class Location
     {
-        public readonly int X;
-        public readonly int Y;
+        public static int x;
+        public static int y;
 
-        public Point(int x, int y)
+        public Location (int x, int y)
+        {
+            this.x = x;               
+        }
+
+        public Location()
+        {
+
+        }
+
+        public Location()
+        {
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        public Location(int x, int y)
         {
             X = x;
             Y = y;
@@ -22,12 +58,12 @@ namespace SGClasses
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Point))
+            if (!(obj is Location))
             {
                 return false;
             }
 
-            Point that = obj as Point;
+            Location that = obj as Location;
 
             return this.X == that.X && this.Y == that.Y;
         }
@@ -42,7 +78,7 @@ namespace SGClasses
             return (int)Math.Sqrt(Math.Pow(X - x, 2) + Math.Pow(Y - y, 2));
         }
 
-        public int DistanceTo(Point point)
+        public int DistanceTo(Location point)
         {
             return DistanceTo(point.X, point.Y);
         }

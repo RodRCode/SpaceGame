@@ -14,7 +14,10 @@ namespace SGClasses
         public readonly double offence;
         public readonly double defense;
         public readonly double shield;
-        public Ship (int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield)
+        public readonly int x;
+        public readonly int y;
+
+        public Ship (int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield, int x, int y)
         {
         this.shipType = shipType;
         this.shipName = shipName;
@@ -24,6 +27,8 @@ namespace SGClasses
         this.offence = offence;
         this.defense = defense;
         this.shield = shield;
+            this.x = x;
+            this.y = y;
         }
         
     }

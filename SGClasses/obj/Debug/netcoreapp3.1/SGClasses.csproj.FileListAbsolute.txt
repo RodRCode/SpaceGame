@@ -1,9 +1,0 @@
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\obj\Debug\netcoreapp3.1\SGClasses.csprojAssemblyReference.cache
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\obj\Debug\netcoreapp3.1\SGClasses.AssemblyInfoInputs.cache
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\obj\Debug\netcoreapp3.1\SGClasses.AssemblyInfo.cs
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\obj\Debug\netcoreapp3.1\SGClasses.csproj.CoreCompileInputs.cache
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\bin\Debug\netcoreapp3.1\SGClasses.deps.json
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\bin\Debug\netcoreapp3.1\SGClasses.dll
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\bin\Debug\netcoreapp3.1\SGClasses.pdb
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\obj\Debug\netcoreapp3.1\SGClasses.dll
-C:\Users\Jay\Source\Repos\RodRCode\SpaceGame\SGClasses\obj\Debug\netcoreapp3.1\SGClasses.pdb

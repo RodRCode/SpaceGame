@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SpaceGameTUI\\SpaceGameTUI.csproj",
+      "projectUniqueName": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SpaceGameTUI\\SpaceGameTUI.csproj",
       "projectName": "SpaceGameTUI",
-      "projectPath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SpaceGameTUI\\SpaceGameTUI.csproj",
+      "projectPath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SpaceGameTUI\\SpaceGameTUI.csproj",
       "packagesPath": "C:\\Users\\Jay\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SpaceGameTUI\\obj\\",
+      "outputPath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SpaceGameTUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jay\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,8 +52,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj": {
-              "projectPath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj"
+            "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj": {
+              "projectPath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj"
             }
           }
         }

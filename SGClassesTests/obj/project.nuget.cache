@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oEnnyC2TVD+nqgwVYlvmcPO8tspoF+r8S1XX9I+QtS/MQ6eLXBG8xPQ7Ha6uXlnCcYiYv1S2MFc/mZdDHRryqQ==",
+  "dgSpecHash": "WXE5R8pbGdIRmqSSaf4jtNXjqtnJUOTUUGnC8BXW6/T174puhZpTChmeWq7C6TyLtFJ8IUSzCS4MaGQqaeIp2Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClassesTests\\SGClassesTests.csproj",
+  "projectFilePath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClassesTests\\SGClassesTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jay\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\Jay\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

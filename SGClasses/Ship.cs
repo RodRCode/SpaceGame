@@ -24,7 +24,7 @@ namespace SGClasses
         Offence = offence;
         Defense = defense;
         Shield = shield;
-    }
+        }
 
     }
 }

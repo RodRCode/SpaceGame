@@ -4,7 +4,12 @@ using System.Text;
 
 namespace SGClasses
 {
-    public class Tester
+    public class TradingProcess
     {
+        // counter for money
+        
+
+
+
     }
 }

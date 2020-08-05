@@ -5737,11 +5737,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClassesTests\\SGClassesTests.csproj",
+      "projectUniqueName": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClassesTests\\SGClassesTests.csproj",
       "projectName": "SGClassesTests",
-      "projectPath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClassesTests\\SGClassesTests.csproj",
+      "projectPath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClassesTests\\SGClassesTests.csproj",
       "packagesPath": "C:\\Users\\Jay\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClassesTests\\obj\\",
+      "outputPath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClassesTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jay\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5757,8 +5757,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj": {
-              "projectPath": "C:\\Users\\Jay\\Source\\Repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj"
+            "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj": {
+              "projectPath": "C:\\Users\\Jay\\source\\repos\\RodRCode\\SpaceGame\\SGClasses\\SGClasses.csproj"
             }
           }
         }

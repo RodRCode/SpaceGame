@@ -5,9 +5,14 @@ using System.Text;
 namespace SGClasses
 {
     // Map map = new Map(8, 5);
+    //start space map at 70 x 30 light years
+    //grahical version will have status display at right that is 20 wide.
 
     class Map
     {
+        // Map map = new Map(x, y); 
+        // How do we call/use this class and method to create the graphical representation of it. 
+
         public readonly int Width;
         public readonly int Height;
 

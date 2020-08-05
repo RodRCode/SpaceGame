@@ -4,6 +4,13 @@ namespace SGClasses
 {
     public class Planet
     {
-        // TODO Type of ship, Name, Total Capacity, Speed, Fuel Level, Offence, Defence, Shield, Cargo hold?
+        //public readonly string Name;
+        //earth is at 1, 1(top left)
+        
+        //public planet()
+       // {
+           // Name = name;
+           
+       // }
     }
 }

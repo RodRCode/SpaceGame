@@ -42,14 +42,14 @@ namespace SGClasses
             Console.WriteLine();
             Console.WriteLine("***********************");
         }
-        public static void DisplayShipInfo(ship Ship)
+        public static void DisplayShipInfo(Ship ship)
         {
             Console.WriteLine("***********************");
             Console.WriteLine("SHIP INFO");
-            Console.WriteLine(shipName);
-            Console.WriteLine(totalCapacity);
-            Console.WriteLine(speed);
-            Console.WriteLine(fuelLevel);
+            Console.WriteLine(ship.shipName);
+            Console.WriteLine(ship.totalCapacity);
+            Console.WriteLine(ship.speed);
+            Console.WriteLine(ship.fuelLevel);
             Console.WriteLine("***********************");
             
         }

@@ -7,20 +7,22 @@ namespace SpaceGameTUI
 {
     class Program
     {
+        public var earth { public get ; private set};
+
+        PopulatePlanets();
+
         static void Main(string[] args)
         {
-
+                      
             // Application.Init();
 
-            //Planet locations 
+            Planet.InitialzePlanets();
 
-            // planet 1 - 1,1
-            // planet 2 - 37, 27
-            // planet 3 - 13, 8
-            // planet 4 - 25, 9
-            // planet 5 - 9, 20
-            // planet 6 - 47,27
+            Console.WriteLine(earth);
 
+            
+            
+            Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = Console.ReadLine();
             int type = 1;
@@ -33,7 +35,7 @@ namespace SpaceGameTUI
 
             Display.DisplayYourStatus(player);
             
-            Display.Ship
+            //Display.Ship
             //DisplayPlanetInfo();
 
 

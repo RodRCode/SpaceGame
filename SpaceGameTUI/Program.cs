@@ -22,7 +22,7 @@ namespace SpaceGameTUI
 
             foreach (var planet in planets)
             {
-                Console.WriteLine(planet.name, "located at X:", planet.x, " Y: ", planet.y);
+                Console.WriteLine($"({ planet.name}, located at X: { planet.x},  Y: { planet.y}");
             }
             int type = 1;
             double age = 18;
@@ -34,8 +34,21 @@ namespace SpaceGameTUI
 
             Display.DisplayYourStatus(player);
 
-            //Display.Ship
-            //DisplayPlanetInfo();
+            //Display Ship
+            
+            int shipType = 1;
+            string shipName = "funship";
+            double totalCapacity = 1000;
+            double speed = 1;
+            double fuelLevel = 100;
+            double offence = 1;
+            double defense = 1;
+            double shield = 1;
+
+            var ship = new Ship(shipType, shipName, totalCapacity, speed, fuelLevel, offence, defense, shield);
+
+            Display.DisplayShipInfo();
+
 
 
         }

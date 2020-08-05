@@ -14,7 +14,7 @@ namespace SGClasses
         public readonly double Offence;
         public readonly double Defense;
         public readonly double Shield;
-        public Ship (int shiptype, string shipname, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield)
+        public Ship (int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield)
         {
         ShipType = shiptype;
         ShipName = shipname;

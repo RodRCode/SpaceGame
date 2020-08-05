@@ -7,24 +7,23 @@ namespace SpaceGameTUI
 {
     class Program
     {
-        public var earth { public get ; private set};
-
-        PopulatePlanets();
 
         static void Main(string[] args)
         {
-                      
+
             // Application.Init();
 
-            Planet.InitialzePlanets();
+            var planets = Planet.PopulatePlanets();
 
-            Console.WriteLine(earth);
 
-            
-            
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = Console.ReadLine();
+
+            foreach (var planet in planets)
+            {
+                Console.WriteLine(planet.name, "located at X:", planet.x, " Y: ", planet.y);
+            }
             int type = 1;
             double age = 18;
             double money = 1000;
@@ -34,7 +33,7 @@ namespace SpaceGameTUI
             var player = new Character(name, type, age, money);
 
             Display.DisplayYourStatus(player);
-            
+
             //Display.Ship
             //DisplayPlanetInfo();
 

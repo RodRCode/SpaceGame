@@ -18,7 +18,7 @@ namespace SGClasses
             this.x = x;
             this.y = y;
         }
-        public static PopulatePlanets()
+        public static List<Planet> PopulatePlanets()
         {
             List<Planet> PlanetList = new List<Planet>();
             

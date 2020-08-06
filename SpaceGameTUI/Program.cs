@@ -46,21 +46,21 @@ namespace SpaceGameTUI
             double offence = 1;
             double defense = 1;
             double shield = 1;
-            int x = 1;
-            int y = 1;
+            Location shipLocation = new Location(1, 1);
 
-            var ship = new Ship(shipType, shipName, totalCapacity, speed, fuelLevel, offence, defense, shield, x, y);
+
+            var ship = new Ship(shipType, shipName, totalCapacity, speed, fuelLevel, offence, defense, shield, shipLocation);
 
             Display.DisplayShipInfo(ship);
 
 
+            int consoleWidth = 140;
+            int consoleHeight = 40;
 
-          
-
-            Console.SetWindowSize(140, 40);
+            Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();
 
-            var banner = new Dialog(root) { Text = "SPACE HAWKER", Width = 136, Height = 7, Top = 2, Left = 2, Border = BorderStyle.Thick };
+            var banner = new Dialog(root) { Text = "SPACE HAWKER", Width = consoleWidth-4, Height = 7, Top = 2, Left = 2, Border = BorderStyle.Thick };
             new Label(banner) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
             new Label(banner) { Text = "AGE: " + player.Age, Top = 2, Left = 4 };
             new Label(banner) { Text = "Bank Account" + player.Money, Top = 3, Left = 4 };

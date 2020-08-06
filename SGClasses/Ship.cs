@@ -15,8 +15,7 @@ namespace SGClasses
         public readonly double defense;
         public readonly double shield;
         public Location location;
-     //      public readonly int x;
-     //      public readonly int y;
+
 
         public Ship(int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield, Location location)
         {

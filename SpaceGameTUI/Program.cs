@@ -24,7 +24,7 @@ namespace SpaceGameTUI
 
             foreach (var planet in planets)
             {
-                Console.WriteLine($"({ planet.name}, located at X: { planet.x},  Y: { planet.y}");
+                Console.WriteLine($"({ planet.name}, located at X: { planet.location.x},  Y: { planet.location.y}");
             }
             int type = 1;
             double age = 18;

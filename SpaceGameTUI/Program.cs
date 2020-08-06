@@ -64,41 +64,62 @@ namespace SpaceGameTUI
             Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();
 
-            var banner = new Dialog(root) { Text = "SPACE HAWKER", Width = 48, Height = 46, Top = 2, Left = 98, Border = BorderStyle.Thick };
-            new Label(banner) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
-            new Label(banner) { Text = "AGE: " + player.Age, Top = 2, Left = 4 };
-            new Label(banner) { Text = "Bank Account" + player.Money, Top = 3, Left = 4 };
-            new Label(banner) { Text = "Name: " + player.Name, Top = 3, Left = 4 };
-            new Label(banner) { Text = "AGE: " + player.Age, Top = 4, Left = 4 };
-            new Label(banner) { Text = "Bank Account" + player.Money, Top = 5, Left = 4 };
-            new Label(banner) { Text = "Name: " + player.Name, Top = 6, Left = 4 };
-            new Label(banner) { Text = "AGE: " + player.Age, Top = 7, Left = 4 };
-            new Label(banner) { Text = "Bank Account" + player.Money, Top = 8, Left = 4 };
-            new Label(banner) { Text = "Name: " + player.Name, Top = 9, Left = 4 };
-            new Label(banner) { Text = "AGE: " + player.Age, Top = 10, Left = 4 };
-            new Label(banner) { Text = "Bank Account" + player.Money, Top = 11, Left = 4 };
-            new Label(banner) { Text = "Name: " + player.Name, Top = 12, Left = 4 };
-            new Label(banner) { Text = "AGE: " + player.Age, Top = 13, Left = 4 };
-            new Label(banner) { Text = "Bank Account" + player.Money, Top = 14, Left = 4 };
+            var dialog = new Dialog(root) { Text = "SPACE HAWKER", Width = 48, Height = 46, Top = 2, Left = 98, Border = BorderStyle.Thick };
+            new Label(dialog) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
+            new Label(dialog) { Text = "AGE: " + player.Age, Top = 2, Left = 4 };
+            new Label(dialog) { Text = "Bank Account" + player.Money, Top = 3, Left = 4 };
+            new Label(dialog) { Text = "Name: " + player.Name, Top = 3, Left = 4 };
+            new Label(dialog) { Text = "AGE: " + player.Age, Top = 4, Left = 4 };
+            new Label(dialog) { Text = "Bank Account" + player.Money, Top = 5, Left = 4 };
+            new Label(dialog) { Text = "Name: " + player.Name, Top = 6, Left = 4 };
+            new Label(dialog) { Text = "AGE: " + player.Age, Top = 7, Left = 4 };
+            new Label(dialog) { Text = "Bank Account" + player.Money, Top = 8, Left = 4 };
+            new Label(dialog) { Text = "Name: " + player.Name, Top = 9, Left = 4 };
+            new Label(dialog) { Text = "AGE: " + player.Age, Top = 10, Left = 4 };
+            new Label(dialog) { Text = "Bank Account" + player.Money, Top = 11, Left = 4 };
+            new Label(dialog) { Text = "Name: " + player.Name, Top = 12, Left = 4 };
+            new Label(dialog) { Text = "AGE: " + player.Age, Top = 13, Left = 4 };
+            new Label(dialog) { Text = "Bank Account" + player.Money, Top = 14, Left = 4 };
+            
+            
+            
+            var list = new ListBox(dialog) { Top = 20, Left = 4, Width = 32, Height = 15, Border = BorderStyle.Thin };
 
-            //var button = new Button(dialog) { Text = "Play", Top = 4, Left = 6 };
-            //var button2 = new Button(dialog) { Text = "Click", Top = 4, Left = 18 };
-            //var list = new ListBox(dialog) { Top = 10, Left = 4, Width = 32, Height = 6, Border = BorderStyle.Thin };
-            //var line = new VerticalLine(dialog) { Top = 4, Left = 40, Width = 1, Height = 6, Border = BorderStyle.Thick };
-            //var dialog2 = new Dialog(root) { Text = "ooooh", Width = 32, Height = 5, Top = 6, Left = 6, Border = BorderStyle.Thick, Visible = false };
-            //var button3 = new Button(dialog2) { Text = "Bye!", Width = 8, Height = 3, Top = 1, Left = 1 };
+            int i = 0;
+            foreach (var planet in planets)
+            {
+                    list.Items.Add("Planet #"+i+":" +planet.name);
+                i++;
+                
+            }
+            
+            root.Run();
 
-            //button3.Clicked += (s, e) => { dialog2.Hide(); dialog.Show(); };
-            //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
+            /*
+             *var root = new RootWindow();
 
-            //for (var i = 0; i < 25; i++ )
-            //{
-            //    list.Items.Add("Item " + i.ToString());
-            //}
+            var dialog = new Dialog(root) { Text = "Hello World!", Width = 60, Height = 32, Top = 4, Left = 4, Border = BorderStyle.Thick };
+            new Label(dialog) {Text = "This is a dialog!", Top = 2, Left = 2};
+            var button = new Button(dialog) { Text = "Oooooh", Top = 4, Left = 6 };
+            var button2 = new Button(dialog) { Text = "Click", Top = 4, Left = 18 };
+            var list = new ListBox(dialog) { Top = 10, Left = 4, Width = 32, Height = 6, Border = BorderStyle.Thin };
+            var line = new VerticalLine(dialog) { Top = 4, Left = 40, Width = 1, Height = 6, Border = BorderStyle.Thick };
 
-            //button.Clicked += button_Clicked;
+            var dialog2 = new Dialog(root) { Text = "ooooh", Width = 32, Height = 5, Top = 6, Left = 6, Border = BorderStyle.Thick, Visible = false };
+            var button3 = new Button(dialog2) { Text = "Bye!", Width = 8, Height = 3, Top = 1, Left = 1 };
+
+            button3.Clicked += (s, e) => { dialog2.Hide(); dialog.Show(); };
+            button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
+
+            for (var i = 0; i < 25; i++ )
+            {
+                list.Items.Add("Item " + i.ToString());
+            }
+
+            button.Clicked += button_Clicked;
 
             root.Run();
+             * */
 
 
         }

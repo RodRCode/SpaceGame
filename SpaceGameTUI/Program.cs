@@ -5,6 +5,8 @@ using SGClasses;
 using CLRCLI;
 using CLRCLI.Widgets;
 
+//todo  STRETCH GOAL, what happens if we add Tribbles to this? Cargo capacity increases over time?  Ship bursts during travel
+
 namespace SpaceGameTUI
 {
     class Program
@@ -31,6 +33,8 @@ namespace SpaceGameTUI
             double money = 1000;
 
             Console.WriteLine("\r\n\r\n\r\n");
+
+            
 
             var player = new Character(name, type, age, money);
 

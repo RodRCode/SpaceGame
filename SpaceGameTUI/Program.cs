@@ -64,11 +64,22 @@ namespace SpaceGameTUI
             Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();
 
-            var banner = new Dialog(root) { Text = "SPACE HAWKER", Width = consoleWidth-4, Height = 7, Top = 2, Left = 2, Border = BorderStyle.Thick };
+            var banner = new Dialog(root) { Text = "SPACE HAWKER", Width = 48, Height = 46, Top = 2, Left = 98, Border = BorderStyle.Thick };
             new Label(banner) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
             new Label(banner) { Text = "AGE: " + player.Age, Top = 2, Left = 4 };
             new Label(banner) { Text = "Bank Account" + player.Money, Top = 3, Left = 4 };
-
+            new Label(banner) { Text = "Name: " + player.Name, Top = 3, Left = 4 };
+            new Label(banner) { Text = "AGE: " + player.Age, Top = 4, Left = 4 };
+            new Label(banner) { Text = "Bank Account" + player.Money, Top = 5, Left = 4 };
+            new Label(banner) { Text = "Name: " + player.Name, Top = 6, Left = 4 };
+            new Label(banner) { Text = "AGE: " + player.Age, Top = 7, Left = 4 };
+            new Label(banner) { Text = "Bank Account" + player.Money, Top = 8, Left = 4 };
+            new Label(banner) { Text = "Name: " + player.Name, Top = 9, Left = 4 };
+            new Label(banner) { Text = "AGE: " + player.Age, Top = 10, Left = 4 };
+            new Label(banner) { Text = "Bank Account" + player.Money, Top = 11, Left = 4 };
+            new Label(banner) { Text = "Name: " + player.Name, Top = 12, Left = 4 };
+            new Label(banner) { Text = "AGE: " + player.Age, Top = 13, Left = 4 };
+            new Label(banner) { Text = "Bank Account" + player.Money, Top = 14, Left = 4 };
 
             //var button = new Button(dialog) { Text = "Play", Top = 4, Left = 6 };
             //var button2 = new Button(dialog) { Text = "Click", Top = 4, Left = 18 };

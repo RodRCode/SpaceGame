@@ -83,16 +83,20 @@ namespace SpaceGameTUI
             
             
             
-            var list = new ListBox(dialog) { Top = 20, Left = 4, Width = 32, Height = 15, Border = BorderStyle.Thin };
+            var planetList = new ListBox(dialog) { Top = 20, Left = 4, Width = 32, Height = 15, Border = BorderStyle.Thin };
 
-            int i = 0;
+            int i = 1;
             foreach (var planet in planets)
             {
-                    list.Items.Add("Planet #"+i+":" +planet.name);
+                    planetList.Items.Add("Planet #"+i+":  " +planet.name);
                 i++;
                 
             }
+
+            planetList.Clicked += planetList_Clicked; ;
             
+            //list.Clicked += button_Clicked;
+           
             root.Run();
 
             /*
@@ -123,6 +127,13 @@ namespace SpaceGameTUI
 
 
         }
+
+        private static void planetList_Clicked(object sender, EventArgs e)
+        {
+
+            SpaceTravel.DistanceCalculation(1, 2);
+        }
+
         static void button_Clicked(object sender, EventArgs e)
         {
             (sender as Button).RootWindow.Detach();

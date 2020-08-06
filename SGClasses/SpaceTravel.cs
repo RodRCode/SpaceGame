@@ -7,11 +7,11 @@ namespace SGClasses
     public class SpaceTravel
     {
         //receives two locations, then returns the distance between them
-        public static double DistanceCalculation(Location location1, Location location2)
+        public static double DistanceCalculation(int x, int y)
         {
-            int x = location1.x - location2.x;
-            int y = location1.y - location2.y;
-            double distance = Math.Sqrt((x * x) + (y * y));
+            int X = x - y;
+            int Y = x - y;
+            double distance = Math.Sqrt((X * X) + (Y * Y));
             return distance;
         }
 

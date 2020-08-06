@@ -25,6 +25,17 @@ namespace SGClasses
             return distance;
         }
 
+        public static double WarpSpeedCalcuation (double distance, int warpSpeed)
+        {
+            double time = 0.0;
+            double fuel = 0.0;
+            int warpSpeed = 5.0;
+            double distance = 20;
+
+            time = ((warpSpeed) ^ (10 * 3)) + ((10 - warpSpeed) ^ ((-11) / 3));
+            Console.WriteLine(time);
+        }
+
 
     }
 }

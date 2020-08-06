@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceGameTUI", "..\SpaceGam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGClassesTests", "..\SGClassesTests\SGClassesTests.csproj", "{8C8B1E67-1253-47D5-A73B-D804B17161E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLRCLI", "..\..\..\CLRCLI\CLRCLI\CLRCLI.csproj", "{1E712636-00B9-46E0-BE35-419B31F9FD57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLRCLI", "..\CLRCLI\CLRCLI.csproj", "{1E712636-00B9-46E0-BE35-419B31F9FD57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

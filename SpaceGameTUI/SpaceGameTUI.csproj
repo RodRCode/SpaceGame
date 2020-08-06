@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CLRCLI\CLRCLI\CLRCLI.csproj" />
     <ProjectReference Include="..\SGClasses\SGClasses.csproj" />
   </ItemGroup>
 

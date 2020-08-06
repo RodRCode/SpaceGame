@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using SGClasses;
+using CLRCLI;
+using CLRCLI.Widgets;
 
 namespace SpaceGameTUI
 {

@@ -5,26 +5,23 @@ namespace SGClasses
 {
     public class Planet
     {
-        //public readonly string Name;
-        //earth is at 1, 1(top left)
 
-//        public readonly int x;
-//        public readonly int y;
         public readonly string name;
         public readonly Location location;
 
-        public Planet(string name, Location location)
+        // base planet constructor
+        public Planet(string name, Location location) 
         {
             this.name = name;
             this.location = location;
         }
+
+        //populates the list of planets
         public static List<Planet> PopulatePlanets()
         {
             List<Planet> PlanetList = new List<Planet>();
 
             Location temp = new Location(1, 1);
-
-
             var earth = new Planet("Earth", temp);
             temp.x = 13;
             temp.y = 8;

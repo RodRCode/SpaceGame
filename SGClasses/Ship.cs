@@ -11,9 +11,11 @@ namespace SGClasses
         public readonly double totalCapacity;
         public readonly double speed;
         public readonly double fuelLevel;
+        public readonly double fuelCapacity;
         public readonly double offence;
         public readonly double defense;
         public readonly double shield;
+        public readonly bool onPlanet;
         public Location location;
 
 

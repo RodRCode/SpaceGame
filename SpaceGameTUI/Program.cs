@@ -61,8 +61,8 @@ namespace SpaceGameTUI
             //planetList.Clicked += (s, e) => { };
 
 
-            planetList.Clicked += planetList_Clicked(object s, planetList.SelectedItem);
-
+        planetList.Clicked += planetList_Clicked;
+            //(object s, planetList.SelectedItem)
             root.Run();
         }
 
@@ -72,7 +72,7 @@ namespace SpaceGameTUI
             
             //this needs to input the coordinates of the planetlist item selected
             //(sender as Button).RootWindow.Detach();
-            (sender as Button).RootWindow.Show();
+            (sender as Button).RootWindow.Hide();
         }
 
         //static void button_Clicked(object sender, EventArgs e)

@@ -56,7 +56,10 @@ namespace SpaceGameTUI
 
             void getindex(int index)
             {
-                Console.WriteLine($"You selected planet {index} with name {planets[index].name} at location {Location.ToString(planets[index].location)}");
+                    ship.location = new Location(9, 67);
+                //new Label(dialog) { Text = "Ship Location: " + ship.location.x + " , " + ship.location.y, Top = 7, Left = 4 };
+                
+                //Console.WriteLine($"You selected planet {index} with name {planets[index].name} at location {Location.ToString(planets[index].location)}");
             }
             
             planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); };

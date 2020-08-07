@@ -33,6 +33,7 @@ namespace SpaceGameTUI
             Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();
 
+           // var position = new Dialog(root) { };
             var dialog = new Dialog(root) { Text = "SPACE HAWKER", Width = 48, Height = 46, Top = 2, Left = 98, Border = BorderStyle.Thick };
             new Label(dialog) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
             new Label(dialog) { Text = "Charcter Type: " + player.CharacterType, Top = 2, Left = 4 };
@@ -64,11 +65,15 @@ namespace SpaceGameTUI
 
 
              ship.location = planets[index].location;
-                
-             var shiplocationdisplay = new Label(dialog) { Text = ship.location.x + " , " + ship.location.y, Top = 10, Left = 3 };
 
-                //Console.WriteLine($"You selected planet {index} with name {planets[index].name} at location {Location.ToString(planets[index].location)}");
-            
+       
+               // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
+
+            new Label(dialog) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b   Ship Location: " + ship.location.x + " , " + ship.location.y + "    ", Top = 7, Left = 4 };
+                
+           
+               
+
             }
             
             planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); };

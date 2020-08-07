@@ -69,7 +69,7 @@ namespace SpaceGameTUI
        
                // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
 
-            new Label(dialog) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b   Ship Location: " + ship.location.x + " , " + ship.location.y + "    ", Top = 7, Left = 4 };
+            new Label(dialog) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b   Ship Location: " + ship.location.x + " , " + ship.location.y + "   "};
                 
            
                

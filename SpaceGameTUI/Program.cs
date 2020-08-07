@@ -11,6 +11,7 @@ namespace SpaceGameTUI
 {
     class Program
     {
+        public static object SelectedIndex { get; private set; }
 
         static void Main(string[] args)
         {
@@ -20,11 +21,9 @@ namespace SpaceGameTUI
 
             // Application.Init();
 
-            int type = 1;
-            double age = 18;
-            double money = 1000;
 
-            var player = new Character(name, type, age, money);
+
+            var player = new Character(name);
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation);
 
@@ -40,11 +39,13 @@ namespace SpaceGameTUI
             new Label(dialog) { Text = "AGE: " + player.Age, Top = 3, Left = 4 };
             new Label(dialog) { Text = "Money: " + player.Money, Top = 4, Left = 4 };
             new Label(dialog) { Text = "Ship Name: " + ship.shipName, Top = 6, Left = 4 };
-            new Label(dialog) { Text = "Ship Location: " + ship.location, Top = 7, Left = 4 };
+            new Label(dialog) { Text = "Ship Location: " + ship.location.x + " , " + ship.location.y, Top = 7, Left = 4 };
+
             var planets = Planet.PopulatePlanets();
             var planetList = new ListBox(dialog) { Top = 20, Left = 4, Width = 32, Height = 15, Border = BorderStyle.Thin };
-            
+
             int i = 1;
+
             foreach (var planet in planets)
             {
                 planetList.Items.Add("Planet #" + i + ":  " + planet.name);
@@ -57,20 +58,27 @@ namespace SpaceGameTUI
                 Console.WriteLine($"({ planet.name}, located at X: { planet.location.x},  Y: { planet.location.y}");
             }
 
-            planetList.Clicked += planetList_Clicked; 
-              
+            //planetList.Clicked += (s, e) => { };
+
+
+            planetList.Clicked += planetList_Clicked;
+
             root.Run();
         }
 
-        static void planetList_Clicked(object sender, EventArgs e)
+        static void planetList_Clicked (object sender, EventArgs e)
         {
+            
+            
             //this needs to input the coordinates of the planetlist item selected
+            //(sender as Button).RootWindow.Detach();
+            (sender as Button).RootWindow.Show();
         }
 
-        static void button_Clicked(object sender, EventArgs e)
-        {
-            (sender as Button).RootWindow.Detach();
-        }
+        //static void button_Clicked(object sender, EventArgs e)
+        //{
+           // (sender as Button).RootWindow.Detach();
+        //}
 
     }
 

@@ -6,7 +6,7 @@ namespace SGClasses
 {
 
 
-    public class Character
+    public class Player
     {
        
 
@@ -15,7 +15,7 @@ namespace SGClasses
         public readonly double Age;
         public readonly double Money;
         
-        public Character(string name, int characterType = 1, double age = 18, double money = 1000)
+        public Player(string name, int characterType = 1, double age = 18, double money = 1000)
         {
             this.Name = name;
             this.CharacterType = characterType;

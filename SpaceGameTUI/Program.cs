@@ -20,10 +20,10 @@ namespace SpaceGameTUI
             string name = Console.ReadLine();
 
             // Application.Init();
+            
 
 
-
-            var player = new Character(name);
+            var player = new Player(name);
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation);
 
@@ -54,9 +54,14 @@ namespace SpaceGameTUI
 
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
-            planetList.Clicked += (plantList.SelectedIndex  ,e) ;
+            void getindex(int index)
+            {
+                Console.WriteLine($"You selected planet {index} with name {planets[index].name} at location {Location.ToString(planets[index].location)}");
+            }
+            
+            planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); };
 
-            planetList.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
+           // planetList.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
 
 
             //planetList.Clicked += planetList_Clicked;

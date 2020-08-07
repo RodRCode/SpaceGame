@@ -28,7 +28,7 @@ namespace SpaceGameTUI
             var ship = new Ship(shipLocation);
 
             int consoleWidth = 150;
-            int consoleHeight = 50;
+            int consoleHeight = 52;
 
             Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();

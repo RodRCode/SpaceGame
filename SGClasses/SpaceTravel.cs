@@ -10,6 +10,7 @@ namespace SGClasses
 
         public static void TravelToNewPlanet(int x , int y )
         {
+           
             
         }
         

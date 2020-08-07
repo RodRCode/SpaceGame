@@ -61,7 +61,7 @@ namespace SpaceGameTUI
             //planetList.Clicked += (s, e) => { };
 
 
-            planetList.Clicked += planetList_Clicked;
+            planetList.Clicked += planetList_Clicked(object s, planetList.SelectedItem);
 
             root.Run();
         }

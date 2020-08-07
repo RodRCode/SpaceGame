@@ -7,6 +7,13 @@ namespace SGClasses
     public class SpaceTravel
     {
         //receives two locations, then returns the distance between them
+
+        public static void TravelToNewPlanet(int x , int y )
+        {
+            
+        }
+        
+        
         public static double DistanceCalculation(int x, int y)
         {
             int X = x - y;

@@ -16,8 +16,8 @@ namespace SGClasses
         public readonly double shield;
         public Location location;
 
-
-        public Ship(int shipType, string shipName, double totalCapacity, double speed, double fuelLevel, double offence, double defense, double shield, Location location)
+        
+        public Ship(Location location, int shipType = 1, string shipName = "My First Ship", double totalCapacity = 1000, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100)
         {
             this.shipType = shipType;
             this.shipName = shipName;
@@ -29,6 +29,8 @@ namespace SGClasses
             this.shield = shield;
             this.location = location;
         }
+
+
 
     }
 }

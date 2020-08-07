@@ -33,8 +33,10 @@ namespace SpaceGameTUI
             Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();
 
-           // var position = new Dialog(root) { };
-            var dialog = new Dialog(root) { Text = "SPACE HAWKER", Width = 48, Height = 46, Top = 2, Left = 98, Border = BorderStyle.Thick };
+           
+            var dialog = new Dialog(root) { Text = "SPACE HAWKER", Width = 35, Height = 46, Top = 2, Left = 104, Border = BorderStyle.Thick };
+            var dialog2 = new Dialog2(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
+
             new Label(dialog) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
             new Label(dialog) { Text = "Charcter Type: " + player.CharacterType, Top = 2, Left = 4 };
             new Label(dialog) { Text = "AGE: " + player.Age, Top = 3, Left = 4 };

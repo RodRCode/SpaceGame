@@ -42,26 +42,24 @@ namespace SpaceGameTUI
             new Label(dialog) { Text = "Ship Location: " + ship.location.x + " , " + ship.location.y, Top = 7, Left = 4 };
 
             var planets = Planet.PopulatePlanets();
+
+               
             var planetList = new ListBox(dialog) { Top = 20, Left = 4, Width = 32, Height = 15, Border = BorderStyle.Thin };
 
-            int i = 1;
-
             foreach (var planet in planets)
             {
-                planetList.Items.Add("Planet #" + i + ":  " + planet.name);
-                i++;
-
+                string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
+                planetList.Items.Add(textForPlanet);
             }
 
-            foreach (var planet in planets)
-            {
-                Console.WriteLine($"({ planet.name}, located at X: { planet.location.x},  Y: { planet.location.y}");
-            }
+            int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
-            //planetList.Clicked += (s, e) => { };
+            planetList.Clicked += (plantList.SelectedIndex  ,e) ;
+
+            planetList.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
 
 
-        planetList.Clicked += planetList_Clicked;
+            //planetList.Clicked += planetList_Clicked;
             //(object s, planetList.SelectedItem)
             root.Run();
         }

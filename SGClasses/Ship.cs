@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SGClasses
 {
@@ -31,6 +33,10 @@ namespace SGClasses
         }
 
 
+        List<Item> ShipInventory = new List<Item>();
+
 
     }
+
 }
+

@@ -26,6 +26,7 @@ namespace SpaceGameTUI
             var player = new Player(name);
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation);
+            
 
             int consoleWidth = 150;
             int consoleHeight = 52;
@@ -41,7 +42,7 @@ namespace SpaceGameTUI
             new Label(displayMainstatus) { Text = "AGE: " + player.Age, Top = 3, Left = 4 };
             new Label(displayMainstatus) { Text = "Money: " + player.Money, Top = 4, Left = 4 };
             new Label(displayMainstatus) { Text = "Ship Name: " + ship.shipName, Top = 6, Left = 4 };
-            new Label(displayMainstatus) { Text = "Ship Location: " + "Earth " + ship.location.x + " , " + ship.location.y, Top = 7, Left = 4 };
+            new Label(displayMainstatus) { Text = "Ship Location:" + " Earth " + ship.location.x + " , " + ship.location.y, Top = 7, Left = 4 };
             new Label(displayMainstatus) { Text = "Fuel: " + ship.fuelLevel, Top = 8, Left = 4 };
 
 
@@ -57,15 +58,38 @@ namespace SpaceGameTUI
             }
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
+
+            planetList.Clicked += (s, e) => 
+            { getindex(planetList.SelectedIndex); 
+              showPlanetListButton.Show(); 
+              planetList.Hide();
             
-            //new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[3].name + "  " + ship.location.x + " , " + ship.location.y + "   " };
-            planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); showPlanetListButton.Show(); planetList.Hide(); new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "   " }; root.Run(); };
+              new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " }; 
+              root.Run(); 
+            };
+            
+            
             showPlanetListButton.Clicked += TravelButton_Clicked;
             //var displayInventoryList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
 
 
-            var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
+            
+            
+            //int selectedIndexOfPlanetList = planetList.SelectedIndex;
+
+            
+
+
+
             var showSellButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -14, Left = 28, Visible = true };
+
+            
+            
+
+            
+            var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
+
+           
             
             
             var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
@@ -74,34 +98,23 @@ namespace SpaceGameTUI
             var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -9, Left = 4, Visible = true};
             var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -9, Left = 16, Visible = true };
             var showSaveButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -9, Left = 28, Visible = true };
-            
+
 
 
 
             //var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
             //var inventoryList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
+            //var displayInventory = new DisplayInventory(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
 
 
-            
             showBuyButton.Clicked += (s, e) => { };
             showSellButton.Clicked += (s, e) => {};
             showReserved1.Clicked += (s, e) => { };
             showReserved2.Clicked += (s, e) => {};
             showSaveButton.Clicked += (s, e) => {};
 
-            //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
-
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
-            //new Label(displayMap) { Text = plot };
 
-            
-            
-
-
-
-            //var displayInventory = new DisplayInventory(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
-
-            
 
             foreach (var planet in planets)
             {
@@ -109,9 +122,6 @@ namespace SpaceGameTUI
                 new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
 
             }
-
-
-            
 
 
             void getindex(int index)
@@ -122,15 +132,7 @@ namespace SpaceGameTUI
                // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
    
             }
-            
-         
 
-            //travelButton.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
-
-
-         
-
-            //(object s, planetList.SelectedItem)
             root.Run();
         }
 

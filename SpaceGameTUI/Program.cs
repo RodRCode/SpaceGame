@@ -47,10 +47,10 @@ namespace SpaceGameTUI
 
             var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 20, Top = 26, Left = 104, Border = BorderStyle.Thin, Visible = true };
             //var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 5, Width = 43, Height = 20, Border = BorderStyle.Thin };
-            var travelButtonText = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -10, Left = 1, Visible = true};
-            var travelButton = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 19, Border = BorderStyle.Thin, Visible = true };
+            var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -10, Left = 1, Visible = true};
+            var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 19, Border = BorderStyle.Thin, Visible = false };
 
-            travelButtonText.Clicked += (s, e) => { travelButtonText.Hide(); };
+            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); };
             
             //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
 
@@ -75,14 +75,14 @@ namespace SpaceGameTUI
             foreach (var planet in planets)
             {
                 string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
-                travelButton.Items.Add(textForPlanet);
+                planetList.Items.Add(textForPlanet);
                 
             }
 
             
 
 
-            int selectedIndexOfPlanetList = travelButton.SelectedIndex;
+            int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
 
             void getindex(int index)
@@ -102,12 +102,12 @@ namespace SpaceGameTUI
 
             }
             
-         travelButton.Clicked += (s, e) => { getindex(travelButton.SelectedIndex); travelButtonText.Hide(); };
+         planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); showPlanetListButton.Hide(); };
 
          //travelButton.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
 
 
-         travelButton.Clicked += TravelButton_Clicked;
+         planetList.Clicked += TravelButton_Clicked;
 
             //(object s, planetList.SelectedItem)
             root.Run();

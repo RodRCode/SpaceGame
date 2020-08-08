@@ -34,7 +34,7 @@ namespace SpaceGameTUI
             var root = new RootWindow();
 
            
-            var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 2, Left = 104, Border = BorderStyle.Thick };
+            var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
 
             new Label(displayMainstatus) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
             new Label(displayMainstatus) { Text = "Charcter Type: " + player.CharacterType, Top = 2, Left = 4 };
@@ -45,12 +45,12 @@ namespace SpaceGameTUI
 
             
 
-            var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 20, Top = 26, Left = 104, Border = BorderStyle.Thin, Visible = true };
+            var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 20, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
             //var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 5, Width = 43, Height = 20, Border = BorderStyle.Thin };
             var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -10, Left = 1, Visible = true};
             var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 19, Border = BorderStyle.Thin, Visible = false };
 
-            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); };
+            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); showPlanetListButton.Hide(); };
             
             //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
 
@@ -63,14 +63,7 @@ namespace SpaceGameTUI
 
             //var displayInventory = new DisplayInventory(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
 
-
-            
-
-
             var planets = Planet.PopulatePlanets();
-
-               
-           
 
             foreach (var planet in planets)
             {
@@ -79,35 +72,26 @@ namespace SpaceGameTUI
                 
             }
 
-            
-
-
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
 
             void getindex(int index)
             {
-
-            
-                
+   
              ship.location = planets[index].location;
 
-       
                // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
 
             new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[selectedIndexOfPlanetList].name + "  " + ship.location.x + " , " + ship.location.y + "   "};
-                
-           
-               
 
             }
             
-         planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); showPlanetListButton.Hide(); };
+         planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); };
 
-         //travelButton.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
+            //travelButton.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
 
 
-         planetList.Clicked += TravelButton_Clicked;
+         showPlanetListButton.Clicked += TravelButton_Clicked;
 
             //(object s, planetList.SelectedItem)
             root.Run();
@@ -119,6 +103,7 @@ namespace SpaceGameTUI
             //this needs to input the coordinates of the planetlist item selected
             //(sender as Button).RootWindow.Detach();
             //(sender as Button).RootWindow.Show();
+        
         }
 
         //static void button_Clicked(object sender, EventArgs e)

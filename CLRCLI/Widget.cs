@@ -149,7 +149,7 @@ namespace CLRCLI
         }
 
         [XmlElement(typeof(Border)), XmlElement(typeof(Button)), XmlElement(typeof(Checkbox)),
-        XmlElement(typeof(Dialog)), XmlElement(typeof(HorizontalBarGraph)), XmlElement(typeof(HorizontalLine)), XmlElement(typeof(VerticalLine)),
+        XmlElement(typeof(DisplayMainStatus)), XmlElement(typeof(HorizontalBarGraph)), XmlElement(typeof(HorizontalLine)), XmlElement(typeof(VerticalLine)),
         XmlElement(typeof(HorizontalProgressBar)), XmlElement(typeof(Label)), XmlElement(typeof(ListBox)),
         XmlElement(typeof(RadioButton)), XmlElement(typeof(SingleLineTextbox)), XmlElement(typeof(SlideToggle)),
         XmlElement(typeof(Spinner)), XmlElement(typeof(TinySpinner))]

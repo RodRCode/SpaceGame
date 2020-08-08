@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CLRCLI.Widgets
 {
-    public class Dialog : Widget
+    public class DisplayMainStatus : Widget
     {
-        internal Dialog() { }
-        public Dialog(Widget parent)
+        internal DisplayMainStatus() { }
+        public DisplayMainStatus(Widget parent)
             : base(parent)
         {
             Top = 0;

@@ -110,12 +110,6 @@ namespace SpaceGameTUI
 
             //all the stuff to sell inventory (end)  
 
-            
-
-            
-            
-
-            
             var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
 
            

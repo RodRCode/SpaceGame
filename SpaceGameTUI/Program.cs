@@ -46,7 +46,7 @@ namespace SpaceGameTUI
             
 
             var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
-            //var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 5, Width = 43, Height = 20, Border = BorderStyle.Thin };
+            //var displayInventoryList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
 
             var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -15, Left = 4, Visible = true };
             var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -15, Left = 16, Visible = true };
@@ -64,11 +64,11 @@ namespace SpaceGameTUI
 
 
             var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
+            //var inventoryList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
 
-            
 
             showPlanetListButton.Clicked += (s, e) => { planetList.Show();};
-            showBuyButton.Clicked += (s, e) => {};
+            showBuyButton.Clicked += (s, e) => { };
             showSellButton.Clicked += (s, e) => {};
             showReserved1.Clicked += (s, e) => { };
             showReserved2.Clicked += (s, e) => {};
@@ -97,9 +97,9 @@ namespace SpaceGameTUI
 
             foreach (var planet in planets)
             {
-                
-                new Label(displayMap){ Text = "██", Top = planet.location.y , Left = planet.location.x };
-                
+    
+                new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
+
             }
 
 
@@ -114,7 +114,7 @@ namespace SpaceGameTUI
                // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
 
             new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[selectedIndexOfPlanetList].name + "  " + ship.location.x + " , " + ship.location.y + "   "};
-
+                
             }
             
          planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); showPlanetListButton.Show(); planetList.Hide(); root.Run(); };

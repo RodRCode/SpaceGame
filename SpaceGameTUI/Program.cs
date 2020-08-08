@@ -51,8 +51,11 @@ namespace SpaceGameTUI
             var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -15, Left = 4, Visible = true };
             var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -15, Left = 16, Visible = true };
             var showSellButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -15, Left = 28, Visible = true };
+            
+            
+            var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
-
+            
             var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -10, Left = 4, Visible = true};
             var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -10, Left = 16, Visible = true };
             var showSaveButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -10, Left = 28, Visible = true };
@@ -62,16 +65,19 @@ namespace SpaceGameTUI
 
             var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
 
+            
+
             showPlanetListButton.Clicked += (s, e) => { planetList.Show();};
-            showBuyButton.Clicked += (s, e) => { planetList.Show();};
-            showSellButton.Clicked += (s, e) => { planetList.Show();};
-            showReserved1.Clicked += (s, e) => { planetList.Show(); };
-            showReserved2.Clicked += (s, e) => { planetList.Show();};
-            showSaveButton.Clicked += (s, e) => { planetList.Show();};
+            showBuyButton.Clicked += (s, e) => {};
+            showSellButton.Clicked += (s, e) => {};
+            showReserved1.Clicked += (s, e) => { };
+            showReserved2.Clicked += (s, e) => {};
+            showSaveButton.Clicked += (s, e) => {};
 
             //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
 
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
+            //new Label(displayMap) { Text = plot };
 
             
             
@@ -88,6 +94,14 @@ namespace SpaceGameTUI
                 planetList.Items.Add(textForPlanet);
                 
             }
+
+            foreach (var planet in planets)
+            {
+                
+                new Label(displayMap){ Text = "██", Top = planet.location.y , Left = planet.location.x };
+                
+            }
+
 
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
@@ -108,7 +122,7 @@ namespace SpaceGameTUI
             //travelButton.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
 
 
-         showPlanetListButton.Clicked += TravelButton_Clicked;
+         //showPlanetListButton.Clicked += TravelButton_Clicked;
 
             //(object s, planetList.SelectedItem)
             root.Run();
@@ -123,9 +137,14 @@ namespace SpaceGameTUI
         
         }
 
+
+
+
+
+
         //static void button_Clicked(object sender, EventArgs e)
         //{
-           // (sender as Button).RootWindow.Detach();
+        // (sender as Button).RootWindow.Detach();
         //}
 
     }

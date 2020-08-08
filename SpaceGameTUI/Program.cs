@@ -84,9 +84,9 @@ namespace SpaceGameTUI
 
             //all the stuff to sell inventory (start)  
 
-            var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = false };
-            var showSellButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -14, Left = 28, Visible = true };
-            var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
+            var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
+            var showSellButton = new Button(displayInventoryList) { Text = "Sell", Width = 10, Height = 3, Top = -27, Left = 28, Visible = true };
+            var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
             foreach (var planet in planets)
             {
                 string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
@@ -96,7 +96,7 @@ namespace SpaceGameTUI
             int selectedIndexOfInventory = planetList.SelectedIndex;
             //showSellButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
             
-            showSellButton.Clicked += (s, e) => { inventoryList.Show(); inventoryList.SetFocus(); };
+            showSellButton.Clicked += (s, e) => { planetList.Hide();  inventoryList.Show(); inventoryList.SetFocus(); };
             
             planetList.Clicked += (s, e) =>
             {

@@ -56,10 +56,11 @@ namespace SpaceGameTUI
 
             }
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
-            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); };
+            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
+            
             //new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[3].name + "  " + ship.location.x + " , " + ship.location.y + "   " };
             planetList.Clicked += (s, e) => { getindex(planetList.SelectedIndex); showPlanetListButton.Show(); planetList.Hide(); new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "   " }; root.Run(); };
-
+            showPlanetListButton.Clicked += TravelButton_Clicked;
             //var displayInventoryList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
 
 
@@ -127,7 +128,7 @@ namespace SpaceGameTUI
             //travelButton.Clicked += (s, e) => { planetList.SelectedIndex { get; private set; } = Menu.currentSelection;};
 
 
-         //showPlanetListButton.Clicked += TravelButton_Clicked;
+         
 
             //(object s, planetList.SelectedItem)
             root.Run();
@@ -137,8 +138,8 @@ namespace SpaceGameTUI
         {
 
             //this needs to input the coordinates of the planetlist item selected
-            //(sender as Button).RootWindow.Detach();
-            //(sender as Button).RootWindow.Show();
+            // (sender as Button).RootWindow.Show();
+            (sender as Button).RootWindow.Show();
         
         }
 

@@ -15,11 +15,18 @@ namespace SpaceGameTUI
 
         static void Main(string[] args)
         {
+            int consoleWidth = 150;
+            int consoleHeight = 52;
+
+            Console.SetWindowSize(consoleWidth, consoleHeight);
+
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = Console.ReadLine();
 
             // Application.Init();
+
+            Display.CreateStarField();
             
 
 
@@ -28,10 +35,6 @@ namespace SpaceGameTUI
             var ship = new Ship(shipLocation);
             
 
-            int consoleWidth = 150;
-            int consoleHeight = 52;
-
-            Console.SetWindowSize(consoleWidth, consoleHeight);
             var root = new RootWindow();
 
            // All the stuff to display main game info (start)

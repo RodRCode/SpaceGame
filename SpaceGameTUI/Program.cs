@@ -23,6 +23,7 @@ namespace SpaceGameTUI
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = Console.ReadLine();
+            Console.Beep();
 
             // Application.Init();
 

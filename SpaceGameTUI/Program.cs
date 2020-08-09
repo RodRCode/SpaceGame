@@ -26,13 +26,9 @@ namespace SpaceGameTUI
 
             // Application.Init();
 
-
-
-
             var player = new Player(name);
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation);
-
 
             var root = new RootWindow();
 
@@ -90,12 +86,15 @@ namespace SpaceGameTUI
             var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
             var showSellButton = new Button(displayInventoryList) { Text = "Sell", Width = 10, Height = 3, Top = -27, Left = 28, Visible = true };
             var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
-            foreach (var planet in planets)
-            {
-                string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
-                planetList.Items.Add(textForPlanet);
+         
+          // Commented out because the list of planets was already populated  
+          //  foreach (var planet in planets)
+          //  {
+          //      string textForPlanet = planet.name + " location2: " + Location.ToString(planet.location);
+          //      planetList.Items.Add(textForPlanet);
+          //
+          //  }
 
-            }
             int selectedIndexOfInventory = planetList.SelectedIndex;
             //showSellButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 

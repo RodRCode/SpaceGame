@@ -32,22 +32,22 @@ namespace SGClasses
 
         }
 
-        public static void CreateStarField()
-        {
-            var randomX = new Random();
-            var randomY = new Random();
-            var randomColor = new Random();
-
-            for (int i = 0; i < 200; i++)
-            {
-                int x = randomX.Next(3, 94);
-                int y = randomY.Next(2, 48);
-                Console.ForegroundColor = (ConsoleColor)randomColor.Next(0, 15);
-                Console.SetCursorPosition(x, y);
-                Console.Write(".");
-            }
-            Console.ForegroundColor = (ConsoleColor)1;
-        }
+    //    public static void CreateStarField()
+    //    {
+    //        var randomX = new Random();
+    //        var randomY = new Random();
+    //        var randomColor = new Random();
+    //
+    //        for (int i = 0; i < 200; i++)
+    //        {
+    //            int x = randomX.Next(3, 94);
+    //            int y = randomY.Next(2, 48);
+    //            Console.ForegroundColor = (ConsoleColor)randomColor.Next(0, 15);
+    //            Console.SetCursorPosition(x, y);
+    //            Console.Write(".");
+    //        }
+    //        Console.ForegroundColor = (ConsoleColor)1;
+    //    }
 
         public static void DisplayPlanetInfo()
         {

@@ -26,18 +26,17 @@ namespace SpaceGameTUI
 
             // Application.Init();
 
-            Display.CreateStarField();
-            
+
 
 
             var player = new Player(name);
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation);
-            
+
 
             var root = new RootWindow();
 
-           // All the stuff to display main game info (start)
+            // All the stuff to display main game info (start)
             var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
 
             new Label(displayMainstatus) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
@@ -65,13 +64,14 @@ namespace SpaceGameTUI
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
-            planetList.Clicked += (s, e) => 
-            { getindex(planetList.SelectedIndex); 
-              showPlanetListButton.Show(); 
-              planetList.Hide();
-            
-              new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " }; 
-              root.Run(); 
+            planetList.Clicked += (s, e) =>
+            {
+                getindex(planetList.SelectedIndex);
+                showPlanetListButton.Show();
+                planetList.Hide();
+
+                new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
+                root.Run();
             };
             //int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
@@ -98,9 +98,9 @@ namespace SpaceGameTUI
             }
             int selectedIndexOfInventory = planetList.SelectedIndex;
             //showSellButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
-            
-            showSellButton.Clicked += (s, e) => { planetList.Hide();  inventoryList.Show(); inventoryList.SetFocus(); };
-            
+
+            showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
+
             planetList.Clicked += (s, e) =>
             {
                 getindex(planetList.SelectedIndex);
@@ -115,13 +115,13 @@ namespace SpaceGameTUI
 
             var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
 
-           
-            
-            
+
+
+
             var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
-            
-            var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -9, Left = 4, Visible = true};
+
+            var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -9, Left = 4, Visible = true };
             var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -9, Left = 16, Visible = true };
             var showSaveButton = new Button(displayPlanetList) { Text = "Save", Width = 10, Height = 3, Top = -9, Left = 28, Visible = true };
 
@@ -134,41 +134,59 @@ namespace SpaceGameTUI
 
 
             //showBuyButton.Clicked += (s, e) => { };
-            showSellButton.Clicked += (s, e) => {};
+            showSellButton.Clicked += (s, e) => { };
             showReserved1.Clicked += (s, e) => { };
-            showReserved2.Clicked += (s, e) => {};
-            showSaveButton.Clicked += (s, e) => {};
+            showReserved2.Clicked += (s, e) => { };
+            showSaveButton.Clicked += (s, e) => { };
 
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
 
+            CreateStarField(displayMap);
 
-            foreach (var planet in planets)
-            {
-    
-                new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
-
-            }
-
+            PutPlanetsOnMap(planets, displayMap);
 
             void getindex(int index)
             {
-   
-             ship.location = planets[index].location;
 
-               // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
-   
+                ship.location = planets[index].location;
+
+                // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
+
             }
 
             root.Run();
         }
 
-        private static void TravelButton_Clicked (object sender, EventArgs e)
+        private static void PutPlanetsOnMap(List<Planet> planets, DisplayMap displayMap)
+        {
+            foreach (var planet in planets)
+            {
+                new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
+            }
+        }
+
+        private static void CreateStarField(DisplayMap displayMap)
+        {
+            var randomX = new Random();
+            var randomY = new Random();
+            var randomColor = new Random();
+
+            for (int i = 0; i < 250; i++)
+            {
+                int x = randomX.Next(0, 98);
+                int y = randomY.Next(0, 48);
+                ConsoleColor starColor = (ConsoleColor)randomColor.Next(0, 15);
+                new Label(displayMap) { Text = ".", Top = y, Left = x, Foreground = starColor };
+            }
+        }
+
+        private static void TravelButton_Clicked(object sender, EventArgs e)
         {
 
             //this needs to input the coordinates of the planetlist item selected
             // (sender as Button).RootWindow.Show();
             (sender as Button).RootWindow.Show();
-        
+
         }
 
 

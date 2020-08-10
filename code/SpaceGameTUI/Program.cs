@@ -15,11 +15,6 @@ namespace SpaceGameTUI
 
         static void Main(string[] args)
         {
-            
-
-
-
-
             int consoleWidth = 150;
             int consoleHeight = 52;
 
@@ -65,47 +60,21 @@ namespace SpaceGameTUI
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
-            //planetList.Clicked += (s, e) =>
-            //{
-             //   getindex(planetList.SelectedIndex);
-            //    showPlanetListButton.Show();
-            //    planetList.Hide();
-            //
-            //    new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
-                
-             //   root.Run();
-            //};
-            //int selectedIndexOfPlanetList = planetList.SelectedIndex;
-
             showPlanetListButton.Clicked += TravelButton_Clicked;
             //all the stuff to populate and choose planets (end)
 
 
+            // Implements game diaglog box
             var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
             var dialogList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 98, Height = 8, Border = BorderStyle.Thin, Visible = true };
-            //dialogList.Items.Add("test                           test                              test");
-
-
-
-
 
             //all the stuff to sell inventory (start)  
-
             var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
             var showSellButton = new Button(displayInventoryList) { Text = "Sell", Width = 10, Height = 3, Top = -27, Left = 28, Visible = true };
             var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
          
-          // Commented out because the list of planets was already populated  
-          //  foreach (var planet in planets)
-          //  {
-          //      string textForPlanet = planet.name + " location2: " + Location.ToString(planet.location);
-          //      planetList.Items.Add(textForPlanet);
-          //
-          //  }
 
             int selectedIndexOfInventory = planetList.SelectedIndex;
-            //showSellButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
-
             showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             planetList.Clicked += (s, e) =>
@@ -117,18 +86,10 @@ namespace SpaceGameTUI
                 new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
                 
                 dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
-                //dialog.Add("test2                           test 2                             test2");
-                
-
                 root.Run();
             };
 
-            //all the stuff to sell inventory (end)  
-
             var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
-
-
-
 
             var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
@@ -137,15 +98,6 @@ namespace SpaceGameTUI
             var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -9, Left = 16, Visible = true };
             var showSaveButton = new Button(displayPlanetList) { Text = "Save", Width = 10, Height = 3, Top = -9, Left = 28, Visible = true };
 
-
-
-
-            //var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
-            //var inventoryList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = false };
-            //var displayInventory = new DisplayInventory(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
-
-
-            //showBuyButton.Clicked += (s, e) => { };
             showSellButton.Clicked += (s, e) => { };
             showReserved1.Clicked += (s, e) => { };
             showReserved2.Clicked += (s, e) => { };
@@ -153,24 +105,13 @@ namespace SpaceGameTUI
 
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
 
-
-
-            
-
-
-
-
             CreateStarField(displayMap);
 
             PutPlanetsOnMap(planets, displayMap);
 
             void getindex(int index)
             {
-
                 ship.location = planets[index].location;
-
-                // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
-
             }
            
             root.Run();
@@ -180,8 +121,7 @@ namespace SpaceGameTUI
         private static void PutPlanetsOnMap(List<Planet> planets, DisplayMap displayMap)
         {
             foreach (var planet in planets)
-            {
-                
+            {   
                 // add an if statement here to make the selected planet a spinner
                 new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
             }
@@ -202,19 +142,13 @@ namespace SpaceGameTUI
             }
         }
 
-        private static void TravelButton_Clicked(object sender, EventArgs e)
-        {
-
-            //this needs to input the coordinates of the planetlist item selected
-            // (sender as Button).RootWindow.Show();
-            (sender as Button).RootWindow.Show();
-
-        }
-
-
-
-
-
+        // commented out for now
+     //   private static void TravelButton_Clicked(object sender, EventArgs e)
+     //   {
+     //       //this needs to input the coordinates of the planetlist item selected
+     //       // (sender as Button).RootWindow.Show();
+     //       (sender as Button).RootWindow.Show();
+     //   }
 
         //static void button_Clicked(object sender, EventArgs e)
         //{
@@ -248,6 +182,4 @@ namespace SpaceGameTUI
 
            root.Run();
             * */
-
-
 }

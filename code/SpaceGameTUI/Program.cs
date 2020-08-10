@@ -16,7 +16,7 @@ namespace SpaceGameTUI
         static void Main(string[] args)
         {
             List<string> dialog = new List<string>();
-
+            dialog.Add("test                           test                              test");
 
 
 
@@ -116,7 +116,7 @@ namespace SpaceGameTUI
 
                 new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
                 dialog.Add($"Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + ", " + ship.location.y + "    ");
-                dialog.Add("test                           test                              test");
+                dialog.Add("test2                           test 2                             test2");
                 
 
                 root.Run();
@@ -152,9 +152,11 @@ namespace SpaceGameTUI
 
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
 
+            
+            
             var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
-            var dialogboxList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
-            var dialogList = new ListBox(displayGameDialog) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            var dialogboxList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 98, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            var dialogList = new ListBox(displayGameDialog) { Top = 1, Left = 0, Width = 98, Height = 8, Border = BorderStyle.Thin, Visible = true };
             
 
 

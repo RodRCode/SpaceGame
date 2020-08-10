@@ -33,8 +33,11 @@ namespace SpaceGameTUI
 
             var root = new RootWindow();
 
+            
+
             // All the stuff to display main game info (start)
             var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
+            var status = new StatusListBox(displayMainStatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
             new Label(displayMainstatus) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
             new Label(displayMainstatus) { Text = "Charcter Type: " + player.CharacterType, Top = 2, Left = 4 };
@@ -49,6 +52,7 @@ namespace SpaceGameTUI
             //all the stuff to populate and choose planets (start)
 
             var planets = Planet.PopulatePlanets();
+
             var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
             var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -14, Left = 4, Visible = true };
             var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
@@ -83,7 +87,7 @@ namespace SpaceGameTUI
                 showPlanetListButton.Show();
                 planetList.Hide();
 
-                new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
+     //           new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
                 
                 dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
                 root.Run();

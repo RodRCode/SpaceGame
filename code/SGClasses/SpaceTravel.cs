@@ -14,6 +14,7 @@ namespace SGClasses
             (double time, double fuel) = WarpSpeedCalcuation(distance, warpSpeed);
             player.Age += time;
             ship.fuelLevel -= fuel;
+            ship.location = newLocation;
         }
 
         public static (double testAge, double testFuel) TestTravelToNewPlanet(Location oldLocation, Location newLocation, Ship ship, Player player, int warpSpeed)

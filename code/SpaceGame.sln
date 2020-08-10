@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGClasses", "SGClasses.csproj", "{45FFA633-A7AF-49AA-B768-55D80534C949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGClasses", "SGClasses\SGClasses.csproj", "{45FFA633-A7AF-49AA-B768-55D80534C949}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceGameTUI", "..\SpaceGameTUI\SpaceGameTUI.csproj", "{5DD133D7-61CA-473C-A6BD-C09FE866D0A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceGameTUI", "SpaceGameTUI\SpaceGameTUI.csproj", "{5DD133D7-61CA-473C-A6BD-C09FE866D0A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGClassesTests", "..\SGClassesTests\SGClassesTests.csproj", "{8C8B1E67-1253-47D5-A73B-D804B17161E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGClassesTests", "SGClassesTests\SGClassesTests.csproj", "{8C8B1E67-1253-47D5-A73B-D804B17161E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLRCLI", "..\CLRCLI\CLRCLI.csproj", "{1E712636-00B9-46E0-BE35-419B31F9FD57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLRCLI", "CLRCLI\CLRCLI.csproj", "{1E712636-00B9-46E0-BE35-419B31F9FD57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

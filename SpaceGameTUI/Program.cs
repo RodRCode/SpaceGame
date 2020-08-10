@@ -193,10 +193,10 @@ namespace SpaceGameTUI
             var randomY = new Random();
             var randomColor = new Random();
 
-            for (int i = 0; i < 250; i++)
+            for (int i = 0; i < 300; i++)
             {
-                int x = randomX.Next(0, 96);
-                int y = randomY.Next(0, 33);
+                int x = randomX.Next(0, 98);
+                int y = randomY.Next(0, 35);
                 ConsoleColor starColor = (ConsoleColor)randomColor.Next(0, 15);
                 new Label(displayMap) { Text = ".", Top = y, Left = x, Foreground = starColor };
             }

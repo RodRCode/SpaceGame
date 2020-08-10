@@ -15,6 +15,12 @@ namespace SpaceGameTUI
 
         static void Main(string[] args)
         {
+            List<string> dialog = new List<string>();
+
+
+
+
+
             int consoleWidth = 150;
             int consoleHeight = 52;
 
@@ -60,15 +66,16 @@ namespace SpaceGameTUI
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
-            planetList.Clicked += (s, e) =>
-            {
-                getindex(planetList.SelectedIndex);
-                showPlanetListButton.Show();
-                planetList.Hide();
-
-                new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
-                root.Run();
-            };
+            //planetList.Clicked += (s, e) =>
+            //{
+             //   getindex(planetList.SelectedIndex);
+            //    showPlanetListButton.Show();
+            //    planetList.Hide();
+            //
+            //    new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
+                
+             //   root.Run();
+            //};
             //int selectedIndexOfPlanetList = planetList.SelectedIndex;
 
             showPlanetListButton.Clicked += TravelButton_Clicked;
@@ -107,6 +114,10 @@ namespace SpaceGameTUI
                 planetList.Hide();
 
                 new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
+                dialog.Add($"Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + ", " + ship.location.y + "    ");
+                dialog.Add("test                           test                              test");
+                
+
                 root.Run();
             };
 
@@ -141,6 +152,12 @@ namespace SpaceGameTUI
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
 
             var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
+            var dialogboxList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            var dialogList = new ListBox(displayGameDialog) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            
+
+
+
 
             CreateStarField(displayMap);
 
@@ -163,6 +180,8 @@ namespace SpaceGameTUI
         {
             foreach (var planet in planets)
             {
+                
+                // add an if statement here to make the selected planet a spinner
                 new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
             }
         }

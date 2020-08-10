@@ -60,7 +60,7 @@ namespace SpaceGameTUI
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
-            showPlanetListButton.Clicked += TravelButton_Clicked;
+            //showPlanetListButton.Clicked += TravelButton_Clicked;
             //all the stuff to populate and choose planets (end)
 
 

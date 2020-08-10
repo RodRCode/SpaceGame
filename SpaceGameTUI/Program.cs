@@ -138,7 +138,9 @@ namespace SpaceGameTUI
             showReserved2.Clicked += (s, e) => { };
             showSaveButton.Clicked += (s, e) => { };
 
-            var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 48, Top = 2, Left = 2, Border = BorderStyle.Thin };
+            var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
+
+            var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
 
             CreateStarField(displayMap);
 
@@ -152,8 +154,9 @@ namespace SpaceGameTUI
                 // This updates the info display with the new location, but I need to figure out how to do this withoug a bunch of tabs
 
             }
-
+           
             root.Run();
+            
         }
 
         private static void PutPlanetsOnMap(List<Planet> planets, DisplayMap displayMap)
@@ -172,8 +175,8 @@ namespace SpaceGameTUI
 
             for (int i = 0; i < 250; i++)
             {
-                int x = randomX.Next(0, 98);
-                int y = randomY.Next(0, 48);
+                int x = randomX.Next(0, 96);
+                int y = randomY.Next(0, 33);
                 ConsoleColor starColor = (ConsoleColor)randomColor.Next(0, 15);
                 new Label(displayMap) { Text = ".", Top = y, Left = x, Foreground = starColor };
             }

@@ -37,15 +37,15 @@ namespace SpaceGameTUI
 
             // All the stuff to display main game info (start)
             var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
-            var status = new StatusListBox(displayMainStatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            var status = new StatusListBox(displayMainstatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
-            new Label(displayMainstatus) { Text = "Name: " + player.Name, Top = 1, Left = 4 };
-            new Label(displayMainstatus) { Text = "Charcter Type: " + player.CharacterType, Top = 2, Left = 4 };
-            new Label(displayMainstatus) { Text = "AGE: " + player.Age, Top = 3, Left = 4 };
-            new Label(displayMainstatus) { Text = "Money: " + player.Money, Top = 4, Left = 4 };
-            new Label(displayMainstatus) { Text = "Ship Name: " + ship.shipName, Top = 6, Left = 4 };
-            new Label(displayMainstatus) { Text = "Ship Location:" + " Earth " + ship.location.x + " , " + ship.location.y, Top = 7, Left = 4 };
-            new Label(displayMainstatus) { Text = "Fuel: " + ship.fuelLevel, Top = 8, Left = 4 };
+            var statusitems = CurrentInfo.Update(player);
+            
+            foreach (var Item in statusitems)
+            {
+                string s = Item;
+                status.Items.Add(s);
+            }
             // All the stuff to display main game info (end)
 
 

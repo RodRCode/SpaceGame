@@ -9,12 +9,14 @@ namespace SGClasses
       
         public int x;
         public int y;
+        public string name;
         
 
-        public Location(int x, int y)
+        public Location(int x=0, int y=0, string name = "default name")
         {
             this.x = x;
             this.y = y;
+            this.name = name;
         }
 
         public static string ToString(Location input)

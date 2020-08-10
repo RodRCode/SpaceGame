@@ -12,7 +12,7 @@ namespace SGClasses
         //        public readonly int y;
         public readonly string name;
         public readonly Location location;
-        private string planetInfo;
+        public readonly string planetInfo;
 
         public Planet(string name, Location location, string planetInfo = "Some interesting stuff happened")
         {

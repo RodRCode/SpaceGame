@@ -10,10 +10,10 @@ namespace SGClasses
     {
        
 
-        public readonly string Name;
-        public readonly int CharacterType;
-        public readonly double Age;
-        public readonly double Money;
+        public string Name;
+        public int CharacterType;
+        public double Age;
+        public double Money;
         
         public Player(string name, int characterType = 1, double age = 18, double money = 1000)
         {

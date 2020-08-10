@@ -7,11 +7,18 @@ namespace SGClasses
     public class CurrentInfo
     {
 
-        public static List<string> Update (Player player)
+        public static List<string> Update (Player player, Ship ship, List<Planet> planets, string planetName)
         {
             List<string> StatusList = new List<string>();
 
             StatusList.Add($"Name: {player.Name}" );
+            StatusList.Add($"Charcter Type: {player.CharacterType}");
+            StatusList.Add($"Age: {player.Age}");
+            StatusList.Add($"Money: {player.Money}");
+            StatusList.Add($"Ship Name: {ship.shipName}");
+            StatusList.Add($"Ship Location: {planetName}");
+            StatusList.Add($"Fuel: {ship.fuelLevel}");
+            StatusList.Add($"Location: {ship.location.x}, {ship.location.y}");
             return StatusList;
         }
      //   new CurrentInfo(displayMainstatus) { Text = "Name: " + player.Name, Top = 1, Left = 4 };

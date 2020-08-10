@@ -17,6 +17,9 @@ namespace SpaceGameTUI
         {
             int consoleWidth = 150;
             int consoleHeight = 52;
+            Location oldLocation = new Location();
+            Location newLocation = new Location();
+            int warpSpeed = 1;
 
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
@@ -39,30 +42,31 @@ namespace SpaceGameTUI
             var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
             var status = new StatusListBox(displayMainstatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
-            var statusitems = CurrentInfo.Update(player);
-            
-            foreach (var Item in statusitems)
+            var planets = Planet.PopulatePlanets();
+            var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
+            var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -14, Left = 4, Visible = true };
+            var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
+            int selectedIndexOfPlanetList = planetList.SelectedIndex;
+            foreach (var planet in planets)
             {
-                string s = Item;
-                status.Items.Add(s);
+                string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
+                planetList.Items.Add(textForPlanet);
+            }
+            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
+
+            string planetName = planets[planetList.SelectedIndex].name;
+            var statusitems = CurrentInfo.Update(player, ship, planets, planetName);
+            
+            foreach (var item in statusitems)
+            {
+                status.Items.Add(item);
             }
             // All the stuff to display main game info (end)
 
 
             //all the stuff to populate and choose planets (start)
 
-            var planets = Planet.PopulatePlanets();
 
-            var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
-            var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -14, Left = 4, Visible = true };
-            var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
-            foreach (var planet in planets)
-            {
-                string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
-                planetList.Items.Add(textForPlanet);
-            }
-            int selectedIndexOfPlanetList = planetList.SelectedIndex;
-            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
             //showPlanetListButton.Clicked += TravelButton_Clicked;
             //all the stuff to populate and choose planets (end)
@@ -87,9 +91,22 @@ namespace SpaceGameTUI
                 showPlanetListButton.Show();
                 planetList.Hide();
 
+
+
+                SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
+
      //           new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
                 
                 dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
+
+                planetName = planets[planetList.SelectedIndex].name;
+
+                statusitems = CurrentInfo.Update(player, ship, planets, planetName);
+
+                foreach (var item in statusitems)
+                {
+                    status.Items.Add(item);
+                }
                 root.Run();
             };
 

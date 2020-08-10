@@ -6,8 +6,8 @@ namespace SGClasses
     public class Item
     {
 
-        public readonly string name;
-        public readonly int quantity;
+        public string name;
+        public int quantity;
         private double value;
 
 

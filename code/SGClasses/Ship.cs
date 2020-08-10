@@ -8,18 +8,19 @@ namespace SGClasses
     {
         // TODO Type of ship, Name, Total Capacity, Speed, Fuel Level, Offence, Defence, Shield, Cargo hold?
 
-        public readonly int shipType;
-        public readonly string shipName;
-        public readonly double totalCapacity;
-        public readonly double speed;
-        public readonly double fuelLevel;
-        public readonly double offence;
-        public readonly double defense;
-        public readonly double shield;
+        public int shipType;
+        public string shipName;
+        public double totalCapacity;
+        public double speed;
+        public double fuelLevel;
+        public double offence;
+        public double defense;
+        public double shield;
         public Location location;
+        public string planetName;
 
         
-        public Ship(Location location, int shipType = 1, string shipName = "My First Ship", double totalCapacity = 1000, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100)
+        public Ship(Location location, int shipType = 1, string shipName = "My First Ship", double totalCapacity = 1000, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100, string planetName = "Earth0")
         {
             this.shipType = shipType;
             this.shipName = shipName;
@@ -30,6 +31,7 @@ namespace SGClasses
             this.defense = defense;
             this.shield = shield;
             this.location = location;
+            this.planetName = planetName;
         }
 
 

@@ -12,9 +12,9 @@ namespace SGClasses
     {
         //base cargo constructor
 
-        public readonly string name;
-        public readonly double capacity;
-        public readonly int quantity;
+        public string name;
+        public double capacity;
+        public int quantity;
 
         public Cargo(string name, double capacity, int quantity)
         {

@@ -75,14 +75,16 @@ namespace SpaceGameTUI
                 //TODO: Need to get warp speed choice from user
                 //TODO: Need to show user the time and fuel it will take to get to a planet
 
+                int warpSpeed = 8;
                 newLocation = planets[planetList.SelectedIndex].location;
 
                 warpSpeedBox.Show();
 
-                warpSpeedBox.Hide();
-                root.Run();
+                warpSpeed = GetWarpSpeed(oldLocation, newLocation, ship, player);
 
-                warpSpeed = GetWarpSpeed(root);
+
+                warpSpeedBox.Hide();
+
 
                 TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
 
@@ -99,8 +101,8 @@ namespace SpaceGameTUI
                 {
                     status.Items.Add(item);
                 }
+                root.Run();
             };
-            //    planetList.Clicked += travelList_Clicked;
 
             // PURCHASE SECTION
             showBuyButton.Clicked += (s, e) => { };
@@ -129,16 +131,12 @@ namespace SpaceGameTUI
             root.Run();
         }
 
-        private static int GetWarpSpeed(RootWindow root)
+        private static int GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player)
         {
-            int warpSpeed = 1;
-
+            int warpSpeed = 7;
             return warpSpeed;
         }
-        //   static void travelList_Clicked(object sender, EventArgs e)
-        //   {
-        //       (sender as Button).RootWindow.Detach();
-        //   }
+
         private static void PrepWorkForTravel(out Location oldLocation, List<Planet> planets, Ship ship, Player player, StatusListBox status, ListBox planetList, out string planetName, out List<string> statusitems)
         {
             planetName = planets[planetList.SelectedIndex].name;

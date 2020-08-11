@@ -54,7 +54,7 @@ namespace SpaceGameTUI
 
             //Create all the popup boxes
             DisplayMainStatus warpSpeedBox, buyBox, sellBox, storyBox, retireBox, quitBox;
-            
+
             AllPopUpBoxes(displayMap, out warpButton, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
 
             ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox);
@@ -74,21 +74,23 @@ namespace SpaceGameTUI
                 //TODO: Need to show user the time and fuel it will take to get to a planet
 
                 int warpSpeed = 8;
+                bool travelYes = false;
                 newLocation = planets[planetList.SelectedIndex].location;
 
                 warpSpeedBox.Show();
 
-                warpSpeed = GetWarpSpeed(oldLocation, newLocation, ship, player);
-
+                (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player, travelYes);
 
                 warpSpeedBox.Hide();
 
+                if (travelYes)
+                {
+                    TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
 
-                TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
+                    SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
-                SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
-
-                planetName = planets[planetList.SelectedIndex].name;
+                    planetName = planets[planetList.SelectedIndex].name;
+                }
 
                 status.Items.Clear();
 
@@ -189,16 +191,71 @@ namespace SpaceGameTUI
             warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
         }
 
-        private static int GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player)
+        private static (int, bool) GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player, bool travelYes)
         {
-            //TODO add in distance and age checking
-            //TODO add in abitlity to choose warp speed again
             //TODO list of warp speed and it shows you the list of calculations
 
             int warpSpeed = 7;
-            Console.Write("What is your warp speed of choice: ");
-            warpSpeed = int.Parse(Console.ReadLine());
-            return warpSpeed;
+            bool done = false;
+
+            do
+            {
+                Console.Write("What is your warp speed of choice: ");
+                warpSpeed = int.Parse(Console.ReadLine());
+                double tempTime, tempFuel, tempDistance = 42.9;
+                tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
+                (tempTime, tempFuel) = SpaceTravel.WarpSpeedCalcuation(tempDistance, warpSpeed);
+                Console.WriteLine("That is " + tempDistance + " lightyears away");
+                Console.WriteLine("You will use " + tempFuel + " fuelies to get there at Warp " + warpSpeed);
+                Console.WriteLine("And will take " + tempTime + " years.");
+                bool canTravel = travelCheck(tempTime, tempFuel, player, ship);
+                string answer = "n";
+                if (canTravel)
+                {
+                    Console.Write("Do you want to go now? Y/N: ");
+                    answer = Console.ReadLine();
+                }
+
+                if (answer == "y")
+                {
+   //                 done = travelCheck(tempTime, tempFuel, player, ship);
+                    travelYes = true;
+                }
+                else
+                {
+                    Console.Write("Do you want to try a different Warp speed? Y/N: ");
+                    answer = Console.ReadLine();
+                    if (answer == "n")
+                    {
+                        done = true;
+                        travelYes = false;
+                    }
+                };
+
+            } while (!done);
+
+            return (warpSpeed, travelYes);
+        }
+
+        private static bool travelCheck(double tempTime, double tempFuel, Player player, Ship ship)
+        {
+            if (((tempTime + player.Age) <= 70) && (tempFuel < ship.fuelLevel))
+            {
+                return (true);
+            }
+            else
+            {
+                if ((tempTime + player.Age) > 70)
+                {
+                    Console.WriteLine("Sorry, you are too old for that trip!  Use more Warp speed, or just retire!");
+                }
+                else
+                {
+                    Console.WriteLine("You don't have enough fuel to make the trip at that warp speed. Try something slower");
+                }
+                return (false);
+
+            }
         }
 
         private static void PrepWorkForTravel(out Location oldLocation, List<Planet> planets, Ship ship, Player player, StatusListBox status, ListBox planetList, out string planetName, out List<string> statusitems)

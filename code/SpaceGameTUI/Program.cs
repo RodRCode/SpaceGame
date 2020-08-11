@@ -17,7 +17,7 @@ namespace SpaceGameTUI
         {
             int consoleWidth = 150;
             int consoleHeight = 52;
-            Location oldLocation = new Location();
+            Location oldLocation = new Location(1,1);
             Location newLocation = new Location();
             int warpSpeed = 1;
             var root = new RootWindow();
@@ -61,6 +61,7 @@ namespace SpaceGameTUI
 
             string planetName = planets[planetList.SelectedIndex].name;
 
+            oldLocation = ship.location;
             var statusitems = CurrentInfo.Update(player, ship, planets, planetName);
 
             foreach (var item in statusitems)
@@ -84,18 +85,24 @@ namespace SpaceGameTUI
                 planetList.Hide();
 
                 newLocation = planets[planetList.SelectedIndex].location;
+                dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
+
+                double tempDistance = 42.9;
+                tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
+                dialogList.Items.Add("Distance was " + tempDistance);
 
                 SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
                 //           new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
 
-                dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
+
 
                 planetName = planets[planetList.SelectedIndex].name;
 
                 status.Items.Clear();
 
                 statusitems = CurrentInfo.Update(player, ship, planets, planetName);
+                oldLocation = ship.location;
 
                 foreach (var item in statusitems)
                 {

@@ -67,10 +67,6 @@ namespace SpaceGameTUI
                 //TODO: Need to get warp speed choice from user
                 //TODO: Need to show user the time and fuel it will take to get to a planet
 
-         //       getindex(planetList.SelectedIndex);
-         //       showTravelButton.Show();
-         //       planetList.Hide();
-
                 newLocation = planets[planetList.SelectedIndex].location;
 
                 TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
@@ -131,6 +127,7 @@ namespace SpaceGameTUI
 
         private static void TravelDataToDialogBox(Location oldLocation, Location newLocation, int warpSpeed, List<Planet> planets, Ship ship, Player player, DialogListBox dialogList, ListBox planetList)
         {
+            dialogList.Items.Clear();
             dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
             double tempTime, tempFuel, tempDistance = 42.9;
             tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
@@ -220,20 +217,6 @@ namespace SpaceGameTUI
                 new Label(displayMap) { Text = ".", Top = y, Left = x, Foreground = starColor };
             }
         }
-
-        // commented out for now
-     //   private static void TravelButton_Clicked(object sender, EventArgs e)
-     //   {
-     //       //this needs to input the coordinates of the planetlist item selected
-     //       // (sender as Button).RootWindow.Show();
-     //       (sender as Button).RootWindow.Show();
-     //   }
-
-        //static void button_Clicked(object sender, EventArgs e)
-        //{
-        // (sender as Button).RootWindow.Detach();
-        //}
-
     }
 
     /*

@@ -54,7 +54,8 @@ namespace SpaceGameTUI
 
             // Start the business of what happens when they use enters stuff
 
-            int selectedIndexOfPlanetList = planetList.SelectedIndex;
+       //     int selectedIndexOfPlanetList = planetList.SelectedIndex;
+
             foreach (var planet in planets)
             {
                 string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
@@ -76,7 +77,7 @@ namespace SpaceGameTUI
             //showPlanetListButton.Clicked += TravelButton_Clicked;
   
             int selectedIndexOfInventory = planetList.SelectedIndex;
-            showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
+
 
             planetList.Clicked += (s, e) =>
             {
@@ -87,15 +88,14 @@ namespace SpaceGameTUI
                 newLocation = planets[planetList.SelectedIndex].location;
                 dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
 
-                double tempDistance = 42.9;
+                double tempTime, tempFuel, tempDistance = 42.9;
                 tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
-                dialogList.Items.Add("Distance was " + tempDistance);
+                (tempTime, tempFuel) = SpaceTravel.TestTravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
+                dialogList.Items.Add("Distance was " + tempDistance + " lightyears");
+                dialogList.Items.Add("You used " + tempFuel + " fuelies (the official fuel of NASCAR)");
+                dialogList.Items.Add("And it took " + tempTime + " years.");
 
                 SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
-
-                //           new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
-
-
 
                 planetName = planets[planetList.SelectedIndex].name;
 
@@ -108,15 +108,16 @@ namespace SpaceGameTUI
                 {
                     status.Items.Add(item);
                 }
-
-                //   root.Run();
             };
 
 
-            var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
+            showBuyButton.Clicked += (s, e) => { };
+      //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
             showSellButton.Clicked += (s, e) => { };
+     //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
+
             showStoryButton.Clicked += (s, e) => { };
             showRetireButton.Clicked += (s, e) => { };
             showQuitButton.Clicked += (s, e) => { };
@@ -141,6 +142,7 @@ namespace SpaceGameTUI
         {
             var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
             var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+
             return inventoryList;
         }
 

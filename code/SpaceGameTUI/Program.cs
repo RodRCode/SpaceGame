@@ -52,14 +52,12 @@ namespace SpaceGameTUI
             ListBox inventoryList = InventoryListBox(root);
             PopulatePlanetListForTravel(planets, planetList);
 
+            //Create all the popup boxes
             DisplayMainStatus warpSpeedBox, buyBox, sellBox, storyBox, retireBox, quitBox;
+            
             AllPopUpBoxes(displayMap, out warpButton, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
 
-            returnFromBuy.Clicked += (s, e) => { buyBox.Hide(); root.Run(); };
-            returnFromSell.Clicked += (s, e) => { sellBox.Hide(); root.Run(); };
-            returnFromStory.Clicked += (s, e) => { storyBox.Hide(); root.Run(); };
-            returnFromRetire.Clicked += (s, e) => { retireBox.Hide(); root.Run(); };
-            returnFromQuit.Clicked += (s, e) => { quitBox.Hide(); root.Run(); };
+            ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox);
 
             // Start the business of what happens when they use enters stuff
 
@@ -129,6 +127,15 @@ namespace SpaceGameTUI
             //    }
 
             root.Run();
+        }
+
+        private static void ReturnInfoFromButtons(RootWindow root, Button returnFromSell, Button returnFromBuy, Button returnFromStory, Button returnFromRetire, Button returnFromQuit, DisplayMainStatus buyBox, DisplayMainStatus sellBox, DisplayMainStatus storyBox, DisplayMainStatus retireBox, DisplayMainStatus quitBox)
+        {
+            returnFromBuy.Clicked += (s, e) => { buyBox.Hide(); root.Run(); };
+            returnFromSell.Clicked += (s, e) => { sellBox.Hide(); root.Run(); };
+            returnFromStory.Clicked += (s, e) => { storyBox.Hide(); root.Run(); };
+            returnFromRetire.Clicked += (s, e) => { retireBox.Hide(); root.Run(); };
+            returnFromQuit.Clicked += (s, e) => { quitBox.Hide(); root.Run(); };
         }
 
         private static void AllPopUpBoxes(DisplayMap displayMap, out Button warpButton, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)

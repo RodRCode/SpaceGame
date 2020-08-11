@@ -13,11 +13,11 @@ namespace SGClasses
 
             StatusList.Add($"Name: {player.Name}" );
             StatusList.Add($"Charcter Type: {player.CharacterType}");
-            StatusList.Add($"Age: {player.Age}");
+            StatusList.Add($"Age: {player.Age:f1}");
             StatusList.Add($"Money: {player.Money}");
             StatusList.Add($"Ship Name: {ship.shipName}");
             StatusList.Add($"Ship Location: {planetName}");
-            StatusList.Add($"Fuel: {ship.fuelLevel}");
+            StatusList.Add($"Fuel: {ship.fuelLevel:f1}");
             StatusList.Add($"Location: {ship.location.x}, {ship.location.y}");
             return StatusList;
         }

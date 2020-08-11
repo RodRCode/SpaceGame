@@ -38,18 +38,17 @@ namespace SpaceGameTUI
             // Create the windows on the display
 
             StatusListBox status = CurrentStatusBox(root);  //Status box "Galactic Hawker" box
+
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
-            var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
+            Button showPlanetListButton, showReserved1, showReserved2, showSaveButton, showSellButton;
+            ActionButtonBox(root, out showPlanetListButton, out showReserved1, out showReserved2, out showSaveButton, out showSellButton);
 
-            var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -14, Left = 4, Visible = true };
-            var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
-            var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -9, Left = 4, Visible = true };
-            var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -9, Left = 16, Visible = true };
-            var showSaveButton = new Button(displayPlanetList) { Text = "Save", Width = 10, Height = 3, Top = -9, Left = 28, Visible = true };
-            var showSellButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -14, Left = 28, Visible = true };
+            DisplayPlanetList displayPlanetList;
+            ListBox planetList;
+            PlanetListBox(root, out displayPlanetList, out planetList);
 
-            var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
+            ListBox inventoryList = InventoryListBox(root);
 
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             foreach (var planet in planets)
@@ -68,20 +67,11 @@ namespace SpaceGameTUI
             {
                 status.Items.Add(item);
             }
-            // All the stuff to display main game info (end)
-
-
-            //all the stuff to populate and choose planets (start)
-
-
 
             //showPlanetListButton.Clicked += TravelButton_Clicked;
             //all the stuff to populate and choose planets (end)
 
 
-            //all the stuff to sell inventory (start)  
-            var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
-            var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
 
             int selectedIndexOfInventory = planetList.SelectedIndex;
@@ -93,7 +83,7 @@ namespace SpaceGameTUI
                 showPlanetListButton.Show();
                 planetList.Hide();
 
-
+                newLocation = planets[planetList.SelectedIndex].location;
 
                 SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
@@ -103,12 +93,15 @@ namespace SpaceGameTUI
 
                 planetName = planets[planetList.SelectedIndex].name;
 
+                status.Items.Clear();
+
                 statusitems = CurrentInfo.Update(player, ship, planets, planetName);
 
                 foreach (var item in statusitems)
                 {
                     status.Items.Add(item);
                 }
+
                 //   root.Run();
             };
 
@@ -133,18 +126,41 @@ namespace SpaceGameTUI
             }
 
             root.Run();
-
         }
 
-        public static StatusListBox CurrentStatusBox(RootWindow root)
+        private static ListBox InventoryListBox(RootWindow root)
         {
-            var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
+            var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
+            var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            return inventoryList;
+        }
+
+        private static void PlanetListBox(RootWindow root, out DisplayPlanetList displayPlanetList, out ListBox planetList)
+        {
+            displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
+            planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
+        }
+
+        private static void ActionButtonBox(RootWindow root, out Button showPlanetListButton, out Button showReserved1, out Button showReserved2, out Button showSaveButton, out Button showSellButton)
+        {
+            var actionBox = new DisplayPlanetList(root) { Text = "Actions", Width = 43, Height = 10, Top = 14, Left = 104, Border = BorderStyle.Thick };
+            showPlanetListButton = new Button(actionBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+            var showBuyButton = new Button(actionBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 16, Visible = true };
+            showReserved1 = new Button(actionBox) { Text = "Res 1", Width = 10, Height = 3, Top = 5, Left = 4, Visible = true };
+            showReserved2 = new Button(actionBox) { Text = "Res 2", Width = 10, Height = 3, Top = 5, Left = 16, Visible = true };
+            showSaveButton = new Button(actionBox) { Text = "Save", Width = 10, Height = 3, Top = 5, Left = 28, Visible = true };
+            showSellButton = new Button(actionBox) { Text = "Sell", Width = 10, Height = 3, Top = 1, Left = 28, Visible = true };
+        }
+
+        private static StatusListBox CurrentStatusBox(RootWindow root)
+        {
+            var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 9, Top = 2, Left = 104, Border = BorderStyle.Thick };
 
             var status = new StatusListBox(displayMainstatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
             return status;
         }
 
-        public static DialogListBox GameDialogBox(RootWindow root)
+        private static DialogListBox GameDialogBox(RootWindow root)
         {
             var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
             var dialogList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 98, Height = 8, Border = BorderStyle.Thin, Visible = true };

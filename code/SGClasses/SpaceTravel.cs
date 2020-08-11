@@ -31,8 +31,19 @@ namespace SGClasses
         // Given two locations, it returns the straight line distance between them
         private static double DistanceCalculation(Location oldLocation, Location newLocation)
         {
-            int x = oldLocation.x - newLocation.x;
-            int y = oldLocation.y - newLocation.y;
+            int x;
+            int y;
+
+            if (oldLocation.x > newLocation.x)
+            { x = oldLocation.x - newLocation.x; }
+            else
+            { x = newLocation.x - newLocation.x; }
+
+            if (oldLocation.y > newLocation.y)
+            { y = oldLocation.y - newLocation.y; }
+            else
+            { y = newLocation.y - newLocation.y; }
+
             double distance = Math.Sqrt((x * x) + (y * y));
             return distance;
         }
@@ -42,7 +53,7 @@ namespace SGClasses
         {
             double warpFactor = ((Math.Pow(warpSpeed, (10 / 3)) + Math.Pow((10 - warpSpeed), (-11 / 3))));
             double fuel = distance * warpFactor;
-            double time = 1 / warpFactor;
+            double time =  distance / warpFactor;
             return (time, fuel);
         }
     }

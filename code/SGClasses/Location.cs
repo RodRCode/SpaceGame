@@ -12,7 +12,7 @@ namespace SGClasses
         public string name;
         
 
-        public Location(int x=0, int y=0, string name = "default name")
+        public Location(int x=999, int y=999, string name = "default name")
         {
             this.x = x;
             this.y = y;

@@ -67,9 +67,9 @@ namespace SpaceGameTUI
                 //TODO: Need to get warp speed choice from user
                 //TODO: Need to show user the time and fuel it will take to get to a planet
 
-                getindex(planetList.SelectedIndex);
-                showTravelButton.Show();
-                planetList.Hide();
+         //       getindex(planetList.SelectedIndex);
+         //       showTravelButton.Show();
+         //       planetList.Hide();
 
                 newLocation = planets[planetList.SelectedIndex].location;
 
@@ -91,22 +91,29 @@ namespace SpaceGameTUI
             };
 
 
-
+            // PURCHASE SECTION
             showBuyButton.Clicked += (s, e) => { };
             //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
+            // SELLING SECTION
             showSellButton.Clicked += (s, e) => { };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
+
+            //STORY SECTION
             showStoryButton.Clicked += (s, e) => { };
+
+            //USER WANTS TO LIVE THE GOOD LIFE AND RETIRE
             showRetireButton.Clicked += (s, e) => { };
+
+            //USER WANTS TO QUIT
             showQuitButton.Clicked += (s, e) => { };
 
 
-            void getindex(int index)
-            {
-                ship.location = planets[index].location;
-            }
+       //    void getindex(int index)
+       //    {
+       //        ship.location = planets[index].location;
+       //    }
 
             root.Run();
         }

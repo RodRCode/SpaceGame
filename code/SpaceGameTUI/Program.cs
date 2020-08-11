@@ -79,7 +79,7 @@ namespace SpaceGameTUI
 
                 warpSpeedBox.Show();
 
-                (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player, travelYes);
+                (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player);
 
                 warpSpeedBox.Hide();
 
@@ -191,12 +191,13 @@ namespace SpaceGameTUI
             warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
         }
 
-        private static (int, bool) GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player, bool travelYes)
+        private static (int, bool) GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player)
         {
             //TODO list of warp speed and it shows you the list of calculations
 
             int warpSpeed = 7;
             bool done = false;
+            bool travelYes = false;
 
             do
             {
@@ -218,7 +219,8 @@ namespace SpaceGameTUI
 
                 if (answer == "y")
                 {
-   //                 done = travelCheck(tempTime, tempFuel, player, ship);
+                    //                 done = travelCheck(tempTime, tempFuel, player, ship);
+                    done = true;
                     travelYes = true;
                 }
                 else

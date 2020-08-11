@@ -45,7 +45,6 @@ namespace SGClasses
             { y = newLocation.y - oldLocation.y; }
 
             double distance = Math.Sqrt((x * x) + (y * y));
-            Console.WriteLine(distance);
             return distance;
         }
 

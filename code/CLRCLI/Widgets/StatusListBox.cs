@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace CLRCLI.Widgets
 {
-    public class StatusListBox : Widget, IFocusable, IAcceptInput
+    public class StatusListBox : Widget //, IFocusable, IAcceptInput
     {
         internal StatusListBox() {
             Items.CollectionChanged += Items_CollectionChanged;

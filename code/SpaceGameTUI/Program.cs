@@ -17,7 +17,7 @@ namespace SpaceGameTUI
         {
             int consoleWidth = 150;
             int consoleHeight = 52;
-            Location oldLocation = new Location(1,1);
+            Location oldLocation = new Location(1, 1);
             Location newLocation = new Location();
             int warpSpeed = 1;
             var root = new RootWindow();
@@ -31,13 +31,14 @@ namespace SpaceGameTUI
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = "Zaphod Beeblebrox";
- //           string name = Console.ReadLine();
+            //           string name = Console.ReadLine();
             var player = new Player(name);
 
             // Application.Init();
 
             // Create the windows on the display
 
+            MapBoxInitialize(root, planets);
             StatusListBox status = CurrentStatusBox(root);  //Status box "Galactic Hawker" box
 
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
@@ -125,11 +126,6 @@ namespace SpaceGameTUI
             showReserved2.Clicked += (s, e) => { };
             showSaveButton.Clicked += (s, e) => { };
 
-            var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
-
-            CreateStarField(displayMap);
-
-            PutPlanetsOnMap(planets, displayMap);
 
             void getindex(int index)
             {
@@ -137,6 +133,13 @@ namespace SpaceGameTUI
             }
 
             root.Run();
+        }
+
+        private static void MapBoxInitialize(RootWindow root, List<Planet> planets)
+        {
+            var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
+            CreateStarField(displayMap);
+            PutPlanetsOnMap(planets, displayMap);
         }
 
         private static ListBox InventoryListBox(RootWindow root)

@@ -52,30 +52,14 @@ namespace SpaceGameTUI
             ListBox inventoryList = InventoryListBox(root);
             PopulatePlanetListForTravel(planets, planetList);
 
-            DisplayMainStatus warpSpeedBox;
-            WarpSpeedPopBox(displayMap, out warpButton, out warpSpeedBox);
-
-            DisplayMainStatus buyBox;
-            BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
-
-            DisplayMainStatus sellBox;
-            SellPopUpBox(displayMap, out returnFromSell, out sellBox);
-
-            DisplayMainStatus storyBox;
-            StoryPopUpBox(displayMap, out returnFromStory, out storyBox);
-
-            var RetireDisplayBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromRetire = new Button(RetireDisplayBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = false };
-            Console.ReadLine();
-
-            var QuitDisplayBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromQuit = new Button(QuitDisplayBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = false };
-            Console.ReadLine();
+            DisplayMainStatus warpSpeedBox, buyBox, sellBox, storyBox, retireBox, quitBox;
+            AllPopUpBoxes(displayMap, out warpButton, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
 
             returnFromBuy.Clicked += (s, e) => { buyBox.Hide(); root.Run(); };
             returnFromSell.Clicked += (s, e) => { sellBox.Hide(); root.Run(); };
             returnFromStory.Clicked += (s, e) => { storyBox.Hide(); root.Run(); };
-
+            returnFromRetire.Clicked += (s, e) => { retireBox.Hide(); root.Run(); };
+            returnFromQuit.Clicked += (s, e) => { quitBox.Hide(); root.Run(); };
 
             // Start the business of what happens when they use enters stuff
 
@@ -130,13 +114,13 @@ namespace SpaceGameTUI
 
 
             //STORY SECTION
-            showStoryButton.Clicked += (s, e) => { };
+            showStoryButton.Clicked += (s, e) => { storyBox.Show(); };
 
             //USER WANTS TO LIVE THE GOOD LIFE AND RETIRE
-            showRetireButton.Clicked += (s, e) => { };
+            showRetireButton.Clicked += (s, e) => { retireBox.Show(); };
 
             //USER WANTS TO QUIT
-            showQuitButton.Clicked += (s, e) => { };
+            showQuitButton.Clicked += (s, e) => { quitBox.Show(); };
 
 
             //    void getindex(int index)
@@ -147,30 +131,54 @@ namespace SpaceGameTUI
             root.Run();
         }
 
+        private static void AllPopUpBoxes(DisplayMap displayMap, out Button warpButton, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)
+        {
+            WarpSpeedPopBox(displayMap, out warpButton, out warpSpeedBox);
+            BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
+            SellPopUpBox(displayMap, out returnFromSell, out sellBox);
+            StoryPopUpBox(displayMap, out returnFromStory, out storyBox);
+            RetirePopUpBox(displayMap, out returnFromRetire, out retireBox);
+            QuitPopUpBox(displayMap, out returnFromQuit, out quitBox);
+        }
+
+        private static void QuitPopUpBox(DisplayMap displayMap, out Button returnFromQuit, out DisplayMainStatus quitBox)
+        {
+            quitBox = new DisplayMainStatus(displayMap) { Text = "Quit", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromQuit = new Button(quitBox) { Text = "Quit", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            Console.ReadLine();
+        }
+
+        private static void RetirePopUpBox(DisplayMap displayMap, out Button returnFromRetire, out DisplayMainStatus retireBox)
+        {
+            retireBox = new DisplayMainStatus(displayMap) { Text = "Retire", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromRetire = new Button(retireBox) { Text = "Retire", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            Console.ReadLine();
+        }
+
         private static void StoryPopUpBox(DisplayMap displayMap, out Button returnFromStory, out DisplayMainStatus storyBox)
         {
-            storyBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            storyBox = new DisplayMainStatus(displayMap) { Text = "Story", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
             returnFromStory = new Button(storyBox) { Text = "Story", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
             Console.ReadLine();
         }
 
         private static void SellPopUpBox(DisplayMap displayMap, out Button returnFromSell, out DisplayMainStatus sellBox)
         {
-            sellBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            sellBox = new DisplayMainStatus(displayMap) { Text = "Sell", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
             returnFromSell = new Button(sellBox) { Text = "Sell", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
             Console.ReadLine();
         }
 
         private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox)
         {
-            buyBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            buyBox = new DisplayMainStatus(displayMap) { Text = "Buy", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
             returnFromBuy = new Button(buyBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
             Console.ReadLine();
         }
 
         private static void WarpSpeedPopBox(DisplayMap displayMap, out Button warpButton, out DisplayMainStatus warpSpeedBox)
         {
-            warpSpeedBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            warpSpeedBox = new DisplayMainStatus(displayMap) { Text = "Warp Speed", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
             warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
         }
 

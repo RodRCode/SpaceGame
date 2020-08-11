@@ -20,43 +20,50 @@ namespace SpaceGameTUI
             Location oldLocation = new Location();
             Location newLocation = new Location();
             int warpSpeed = 1;
+            var root = new RootWindow();
+            var planets = Planet.PopulatePlanets();
 
             Console.SetWindowSize(consoleWidth, consoleHeight);
+
+            Location shipLocation = new Location(1, 1);
+            var ship = new Ship(shipLocation);
 
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = Console.ReadLine();
-            Console.Beep();
+            var player = new Player(name);
 
             // Application.Init();
 
-            var player = new Player(name);
-            Location shipLocation = new Location(1, 1);
-            var ship = new Ship(shipLocation);
+            // Create the windows on the display
 
-            var root = new RootWindow();
+            StatusListBox status = CurrentStatusBox(root);  //Status box "Galactic Hawker" box
+            DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
-            
-
-            // All the stuff to display main game info (start)
-            var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
-            var status = new StatusListBox(displayMainstatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
-
-            var planets = Planet.PopulatePlanets();
             var displayPlanetList = new DisplayPlanetList(root) { Text = "Planet List", Width = 43, Height = 10, Top = 27, Left = 104, Border = BorderStyle.Thin, Visible = true };
+
             var showPlanetListButton = new Button(displayPlanetList) { Text = "Travel", Width = 10, Height = 3, Top = -14, Left = 4, Visible = true };
+            var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
+            var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -9, Left = 4, Visible = true };
+            var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -9, Left = 16, Visible = true };
+            var showSaveButton = new Button(displayPlanetList) { Text = "Save", Width = 10, Height = 3, Top = -9, Left = 28, Visible = true };
+            var showSellButton = new Button(displayPlanetList) { Text = "Sell", Width = 10, Height = 3, Top = -14, Left = 28, Visible = true };
+
             var planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
+
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             foreach (var planet in planets)
             {
                 string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
                 planetList.Items.Add(textForPlanet);
             }
+
             showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
             string planetName = planets[planetList.SelectedIndex].name;
+
             var statusitems = CurrentInfo.Update(player, ship, planets, planetName);
-            
+
             foreach (var item in statusitems)
             {
                 status.Items.Add(item);
@@ -72,15 +79,10 @@ namespace SpaceGameTUI
             //all the stuff to populate and choose planets (end)
 
 
-            // Implements game diaglog box
-            var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
-            var dialogList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 98, Height = 8, Border = BorderStyle.Thin, Visible = true };
-
             //all the stuff to sell inventory (start)  
             var displayInventoryList = new DisplayShipInventory(root) { Text = "Inventory", Width = 43, Height = 10, Top = 40, Left = 104, Border = BorderStyle.Thin, Visible = true };
-            var showSellButton = new Button(displayInventoryList) { Text = "Sell", Width = 10, Height = 3, Top = -27, Left = 28, Visible = true };
             var inventoryList = new ListBox(displayInventoryList) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
-         
+
 
             int selectedIndexOfInventory = planetList.SelectedIndex;
             showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
@@ -95,8 +97,8 @@ namespace SpaceGameTUI
 
                 SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
-     //           new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
-                
+                //           new Label(displayMainstatus) { Text = "\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\b\b\b   Ship Location: " + planets[planetList.SelectedIndex].name + "  " + ship.location.x + " , " + ship.location.y + "    " };
+
                 dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
 
                 planetName = planets[planetList.SelectedIndex].name;
@@ -107,17 +109,12 @@ namespace SpaceGameTUI
                 {
                     status.Items.Add(item);
                 }
-                root.Run();
+                //   root.Run();
             };
 
-            var showBuyButton = new Button(displayPlanetList) { Text = "Buy", Width = 10, Height = 3, Top = -14, Left = 16, Visible = true };
 
             var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
-
-            var showReserved1 = new Button(displayPlanetList) { Text = "Res 1", Width = 10, Height = 3, Top = -9, Left = 4, Visible = true };
-            var showReserved2 = new Button(displayPlanetList) { Text = "Res 2", Width = 10, Height = 3, Top = -9, Left = 16, Visible = true };
-            var showSaveButton = new Button(displayPlanetList) { Text = "Save", Width = 10, Height = 3, Top = -9, Left = 28, Visible = true };
 
             showSellButton.Clicked += (s, e) => { };
             showReserved1.Clicked += (s, e) => { };
@@ -134,9 +131,24 @@ namespace SpaceGameTUI
             {
                 ship.location = planets[index].location;
             }
-           
+
             root.Run();
-            
+
+        }
+
+        public static StatusListBox CurrentStatusBox(RootWindow root)
+        {
+            var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 20, Top = 3, Left = 104, Border = BorderStyle.Thick };
+
+            var status = new StatusListBox(displayMainstatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            return status;
+        }
+
+        public static DialogListBox GameDialogBox(RootWindow root)
+        {
+            var displayGameDialog = new DisplayGameDialog(root) { Text = "Game Dialog", Width = 98, Height = 10, Top = 40, Left = 2, Border = BorderStyle.Thin };
+            var dialogList = new DialogListBox(displayGameDialog) { Top = 1, Left = 0, Width = 98, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            return dialogList;
         }
 
         private static void PutPlanetsOnMap(List<Planet> planets, DisplayMap displayMap)

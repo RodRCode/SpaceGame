@@ -15,7 +15,7 @@ namespace SGClasses
         public double Age;
         public double Money;
         
-        public Player(string name, int characterType = 1, double age = 18, double money = 1000)
+        public Player(string name = "Zaphod Beeblebrox", int characterType = 1, double age = 18, double money = 1000)
         {
             this.Name = name;
             this.CharacterType = characterType;

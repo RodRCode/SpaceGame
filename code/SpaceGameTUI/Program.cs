@@ -50,50 +50,30 @@ namespace SpaceGameTUI
             PlanetListBox(root, out displayPlanetList, out planetList);
 
             ListBox inventoryList = InventoryListBox(root);
+            PopulatePlanetListForTravel(planets, planetList);
 
 
             // Start the business of what happens when they use enters stuff
 
-       //     int selectedIndexOfPlanetList = planetList.SelectedIndex;
-
-            foreach (var planet in planets)
-            {
-                string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
-                planetList.Items.Add(textForPlanet);
-            }
-
+            //TRAVEL BUTTON SELECTION
             showTravelButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
-
-            string planetName = planets[planetList.SelectedIndex].name;
-
-            oldLocation = ship.location;
-            var statusitems = CurrentInfo.Update(player, ship, planets, planetName);
-
-            foreach (var item in statusitems)
-            {
-                status.Items.Add(item);
-            }
-
-            //showPlanetListButton.Clicked += TravelButton_Clicked;
-  
-            int selectedIndexOfInventory = planetList.SelectedIndex;
-
+            string planetName;
+            List<string> statusitems;
+            PrepWorkForTravel(out oldLocation, planets, ship, player, status, planetList, out planetName, out statusitems);
 
             planetList.Clicked += (s, e) =>
             {
+                //TODO: Need to check that you have enough fuel and time to travel there
+                //TODO: Need to get warp speed choice from user
+                //TODO: Need to show user the time and fuel it will take to get to a planet
+
                 getindex(planetList.SelectedIndex);
                 showTravelButton.Show();
                 planetList.Hide();
 
                 newLocation = planets[planetList.SelectedIndex].location;
-                dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
 
-                double tempTime, tempFuel, tempDistance = 42.9;
-                tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
-                (tempTime, tempFuel) = SpaceTravel.TestTravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
-                dialogList.Items.Add("Distance was " + tempDistance + " lightyears");
-                dialogList.Items.Add("You used " + tempFuel + " fuelies (the official fuel of NASCAR)");
-                dialogList.Items.Add("And it took " + tempTime + " years.");
+                TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
 
                 SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
@@ -113,10 +93,10 @@ namespace SpaceGameTUI
 
 
             showBuyButton.Clicked += (s, e) => { };
-      //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
+            //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
             showSellButton.Clicked += (s, e) => { };
-     //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
+            //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             showStoryButton.Clicked += (s, e) => { };
             showRetireButton.Clicked += (s, e) => { };
@@ -129,6 +109,38 @@ namespace SpaceGameTUI
             }
 
             root.Run();
+        }
+
+        private static void PrepWorkForTravel(out Location oldLocation, List<Planet> planets, Ship ship, Player player, StatusListBox status, ListBox planetList, out string planetName, out List<string> statusitems)
+        {
+            planetName = planets[planetList.SelectedIndex].name;
+            oldLocation = ship.location;
+            statusitems = CurrentInfo.Update(player, ship, planets, planetName);
+            foreach (var item in statusitems)
+            {
+                status.Items.Add(item);
+            }
+        }
+
+        private static void TravelDataToDialogBox(Location oldLocation, Location newLocation, int warpSpeed, List<Planet> planets, Ship ship, Player player, DialogListBox dialogList, ListBox planetList)
+        {
+            dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
+            double tempTime, tempFuel, tempDistance = 42.9;
+            tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
+            (tempTime, tempFuel) = SpaceTravel.TestTravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
+            dialogList.Items.Add("Distance was " + tempDistance + " lightyears");
+            dialogList.Items.Add("You used " + tempFuel + " fuelies (the official fuel of NASCAR)");
+            dialogList.Items.Add("And it took " + tempTime + " years.");
+            dialogList.Items.Add("");
+        }
+
+        private static void PopulatePlanetListForTravel(List<Planet> planets, ListBox planetList)
+        {
+            foreach (var planet in planets)
+            {
+                string textForPlanet = planet.name + " location: " + Location.ToString(planet.location);
+                planetList.Items.Add(textForPlanet);
+            }
         }
 
         private static void MapBoxInitialize(RootWindow root, List<Planet> planets)

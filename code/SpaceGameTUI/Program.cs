@@ -131,11 +131,10 @@ namespace SpaceGameTUI
             dialogList.Items.Add("You traveled to " + planets[planetList.SelectedIndex].name);
             double tempTime, tempFuel, tempDistance = 42.9;
             tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
-            (tempTime, tempFuel) = SpaceTravel.TestTravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
+            (tempTime, tempFuel) = SpaceTravel.WarpSpeedCalcuation(tempDistance, warpSpeed);
             dialogList.Items.Add("Distance was " + tempDistance + " lightyears");
             dialogList.Items.Add("You used " + tempFuel + " fuelies (the official fuel of NASCAR)");
             dialogList.Items.Add("And it took " + tempTime + " years.");
-            dialogList.Items.Add("");
         }
 
         private static void PopulatePlanetListForTravel(List<Planet> planets, ListBox planetList)

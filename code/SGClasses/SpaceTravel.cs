@@ -49,7 +49,7 @@ namespace SGClasses
         }
 
         // Recieves the distance, and the warp speed you want to use, and returns the time and fuel needed to travel
-        private static (double, double) WarpSpeedCalcuation(double distance, int warpSpeed)
+        public static (double, double) WarpSpeedCalcuation(double distance, int warpSpeed)
         {
             double warpFactor = ((Math.Pow(warpSpeed, (10 / 3)) + Math.Pow((10 - warpSpeed), (-11 / 3))));
             double fuel = distance * warpFactor;

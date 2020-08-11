@@ -42,7 +42,7 @@ namespace SpaceGameTUI
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
             //Creates the box for the Action buttons
-            Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton, warpButton;
+            Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton, warpButton, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit;
             ActionButtonBox(root, out showTravelButton, out showBuyButton, out showSellButton, out showStoryButton, out showRetireButton, out showQuitButton);
 
             DisplayPlanetList displayPlanetList;
@@ -52,13 +52,29 @@ namespace SpaceGameTUI
             ListBox inventoryList = InventoryListBox(root);
             PopulatePlanetListForTravel(planets, planetList);
 
-            var warpSpeedBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            DisplayMainStatus warpSpeedBox;
+            WarpSpeedPopBox(displayMap, out warpButton, out warpSpeedBox);
 
+            DisplayMainStatus buyBox;
+            BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
 
-            //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
-            //button3.Clicked += (s, e) => { dialog2.Hide(); dialog.Show(); };
+            DisplayMainStatus sellBox;
+            SellPopUpBox(displayMap, out returnFromSell, out sellBox);
 
+            DisplayMainStatus storyBox;
+            StoryPopUpBox(displayMap, out returnFromStory, out storyBox);
+
+            var RetireDisplayBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromRetire = new Button(RetireDisplayBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = false };
+            Console.ReadLine();
+
+            var QuitDisplayBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromQuit = new Button(QuitDisplayBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = false };
+            Console.ReadLine();
+
+            returnFromBuy.Clicked += (s, e) => { buyBox.Hide(); root.Run(); };
+            returnFromSell.Clicked += (s, e) => { sellBox.Hide(); root.Run(); };
+            returnFromStory.Clicked += (s, e) => { storyBox.Hide(); root.Run(); };
 
 
             // Start the business of what happens when they use enters stuff
@@ -105,11 +121,11 @@ namespace SpaceGameTUI
             };
 
             // PURCHASE SECTION
-            showBuyButton.Clicked += (s, e) => { };
+            showBuyButton.Clicked += (s, e) => { buyBox.Show(); };
             //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
             // SELLING SECTION
-            showSellButton.Clicked += (s, e) => { };
+            showSellButton.Clicked += (s, e) => { sellBox.Show(); };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
 
@@ -131,9 +147,42 @@ namespace SpaceGameTUI
             root.Run();
         }
 
+        private static void StoryPopUpBox(DisplayMap displayMap, out Button returnFromStory, out DisplayMainStatus storyBox)
+        {
+            storyBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromStory = new Button(storyBox) { Text = "Story", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            Console.ReadLine();
+        }
+
+        private static void SellPopUpBox(DisplayMap displayMap, out Button returnFromSell, out DisplayMainStatus sellBox)
+        {
+            sellBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromSell = new Button(sellBox) { Text = "Sell", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            Console.ReadLine();
+        }
+
+        private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox)
+        {
+            buyBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            returnFromBuy = new Button(buyBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            Console.ReadLine();
+        }
+
+        private static void WarpSpeedPopBox(DisplayMap displayMap, out Button warpButton, out DisplayMainStatus warpSpeedBox)
+        {
+            warpSpeedBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+        }
+
         private static int GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player)
         {
+            //TODO add in distance and age checking
+            //TODO add in abitlity to choose warp speed again
+            //TODO list of warp speed and it shows you the list of calculations
+
             int warpSpeed = 7;
+            Console.Write("What is your warp speed of choice: ");
+            warpSpeed = int.Parse(Console.ReadLine());
             return warpSpeed;
         }
 

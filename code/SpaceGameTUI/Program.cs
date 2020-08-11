@@ -30,7 +30,8 @@ namespace SpaceGameTUI
 
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
-            string name = Console.ReadLine();
+            string name = "Zaphod Beeblebrox";
+ //           string name = Console.ReadLine();
             var player = new Player(name);
 
             // Application.Init();
@@ -49,6 +50,9 @@ namespace SpaceGameTUI
             PlanetListBox(root, out displayPlanetList, out planetList);
 
             ListBox inventoryList = InventoryListBox(root);
+
+
+            // Start the business of what happens when they use enters stuff
 
             int selectedIndexOfPlanetList = planetList.SelectedIndex;
             foreach (var planet in planets)
@@ -153,10 +157,10 @@ namespace SpaceGameTUI
             var actionBox = new DisplayPlanetList(root) { Text = "Actions", Width = 43, Height = 10, Top = 14, Left = 104, Border = BorderStyle.Thick };
             showPlanetListButton = new Button(actionBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
             var showBuyButton = new Button(actionBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 16, Visible = true };
-            showReserved1 = new Button(actionBox) { Text = "Res 1", Width = 10, Height = 3, Top = 5, Left = 4, Visible = true };
-            showReserved2 = new Button(actionBox) { Text = "Res 2", Width = 10, Height = 3, Top = 5, Left = 16, Visible = true };
-            showSaveButton = new Button(actionBox) { Text = "Save", Width = 10, Height = 3, Top = 5, Left = 28, Visible = true };
             showSellButton = new Button(actionBox) { Text = "Sell", Width = 10, Height = 3, Top = 1, Left = 28, Visible = true };
+            showReserved1 = new Button(actionBox) { Text = "Story Info", Width = 10, Height = 3, Top = 5, Left = 4, Visible = true };
+            showReserved2 = new Button(actionBox) { Text = "Retire", Width = 10, Height = 3, Top = 5, Left = 16, Visible = true };
+            showSaveButton = new Button(actionBox) { Text = "Quit", Width = 10, Height = 3, Top = 5, Left = 28, Visible = true };
         }
 
         private static StatusListBox CurrentStatusBox(RootWindow root)

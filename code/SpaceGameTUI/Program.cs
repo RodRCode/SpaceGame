@@ -19,7 +19,7 @@ namespace SpaceGameTUI
             int consoleHeight = 52;
             Location oldLocation = new Location(1, 1);
             Location newLocation = new Location();
-            int warpSpeed = 1;
+            int warpSpeed;
             var root = new RootWindow();
             var planets = Planet.PopulatePlanets();
 
@@ -37,12 +37,12 @@ namespace SpaceGameTUI
             // Application.Init();
 
             // Create the windows on the display
-            MapBoxInitialize(root, planets);  //Map and starfield
+            var displayMap = MapBoxInitialize(root, planets);  //Map and starfield
             StatusListBox status = CurrentStatusBox(root);  //Status box "Galactic Hawker" box
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
             //Creates the box for the Action buttons
-            Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton;
+            Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton, warpButton;
             ActionButtonBox(root, out showTravelButton, out showBuyButton, out showSellButton, out showStoryButton, out showRetireButton, out showQuitButton);
 
             DisplayPlanetList displayPlanetList;
@@ -51,6 +51,14 @@ namespace SpaceGameTUI
 
             ListBox inventoryList = InventoryListBox(root);
             PopulatePlanetListForTravel(planets, planetList);
+
+            var warpSpeedBox = new DisplayMainStatus(displayMap) { Text = "Actions", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
+            warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+
+
+            //button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
+            //button3.Clicked += (s, e) => { dialog2.Hide(); dialog.Show(); };
+
 
 
             // Start the business of what happens when they use enters stuff
@@ -69,6 +77,13 @@ namespace SpaceGameTUI
 
                 newLocation = planets[planetList.SelectedIndex].location;
 
+                warpSpeedBox.Show();
+
+                warpSpeedBox.Hide();
+                root.Run();
+
+                warpSpeed = GetWarpSpeed(root);
+
                 TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
 
                 SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
@@ -85,7 +100,7 @@ namespace SpaceGameTUI
                     status.Items.Add(item);
                 }
             };
-
+            //    planetList.Clicked += travelList_Clicked;
 
             // PURCHASE SECTION
             showBuyButton.Clicked += (s, e) => { };
@@ -106,14 +121,24 @@ namespace SpaceGameTUI
             showQuitButton.Clicked += (s, e) => { };
 
 
-       //    void getindex(int index)
-       //    {
-       //        ship.location = planets[index].location;
-       //    }
+            //    void getindex(int index)
+            //    {
+            //        ship.location = planets[index].location;
+            //    }
 
             root.Run();
         }
 
+        private static int GetWarpSpeed(RootWindow root)
+        {
+            int warpSpeed = 1;
+
+            return warpSpeed;
+        }
+        //   static void travelList_Clicked(object sender, EventArgs e)
+        //   {
+        //       (sender as Button).RootWindow.Detach();
+        //   }
         private static void PrepWorkForTravel(out Location oldLocation, List<Planet> planets, Ship ship, Player player, StatusListBox status, ListBox planetList, out string planetName, out List<string> statusitems)
         {
             planetName = planets[planetList.SelectedIndex].name;
@@ -146,11 +171,12 @@ namespace SpaceGameTUI
             }
         }
 
-        private static void MapBoxInitialize(RootWindow root, List<Planet> planets)
+        private static DisplayMap MapBoxInitialize(RootWindow root, List<Planet> planets)
         {
             var displayMap = new DisplayMap(root) { Text = "MAP", Width = 98, Height = 35, Top = 2, Left = 2, Border = BorderStyle.Thin };
             CreateStarField(displayMap);
             PutPlanetsOnMap(planets, displayMap);
+            return displayMap;
         }
 
         private static ListBox InventoryListBox(RootWindow root)
@@ -196,7 +222,7 @@ namespace SpaceGameTUI
         private static void PutPlanetsOnMap(List<Planet> planets, DisplayMap displayMap)
         {
             foreach (var planet in planets)
-            {   
+            {
                 // add an if statement here to make the selected planet a spinner
                 new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
             }
@@ -216,6 +242,9 @@ namespace SpaceGameTUI
                 new Label(displayMap) { Text = ".", Top = y, Left = x, Foreground = starColor };
             }
         }
+
+
+
     }
 
     /*

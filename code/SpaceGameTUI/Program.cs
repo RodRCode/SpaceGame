@@ -37,14 +37,13 @@ namespace SpaceGameTUI
             // Application.Init();
 
             // Create the windows on the display
-
-            MapBoxInitialize(root, planets);
+            MapBoxInitialize(root, planets);  //Map and starfield
             StatusListBox status = CurrentStatusBox(root);  //Status box "Galactic Hawker" box
-
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
-            Button showPlanetListButton, showReserved1, showReserved2, showSaveButton, showSellButton;
-            ActionButtonBox(root, out showPlanetListButton, out showReserved1, out showReserved2, out showSaveButton, out showSellButton);
+            //Creates the box for the Action buttons
+            Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton;
+            ActionButtonBox(root, out showTravelButton, out showBuyButton, out showSellButton, out showStoryButton, out showRetireButton, out showQuitButton);
 
             DisplayPlanetList displayPlanetList;
             ListBox planetList;
@@ -62,7 +61,7 @@ namespace SpaceGameTUI
                 planetList.Items.Add(textForPlanet);
             }
 
-            showPlanetListButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
+            showTravelButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
 
             string planetName = planets[planetList.SelectedIndex].name;
 
@@ -75,18 +74,14 @@ namespace SpaceGameTUI
             }
 
             //showPlanetListButton.Clicked += TravelButton_Clicked;
-            //all the stuff to populate and choose planets (end)
-
-
-
-
+  
             int selectedIndexOfInventory = planetList.SelectedIndex;
             showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             planetList.Clicked += (s, e) =>
             {
                 getindex(planetList.SelectedIndex);
-                showPlanetListButton.Show();
+                showTravelButton.Show();
                 planetList.Hide();
 
                 newLocation = planets[planetList.SelectedIndex].location;
@@ -122,9 +117,9 @@ namespace SpaceGameTUI
 
 
             showSellButton.Clicked += (s, e) => { };
-            showReserved1.Clicked += (s, e) => { };
-            showReserved2.Clicked += (s, e) => { };
-            showSaveButton.Clicked += (s, e) => { };
+            showStoryButton.Clicked += (s, e) => { };
+            showRetireButton.Clicked += (s, e) => { };
+            showQuitButton.Clicked += (s, e) => { };
 
 
             void getindex(int index)
@@ -155,15 +150,15 @@ namespace SpaceGameTUI
             planetList = new ListBox(displayPlanetList) { Top = 1, Left = 0, Width = 41, Height = 8, Border = BorderStyle.Thin, Visible = false };
         }
 
-        private static void ActionButtonBox(RootWindow root, out Button showPlanetListButton, out Button showReserved1, out Button showReserved2, out Button showSaveButton, out Button showSellButton)
+        private static void ActionButtonBox(RootWindow root, out Button showTravelButton, out Button showBuyButton, out Button showSellButton, out Button showStoryButton, out Button showRetireButton, out Button showQuitButton)
         {
             var actionBox = new DisplayPlanetList(root) { Text = "Actions", Width = 43, Height = 10, Top = 14, Left = 104, Border = BorderStyle.Thick };
-            showPlanetListButton = new Button(actionBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
-            var showBuyButton = new Button(actionBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 16, Visible = true };
+            showTravelButton = new Button(actionBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+            showBuyButton = new Button(actionBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 16, Visible = true };
             showSellButton = new Button(actionBox) { Text = "Sell", Width = 10, Height = 3, Top = 1, Left = 28, Visible = true };
-            showReserved1 = new Button(actionBox) { Text = "Story Info", Width = 10, Height = 3, Top = 5, Left = 4, Visible = true };
-            showReserved2 = new Button(actionBox) { Text = "Retire", Width = 10, Height = 3, Top = 5, Left = 16, Visible = true };
-            showSaveButton = new Button(actionBox) { Text = "Quit", Width = 10, Height = 3, Top = 5, Left = 28, Visible = true };
+            showStoryButton = new Button(actionBox) { Text = "Story Info", Width = 10, Height = 3, Top = 5, Left = 4, Visible = true };
+            showRetireButton = new Button(actionBox) { Text = "Retire", Width = 10, Height = 3, Top = 5, Left = 16, Visible = true };
+            showQuitButton = new Button(actionBox) { Text = "Quit", Width = 10, Height = 3, Top = 5, Left = 28, Visible = true };
         }
 
         private static StatusListBox CurrentStatusBox(RootWindow root)

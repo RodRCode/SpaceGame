@@ -131,46 +131,55 @@ namespace SpaceGameTUI
                     var currentPlanet = planets[currentIndex];
                     double cost = currentPlanet.itemList[currentItem].planetCostFactor * currentPlanet.itemList[currentItem].value;
                     var currentItemName = currentPlanet.itemList[currentItem].name;
+                    double weight = currentPlanet.itemList[currentItem].weight;
+                    double newCapacity = ship.totalCapacity - weight;
 
-
-
-                    if (currentItemName == "Fuel              ") // special case for fuel
-                    {
-                        cost = 1;
-                        if (EnoughMoney(player, cost))
+                        if (currentItemName == "Fuel              ") // special case for fuel
                         {
-                            dialogList.Items.Clear();
-                            dialogList.Items.Add("You bought some " + currentItemName);
-                            ship.fuelLevel += 100; ;
-                            player.Money--;
+                            cost = 1;
+                            if (EnoughMoney(player, cost))
+                            {
+                                dialogList.Items.Clear();
+                                dialogList.Items.Add("You bought some " + currentItemName);
+                                ship.fuelLevel += 100; ;
+                                player.Money--;
+                            }
+                            else
+                            {
+                                dialogList.Items.Clear();
+                                dialogList.Items.Add("You don't have enough money to buy that!");
+                            }
                         }
                         else
+                    if (newCapacity >= 0)
+                    {
                         {
-                            dialogList.Items.Clear();
-                            dialogList.Items.Add("You don't have enough money to buy that!");
+                            if (EnoughMoney(player, cost))
+                            {
+                                var shipItemIndex = ship.cargoList.FindIndex(x => x.name.Contains(currentItemName));
+
+                                if (shipItemIndex >= 0)
+                                {
+                                    ship.cargoList[shipItemIndex].quantity++;
+                                    ship.totalCapacity -= weight;
+                                    dialogList.Items.Clear();
+                                    dialogList.Items.Add("You bought some " + currentItemName);
+                                    UpdateInventoryList(ship, inventoryList);
+                                    player.Money -= cost;
+                                }
+                            }
+                            else
+                            {
+                                dialogList.Items.Clear();
+                                dialogList.Items.Add("You don't have enough money to buy that!");
+                            }
                         }
                     }
                     else
                     {
-                        if (EnoughMoney(player, cost))
-                        {
-                            var shipItemIndex = ship.cargoList.FindIndex(x => x.name.Contains(currentItemName));
-
-                            if (shipItemIndex >= 0)
-                            {
-                                ship.cargoList[shipItemIndex].quantity++;
-                                dialogList.Items.Clear();
-                                dialogList.Items.Add("You bought some " + currentItemName);
-                                UpdateInventoryList(ship, inventoryList);
-                                player.Money -= cost;
-                            }
-                        }
-                        else
-                        {
-                            dialogList.Items.Clear();
-                            dialogList.Items.Add("You don't have enough money to buy that!");
-                        }
-                    }
+                        dialogList.Items.Clear();
+                        dialogList.Items.Add("Your ship doesn't have the capacity to hold that too!");
+                    }                    
                     statusitems = UpdateStatusBox(planets, ship, player, status);
                 };
             };

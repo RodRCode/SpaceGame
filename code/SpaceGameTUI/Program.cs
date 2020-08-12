@@ -138,7 +138,7 @@ namespace SpaceGameTUI
                         {
                             dialogList.Items.Clear();
                             dialogList.Items.Add("You bought some " + currentItemName);
-                            ship.fuelLevel += 10; ;
+                            ship.fuelLevel += 100; ;
                             player.Money--;
                         }
                         else
@@ -468,7 +468,7 @@ namespace SpaceGameTUI
         {
             var displayMainstatus = new DisplayMainStatus(root) { Text = "SPACE HAWKER", Width = 43, Height = 9, Top = 2, Left = 104, Border = BorderStyle.Thick };
 
-            var status = new StatusListBox(displayMainstatus) { Top = 1, Left = 0, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+            var status = new StatusListBox(displayMainstatus) { Top = 0, Left = 0, Width = 43, Height = 9, Border = BorderStyle.Thin, Visible = true };
             return status;
         }
 

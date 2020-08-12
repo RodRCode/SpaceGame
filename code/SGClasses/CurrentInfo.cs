@@ -19,6 +19,7 @@ namespace SGClasses
             StatusList.Add($"Ship Location: {ship.planetName}");
             StatusList.Add($"Fuel: {ship.fuelLevel:f1}");
             StatusList.Add($"Location: {ship.location.x}, {ship.location.y}");
+            StatusList.Add($"Weight Capacity: {ship.totalCapacity}");
             return StatusList;
         }
      //   new CurrentInfo(displayMainstatus) { Text = "Name: " + player.Name, Top = 1, Left = 4 };

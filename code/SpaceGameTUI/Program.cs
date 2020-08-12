@@ -131,6 +131,9 @@ namespace SpaceGameTUI
                     var currentPlanet = planets[currentIndex];
                     double cost = currentPlanet.itemList[currentItem].planetCostFactor * currentPlanet.itemList[currentItem].value;
                     var currentItemName = currentPlanet.itemList[currentItem].name;
+
+
+
                     if (currentItemName == "Fuel              ") // special case for fuel
                     {
                         cost = 1;
@@ -168,9 +171,7 @@ namespace SpaceGameTUI
                             dialogList.Items.Add("You don't have enough money to buy that!");
                         }
                     }
-                        statusitems = UpdateStatusBox(planets, ship, player, status);
-
-                    // Need a list of things you hit enter and it shows what you bought in the game dialog
+                    statusitems = UpdateStatusBox(planets, ship, player, status);
                 };
             };
             // TODO create the purchase section
@@ -180,22 +181,8 @@ namespace SpaceGameTUI
             showSellButton.Clicked += (s, e) =>
                 {
                     sellBox.Show();
-                    /*                ListBox sellList;
-                                    bool done = false;
-                                    sellList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
 
-                                    do
-                                    {
-
-                                    } while (!done);
-
-                                    sellBox.Hide();
-
-                                    UpdateStatusBox(status, statusitems);
-
-                                    root.Run();
-                    */
                 };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
@@ -211,8 +198,6 @@ namespace SpaceGameTUI
             showQuitButton.Clicked += (s, e) =>
             {
                 quitBox.Show();
-
-
             };
             // TODO: Have a way to exit the program and give the user a final goodbye
 
@@ -395,7 +380,6 @@ namespace SpaceGameTUI
                     dialogList.Items.Add("You don't have enough fuel to make the trip at that warp speed. Try something slower");
                 }
                 return (false);
-
             }
         }
 

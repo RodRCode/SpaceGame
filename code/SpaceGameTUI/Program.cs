@@ -55,7 +55,7 @@ namespace SpaceGameTUI
             //Create all the popup boxes
             DisplayMainStatus warpSpeedBox, buyBox, sellBox, storyBox, retireBox, quitBox;
 
-            AllPopUpBoxes(displayMap, out warpButton, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
+            AllPopUpBoxes(displayMap, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
 
             ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox);
 
@@ -140,9 +140,9 @@ namespace SpaceGameTUI
             returnFromQuit.Clicked += (s, e) => { quitBox.Hide(); root.Run(); };
         }
 
-        private static void AllPopUpBoxes(DisplayMap displayMap, out Button warpButton, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)
+        private static void AllPopUpBoxes(DisplayMap displayMap, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)
         {
-            WarpSpeedPopBox(displayMap, out warpButton, out warpSpeedBox);
+            WarpSpeedPopBox(displayMap,  out warpSpeedBox);
             BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
             SellPopUpBox(displayMap, out returnFromSell, out sellBox);
             StoryPopUpBox(displayMap, out returnFromStory, out storyBox);
@@ -185,10 +185,10 @@ namespace SpaceGameTUI
             Console.ReadLine();
         }
 
-        private static void WarpSpeedPopBox(DisplayMap displayMap, out Button warpButton, out DisplayMainStatus warpSpeedBox)
+        private static void WarpSpeedPopBox(DisplayMap displayMap, out DisplayMainStatus warpSpeedBox)
         {
             warpSpeedBox = new DisplayMainStatus(displayMap) { Text = "Warp Speed", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            
         }
 
         private static (int, bool) GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player)

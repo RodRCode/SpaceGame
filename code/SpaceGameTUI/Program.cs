@@ -11,6 +11,8 @@ namespace SpaceGameTUI
 {
     class Program
     {
+        public static ListBox buyList;
+
         public static object SelectedIndex { get; private set; }
 
         static void Main(string[] args)
@@ -49,6 +51,7 @@ namespace SpaceGameTUI
 
             DisplayPlanetList displayPlanetList;
             ListBox planetList;
+    //        ListBox buyList;
             PlanetListBox(root, out displayPlanetList, out planetList);
 
             ListBox inventoryList = InventoryListBox(root);
@@ -94,12 +97,12 @@ namespace SpaceGameTUI
 
                     SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
-                    planetName = planets[planetList.SelectedIndex].name;
+                    ship.planetName = planets[planetList.SelectedIndex].name;
                 }
 
                 status.Items.Clear();
 
-                statusitems = CurrentInfo.Update(player, ship, planets, planetName);
+                statusitems = CurrentInfo.Update(player, ship, planets);
                 oldLocation = ship.location;
 
                 foreach (var item in statusitems)
@@ -113,6 +116,26 @@ namespace SpaceGameTUI
             showBuyButton.Clicked += (s, e) =>
             {
                 buyBox.Show();
+                string currentShipPlanetName = ship.planetName;
+                var currentIndex = planets.FindIndex(x => x.name.Contains(currentShipPlanetName));
+
+                foreach (var item in planets[currentIndex].itemList)
+                {
+                    string textForInventory = item.name + " Qty: " + item.quantity + " wt: " + item.weight;
+                    buyList.Items.Add(textForInventory);
+                }
+
+//                inventoryList.Show();
+//                buyList.SetFocus();
+
+                Console.ReadLine();
+                buyBox.Hide();
+                status.Items.Clear();
+                foreach (var item in statusitems)
+                {
+                    status.Items.Add(item);
+                }
+           //     root.Run();
 
                 // Need a list of things you hit enter and it shows what you bought in the game dialog
             };
@@ -150,7 +173,7 @@ namespace SpaceGameTUI
         private static void AllPopUpBoxes(DisplayMap displayMap, out Button warpButton, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)
         {
             WarpSpeedPopBox(displayMap, out warpButton, out warpSpeedBox);
-            BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
+            BuyPopUpBox(displayMap, out returnFromBuy, out buyBox, out buyList);
             SellPopUpBox(displayMap, out returnFromSell, out sellBox);
             StoryPopUpBox(displayMap, out returnFromStory, out storyBox);
             RetirePopUpBox(displayMap, out returnFromRetire, out retireBox);
@@ -181,14 +204,15 @@ namespace SpaceGameTUI
         private static void SellPopUpBox(DisplayMap displayMap, out Button returnFromSell, out DisplayMainStatus sellBox)
         {
             sellBox = new DisplayMainStatus(displayMap) { Text = "Sell", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromSell = new Button(sellBox) { Text = "Sell", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            returnFromSell = new Button(sellBox) { Text = "Exit", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
             Console.ReadLine();
         }
 
-        private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox)
+        private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox, out ListBox buyList)
         {
             buyBox = new DisplayMainStatus(displayMap) { Text = "Buy", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromBuy = new Button(buyBox) { Text = "Buy", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
+            returnFromBuy = new Button(buyBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true, Enabled = true };
+            buyList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
             Console.ReadLine();
         }
 
@@ -284,7 +308,7 @@ namespace SpaceGameTUI
         {
             planetName = planets[planetList.SelectedIndex].name;
             oldLocation = ship.location;
-            statusitems = CurrentInfo.Update(player, ship, planets, planetName);
+            statusitems = CurrentInfo.Update(player, ship, planets);
             foreach (var item in statusitems)
             {
                 status.Items.Add(item);

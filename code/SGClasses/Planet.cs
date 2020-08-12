@@ -14,6 +14,7 @@ namespace SGClasses
         public readonly Location location;
         public readonly string planetInfo;
         public List<Item> itemList;
+        public int listNum;
 
 
         public Planet(string name, Location location, List<Item> itemList, string planetInfo = "Some interesting stuff happened")

@@ -4,6 +4,7 @@ using System.Text;
 using SGClasses;
 using CLRCLI;
 using CLRCLI.Widgets;
+using System.Runtime.InteropServices;
 
 //todo  STRETCH GOAL, what happens if we add Tribbles to this? Cargo capacity increases over time?  Ship bursts during travel
 
@@ -23,7 +24,7 @@ namespace SpaceGameTUI
             int warpSpeed;
             var root = new RootWindow();
             var planets = Planet.PopulatePlanets();
-            
+
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
             Location shipLocation = new Location(1, 1);
@@ -69,7 +70,7 @@ namespace SpaceGameTUI
             AllPopUpBoxes(displayMap, out warpButton, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
 
             ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox);
-             
+
             // Start the business of what happens when they use enters stuff
 
             //TRAVEL BUTTON SELECTION
@@ -119,45 +120,59 @@ namespace SpaceGameTUI
 
                 ListBox buyList;
                 buyList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
-                buyList.Clicked += (s, e) => { };
-                    buyList.SetFocus();
 
                 string currentShipPlanetName = ship.planetName;
                 var currentIndex = planets.FindIndex(x => x.name.Contains(currentShipPlanetName));
-                
+
+                buyList.Clicked += (s, e) =>
+                {
+                    int currentItem;
+                    currentItem = buyList.SelectedIndex;
+                    var currentPlanet = planets[currentIndex];
+                    double cost = currentPlanet.itemList[currentItem].planetCostFactor * currentPlanet.itemList[currentItem].value;
+
+
+                    player.Money -= cost;
+
+                    statusitems = UpdateStatusBox(planets, ship, player, status);
+
+                };
+
+
+
                 buyList.Items.Clear();
                 CreateAndPopulateBuyList(planets, buyList, currentIndex);
                 buyList.Show();
-                buyList.SetFocus();             
- 
+                buyList.SetFocus();
 
-                UpdateStatusBox(status, statusitems);
 
-                
+
+
                 // Need a list of things you hit enter and it shows what you bought in the game dialog
             };
             // TODO create the purchase section
             // TODO: create the Transactions class
 
             // SELLING SECTION
-            showSellButton.Clicked += (s, e) => { 
+            showSellButton.Clicked += (s, e) =>
+            {
                 sellBox.Show();
-/*                ListBox sellList;
-                bool done = false;
-                sellList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+                /*                ListBox sellList;
+                                bool done = false;
+                                sellList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
 
-                do
-                {
+                                do
+                                {
 
-                } while (!done);
+                                } while (!done);
 
-                sellBox.Hide();
+                                sellBox.Hide();
 
-                UpdateStatusBox(status, statusitems);
+                                UpdateStatusBox(status, statusitems);
 
-                root.Run();
-*/
+                                root.Run();
+                */
             };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
@@ -170,14 +185,27 @@ namespace SpaceGameTUI
             // TODO: Have a way to exit the program and give the user a final screen/window
 
             //USER WANTS TO QUIT
-            showQuitButton.Clicked += (s, e) => { 
-                quitBox.Show(); 
-            
-            
+            showQuitButton.Clicked += (s, e) =>
+            {
+                quitBox.Show();
+
+
             };
             // TODO: Have a way to exit the program and give the user a final goodbye
 
             root.Run();
+        }
+
+        private static List<string> UpdateStatusBox(List<Planet> planets, Ship ship, Player player, StatusListBox status)
+        {
+            List<string> statusitems = CurrentInfo.Update(player, ship, planets);
+            status.Items.Clear();
+            foreach (var item in statusitems)
+            {
+                status.Items.Add(item);
+            }
+
+            return statusitems;
         }
 
         private static void CreateAndPopulateBuyList(List<Planet> planets, ListBox buyList, int currentIndex)
@@ -190,14 +218,7 @@ namespace SpaceGameTUI
             }
         }
 
-        private static void UpdateStatusBox(StatusListBox status, List<string> statusitems)
-        {
-            status.Items.Clear();
-            foreach (var item in statusitems)
-            {
-                status.Items.Add(item);
-            }
-        }
+
 
         private static void ReturnInfoFromButtons(RootWindow root, Button returnFromSell, Button returnFromBuy, Button returnFromStory, Button returnFromRetire, Button returnFromQuit, DisplayMainStatus buyBox, DisplayMainStatus sellBox, DisplayMainStatus storyBox, DisplayMainStatus retireBox, DisplayMainStatus quitBox)
         {
@@ -211,7 +232,7 @@ namespace SpaceGameTUI
         private static void AllPopUpBoxes(DisplayMap displayMap, out Button warpButton, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)
         {
             WarpSpeedPopBox(displayMap, out warpButton, out warpSpeedBox);
-             BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
+            BuyPopUpBox(displayMap, out returnFromBuy, out buyBox);
             SellPopUpBox(displayMap, out returnFromSell, out sellBox);
             StoryPopUpBox(displayMap, out returnFromStory, out storyBox);
             RetirePopUpBox(displayMap, out returnFromRetire, out retireBox);
@@ -227,8 +248,8 @@ namespace SpaceGameTUI
         private static void RetirePopUpBox(DisplayMap displayMap, out Button returnFromRetire, out DisplayMainStatus retireBox)
         {
             retireBox = new DisplayMainStatus(displayMap) { Text = "Retire", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromRetire = new Button(retireBox) { Text = "Retire", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true};
-          }
+            returnFromRetire = new Button(retireBox) { Text = "Retire", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+        }
 
         private static void StoryPopUpBox(DisplayMap displayMap, out Button returnFromStory, out DisplayMainStatus storyBox)
         {
@@ -243,7 +264,7 @@ namespace SpaceGameTUI
             returnFromSell = new Button(sellBox) { Text = "Exit", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
         }
 
-         private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox)
+        private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox)
         {
             buyBox = new DisplayMainStatus(displayMap) { Text = "Buy", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
             returnFromBuy = new Button(buyBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true };

@@ -149,17 +149,24 @@ namespace SpaceGameTUI
                     }
                     else
                     {
-                        var shipItemIndex = ship.cargoList.FindIndex(x => x.name.Contains(currentItemName));
-
-                        if (shipItemIndex >= 0)
+                        if (EnoughMoney(player, cost))
                         {
-                            ship.cargoList[shipItemIndex].quantity++;
-                            dialogList.Items.Clear();
-                            dialogList.Items.Add("You bought some "+ currentItemName);
-                            UpdateInventoryList(ship, inventoryList);
-                            player.Money -= cost;
-                        }
+                            var shipItemIndex = ship.cargoList.FindIndex(x => x.name.Contains(currentItemName));
 
+                            if (shipItemIndex >= 0)
+                            {
+                                ship.cargoList[shipItemIndex].quantity++;
+                                dialogList.Items.Clear();
+                                dialogList.Items.Add("You bought some " + currentItemName);
+                                UpdateInventoryList(ship, inventoryList);
+                                player.Money -= cost;
+                            }
+                        }
+                        else
+                        {
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You don't have enough money to buy that!");
+                        }
                     }
                         statusitems = UpdateStatusBox(planets, ship, player, status);
 

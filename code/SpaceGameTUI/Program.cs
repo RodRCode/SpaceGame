@@ -42,6 +42,8 @@ namespace SpaceGameTUI
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
             //Creates the box for the Action buttons
+            // TODO figure out how to have the window close when the "done" button is selected
+
             Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton, warpButton, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit;
             ActionButtonBox(root, out showTravelButton, out showBuyButton, out showSellButton, out showStoryButton, out showRetireButton, out showQuitButton);
 

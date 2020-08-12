@@ -55,11 +55,7 @@ namespace SpaceGameTUI
 
             ListBox inventoryList = InventoryListBox(root);
 
-            foreach (var item in ship.cargoList)
-            {
-                string textForInventory = item.name + " Qty: " + item.quantity + " wt: " + item.weight;
-                inventoryList.Items.Add(textForInventory);
-            }
+            UpdateInventoryList(ship, inventoryList);
 
             PopulatePlanetListForTravel(planets, planetList);
 
@@ -124,56 +120,72 @@ namespace SpaceGameTUI
                 string currentShipPlanetName = ship.planetName;
                 var currentIndex = planets.FindIndex(x => x.name.Contains(currentShipPlanetName));
 
+                buyList.Items.Clear();
+                CreateAndPopulateBuyList(planets, buyList, currentIndex);
+
+                buyList.SetFocus();
                 buyList.Clicked += (s, e) =>
                 {
                     int currentItem;
                     currentItem = buyList.SelectedIndex;
                     var currentPlanet = planets[currentIndex];
                     double cost = currentPlanet.itemList[currentItem].planetCostFactor * currentPlanet.itemList[currentItem].value;
+                    var currentItemName = currentPlanet.itemList[currentItem].name;
+                    if (currentItemName == "Fuel              ") // special case for fuel
+                    {
+                        cost = 1;
+                        if (EnoughMoney(player, cost))
+                        {
+                            ship.fuelLevel += 10; ;
+                            player.Money--;
+                        }
+                        else
+                        {
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You don't have enough money to buy that!");
+                        }
+                    }
+                    else
+                    {
+                        var shipItemIndex = ship.cargoList.FindIndex(x => x.name.Contains(currentItemName));
 
+                        if (shipItemIndex >= 0)
+                        {
+                            ship.cargoList[shipItemIndex].quantity++;
+                            UpdateInventoryList(ship, inventoryList);
+                            player.Money -= cost;
+                        }
 
-                    player.Money -= cost;
+                    }
+                        statusitems = UpdateStatusBox(planets, ship, player, status);
 
-                    statusitems = UpdateStatusBox(planets, ship, player, status);
-
+                    // Need a list of things you hit enter and it shows what you bought in the game dialog
                 };
-
-
-
-                buyList.Items.Clear();
-                CreateAndPopulateBuyList(planets, buyList, currentIndex);
-                buyList.Show();
-                buyList.SetFocus();
-
-
-
-
-                // Need a list of things you hit enter and it shows what you bought in the game dialog
             };
             // TODO create the purchase section
             // TODO: create the Transactions class
 
             // SELLING SECTION
             showSellButton.Clicked += (s, e) =>
-            {
-                sellBox.Show();
-                /*                ListBox sellList;
-                                bool done = false;
-                                sellList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+                {
+                    sellBox.Show();
+                    /*                ListBox sellList;
+                                    bool done = false;
+                                    sellList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
 
 
-                                do
-                                {
+                                    do
+                                    {
 
-                                } while (!done);
+                                    } while (!done);
 
-                                sellBox.Hide();
+                                    sellBox.Hide();
 
-                                UpdateStatusBox(status, statusitems);
+                                    UpdateStatusBox(status, statusitems);
 
-                                root.Run();
-                */
-            };
+                                    root.Run();
+                    */
+                };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             //STORY SECTION
@@ -194,6 +206,24 @@ namespace SpaceGameTUI
             // TODO: Have a way to exit the program and give the user a final goodbye
 
             root.Run();
+        }
+
+        private static bool EnoughMoney(Player player, double cost)
+        {
+            bool enoughMoney = false;
+            if (cost < player.Money)
+            { enoughMoney = true; }
+            return enoughMoney;
+        }
+
+        private static void UpdateInventoryList(Ship ship, ListBox inventoryList)
+        {
+            inventoryList.Items.Clear();
+            foreach (var item in ship.cargoList)
+            {
+                string textForInventory = item.name + " Qty: " + item.quantity + " wt: " + item.weight;
+                inventoryList.Items.Add(textForInventory);
+            }
         }
 
         private static List<string> UpdateStatusBox(List<Planet> planets, Ship ship, Player player, StatusListBox status)

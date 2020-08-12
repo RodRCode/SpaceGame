@@ -9,6 +9,7 @@ namespace SGClasses
         // TODO Type of ship, Name, Total Capacity, Speed, Fuel Level, Offence, Defence, Shield, Cargo hold?
 
         public int shipType;
+        public List<Item> cargoList;
         public string shipName;
         public double totalCapacity;
         public double speed;
@@ -20,9 +21,10 @@ namespace SGClasses
         public string planetName;
 
         
-        public Ship(Location location, int shipType = 1, string shipName = "The Heart of Gold (II)", double totalCapacity = 1000, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100, string planetName = "Earth0")
+        public Ship(Location location, List<Item> cargoList, int shipType = 1, string shipName = "The Heart of Gold (II)", double totalCapacity = 1000, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100, string planetName = "Earth0")
         {
             this.shipType = shipType;
+            this.cargoList = cargoList;
             this.shipName = shipName;
             this.totalCapacity = totalCapacity;
             this.speed = speed;
@@ -33,11 +35,6 @@ namespace SGClasses
             this.location = location;
             this.planetName = planetName;
         }
-
-
-        List<Item> ShipInventory = new List<Item>();
-
-
     }
 
 }

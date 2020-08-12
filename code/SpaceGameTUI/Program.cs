@@ -26,7 +26,7 @@ namespace SpaceGameTUI
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
             Location shipLocation = new Location(1, 1);
-            var ship = new Ship(shipLocation);
+            var ship = new Ship(shipLocation, Item.shipItemList());
 
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");

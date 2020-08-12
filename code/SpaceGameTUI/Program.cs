@@ -202,7 +202,7 @@ namespace SpaceGameTUI
             do
             {
                 dialogList.Items.Clear();
-                dialogList.Items.Add("Enter 'q' to quit");
+                dialogList.Items.Add("Enter 'q' to exit the warp speed selection");
                 dialogList.Items.Add("What is your warp speed of choice (1-9): ");
                 var numChar = Console.ReadKey(true);
                 var numString = numChar.KeyChar.ToString();

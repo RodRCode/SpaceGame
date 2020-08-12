@@ -119,9 +119,11 @@ namespace SpaceGameTUI
                 string currentShipPlanetName = ship.planetName;
                 var currentIndex = planets.FindIndex(x => x.name.Contains(currentShipPlanetName));
 
+                buyList.Items.Clear();
                 foreach (var item in planets[currentIndex].itemList)
                 {
-                    string textForInventory = item.name + " Qty: " + item.quantity + " wt: " + item.weight;
+                    double cost = item.planetCostFactor * item.value;
+                    string textForInventory = item.name + " wt: " + item.weight + " cost: " + cost;
                     buyList.Items.Add(textForInventory);
                 }
 
@@ -135,7 +137,7 @@ namespace SpaceGameTUI
                 {
                     status.Items.Add(item);
                 }
-           //     root.Run();
+                root.Run();
 
                 // Need a list of things you hit enter and it shows what you bought in the game dialog
             };

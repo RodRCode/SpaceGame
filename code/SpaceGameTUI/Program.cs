@@ -134,24 +134,24 @@ namespace SpaceGameTUI
                     double weight = currentPlanet.itemList[currentItem].weight;
                     double newCapacity = ship.totalCapacity - weight;
 
-                        if (currentItemName == "Fuel              ") // special case for fuel
+                    if (currentItemName == "Fuel              ") // special case for fuel
+                    {
+                        cost = 1;
+                        if (EnoughMoney(player, cost))
                         {
-                            cost = 1;
-                            if (EnoughMoney(player, cost))
-                            {
-                                dialogList.Items.Clear();
-                                dialogList.Items.Add("You bought some " + currentItemName);
-                                ship.fuelLevel += 100; ;
-                                player.Money--;
-                            }
-                            else
-                            {
-                                dialogList.Items.Clear();
-                                dialogList.Items.Add("You don't have enough money to buy that!");
-                            }
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You bought some " + currentItemName);
+                            ship.fuelLevel += 100; ;
+                            player.Money--;
                         }
                         else
-                    if (newCapacity >= 0)
+                        {
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You don't have enough money to buy that!");
+                        }
+                    }
+                    else
+                if (newCapacity >= 0)
                     {
                         {
                             if (EnoughMoney(player, cost))
@@ -179,7 +179,7 @@ namespace SpaceGameTUI
                     {
                         dialogList.Items.Clear();
                         dialogList.Items.Add("Your ship doesn't have the capacity to hold that too!");
-                    }                    
+                    }
                     statusitems = UpdateStatusBox(planets, ship, player, status);
                 };
             };
@@ -188,11 +188,78 @@ namespace SpaceGameTUI
 
             // SELLING SECTION
             showSellButton.Clicked += (s, e) =>
+            {
+                sellBox.Show();
+
+                ListBox sellList;
+                sellList = new ListBox(sellBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
+
+                string currentShipPlanetName = ship.planetName;
+                var currentIndex = planets.FindIndex(x => x.name.Contains(currentShipPlanetName));
+
+                sellList.Items.Clear();
+                CreateAndPopulateSellList(planets, sellList, currentIndex);
+
+                sellList.SetFocus();
+                sellList.Clicked += (s, e) =>
                 {
-                    sellBox.Show();
+                    int currentItem;
+                    currentItem = sellList.SelectedIndex;
+                    var currentPlanet = planets[currentIndex];
+                    double cost = currentPlanet.itemList[currentItem].planetCostFactor * currentPlanet.itemList[currentItem].value;
+                    var currentItemName = currentPlanet.itemList[currentItem].name;
+                    double weight = currentPlanet.itemList[currentItem].weight;
+                    double newCapacity = ship.totalCapacity - weight;
 
+                    if (currentItemName == "Fuel              ") // special case for fuel
+                    {
+                        cost = 1;
+                        if (EnoughMoney(player, cost))
+                        {
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You bought some " + currentItemName);
+                            ship.fuelLevel += 100; ;
+                            player.Money--;
+                        }
+                        else
+                        {
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You don't have enough money to sell that!");
+                        }
+                    }
+                    else
+                if (newCapacity >= 0)
+                    {
+                        {
+                            if (EnoughMoney(player, cost))
+                            {
+                                var shipItemIndex = ship.cargoList.FindIndex(x => x.name.Contains(currentItemName));
 
+                                if (shipItemIndex >= 0)
+                                {
+                                    ship.cargoList[shipItemIndex].quantity++;
+                                    ship.totalCapacity -= weight;
+                                    dialogList.Items.Clear();
+                                    dialogList.Items.Add("You bought some " + currentItemName);
+                                    UpdateInventoryList(ship, inventoryList);
+                                    player.Money -= cost;
+                                }
+                            }
+                            else
+                            {
+                                dialogList.Items.Clear();
+                                dialogList.Items.Add("You don't have enough money to sell that!");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        dialogList.Items.Clear();
+                        dialogList.Items.Add("Your ship doesn't have the capacity to hold that too!");
+                    }
+                    statusitems = UpdateStatusBox(planets, ship, player, status);
                 };
+            };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             //STORY SECTION
@@ -211,6 +278,16 @@ namespace SpaceGameTUI
             // TODO: Have a way to exit the program and give the user a final goodbye
 
             root.Run();
+        }
+
+        private static void CreateAndPopulateSellList(List<Planet> planets, ListBox sellList, int currentIndex)
+        {
+            foreach (var item in planets[currentIndex].itemList)
+            {
+                double cost = item.planetCostFactor * item.value;
+                string textForInventory = item.name + " wt: " + item.weight + " cost: " + cost;
+                sellList.Items.Add(textForInventory);
+            }
         }
 
         private static bool EnoughMoney(Player player, double cost)
@@ -277,26 +354,26 @@ namespace SpaceGameTUI
         private static void QuitPopUpBox(DisplayMap displayMap, out Button returnFromQuit, out DisplayMainStatus quitBox)
         {
             quitBox = new DisplayMainStatus(displayMap) { Text = "Quit", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromQuit = new Button(quitBox) { Text = "Quit", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+            returnFromQuit = new Button(quitBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true };
         }
 
         private static void RetirePopUpBox(DisplayMap displayMap, out Button returnFromRetire, out DisplayMainStatus retireBox)
         {
             retireBox = new DisplayMainStatus(displayMap) { Text = "Retire", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromRetire = new Button(retireBox) { Text = "Retire", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+            returnFromRetire = new Button(retireBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true };
         }
 
         private static void StoryPopUpBox(DisplayMap displayMap, out Button returnFromStory, out DisplayMainStatus storyBox)
         {
             storyBox = new DisplayMainStatus(displayMap) { Text = "Story", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromStory = new Button(storyBox) { Text = "Story", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+            returnFromStory = new Button(storyBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true };
 
         }
 
         private static void SellPopUpBox(DisplayMap displayMap, out Button returnFromSell, out DisplayMainStatus sellBox)
         {
             sellBox = new DisplayMainStatus(displayMap) { Text = "Sell", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
-            returnFromSell = new Button(sellBox) { Text = "Exit", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true };
+            returnFromSell = new Button(sellBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true };
         }
 
         private static void BuyPopUpBox(DisplayMap displayMap, out Button returnFromBuy, out DisplayMainStatus buyBox)

@@ -52,6 +52,13 @@ namespace SpaceGameTUI
             PlanetListBox(root, out displayPlanetList, out planetList);
 
             ListBox inventoryList = InventoryListBox(root);
+
+            foreach (var item in ship.cargoList)
+            {
+                string textForInventory = item.name + " Qty: " + item.quantity + " wt: " + item.weight;
+                inventoryList.Items.Add(textForInventory);
+            }
+
             PopulatePlanetListForTravel(planets, planetList);
 
             //Create all the popup boxes
@@ -75,7 +82,7 @@ namespace SpaceGameTUI
                 bool travelYes = false;
                 newLocation = planets[planetList.SelectedIndex].location;
 
-       //         warpSpeedBox.Show();
+                //         warpSpeedBox.Show();
 
                 (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player, dialogList);
 

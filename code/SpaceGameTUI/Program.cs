@@ -69,9 +69,7 @@ namespace SpaceGameTUI
 
             planetList.Clicked += (s, e) =>
             {
-                //TODO: Need to check that you have enough fuel and time to travel there
-                //TODO: Need to get warp speed choice from user
-                //TODO: Need to show user the time and fuel it will take to get to a planet
+                //TODO: clean up the uglies of the interface, send the text to the game dialog box
 
                 int warpSpeed = 8;
                 bool travelYes = false;
@@ -105,7 +103,14 @@ namespace SpaceGameTUI
             };
 
             // PURCHASE SECTION
-            showBuyButton.Clicked += (s, e) => { buyBox.Show(); };
+            showBuyButton.Clicked += (s, e) => { buyBox.Show(); 
+            
+            // Need a list of things you hit enter and it shows what you bought in the game dialog
+            };
+            // create the purchase section
+            // TODO: create the Transactions class
+
+
             //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
             // SELLING SECTION
@@ -115,12 +120,15 @@ namespace SpaceGameTUI
 
             //STORY SECTION
             showStoryButton.Clicked += (s, e) => { storyBox.Show(); };
+            // TODO: Get the story to the user
 
             //USER WANTS TO LIVE THE GOOD LIFE AND RETIRE
             showRetireButton.Clicked += (s, e) => { retireBox.Show(); };
+            // TODO: Have a way to exit the program and give the user a final screen/window
 
             //USER WANTS TO QUIT
             showQuitButton.Clicked += (s, e) => { quitBox.Show(); };
+            // TODO: Have a way to exit the program and give the user a final goodbye
 
 
             //    void getindex(int index)

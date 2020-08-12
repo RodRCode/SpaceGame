@@ -75,7 +75,7 @@ namespace SpaceGameTUI
                 bool travelYes = false;
                 newLocation = planets[planetList.SelectedIndex].location;
 
-                warpSpeedBox.Show();
+       //         warpSpeedBox.Show();
 
                 (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player, dialogList);
 
@@ -202,38 +202,48 @@ namespace SpaceGameTUI
             do
             {
                 dialogList.Items.Clear();
-                dialogList.Items.Add("What is your warp speed of choice: ");
+                dialogList.Items.Add("Enter 'q' to quit");
+                dialogList.Items.Add("What is your warp speed of choice (1-9): ");
                 var numChar = Console.ReadKey(true);
-                warpSpeed = int.Parse(numChar.KeyChar.ToString());
-                double tempTime, tempFuel, tempDistance = 42.9;
-                tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
-                (tempTime, tempFuel) = SpaceTravel.WarpSpeedCalcuation(tempDistance, warpSpeed);
-                dialogList.Items.Add("That is " + tempDistance + " lightyears away");
-                dialogList.Items.Add("You will use " + tempFuel + " fuelies to get there at Warp " + warpSpeed);
-                dialogList.Items.Add("And will take " + tempTime + " years.");
-                bool canTravel = travelCheck(tempTime, tempFuel, player, ship, dialogList);
-                string answer = "n";
-                if (canTravel)
-                {
-                    dialogList.Items.Add("Do you want to go now? Y/N: ");
-                    numChar = Console.ReadKey(true);
-                    answer = numChar.KeyChar.ToString();
-                }
-
-                if (answer == "y")
+                var numString = numChar.KeyChar.ToString();
+                if (numString == "q")
                 {
                     done = true;
-                    travelYes = true;
+                    dialogList.Items.Clear();
                 }
                 else
                 {
-                    dialogList.Items.Add("Do you want to try a different Warp speed? Y/N: ");
-                    numChar = Console.ReadKey(true);
-                    answer = numChar.KeyChar.ToString();
-                    if (answer == "n")
+                    warpSpeed = int.Parse(numChar.KeyChar.ToString());
+                    double tempTime, tempFuel, tempDistance = 42.9;
+                    tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
+                    (tempTime, tempFuel) = SpaceTravel.WarpSpeedCalcuation(tempDistance, warpSpeed);
+                    dialogList.Items.Add("That is " + tempDistance + " lightyears away");
+                    dialogList.Items.Add("You will use " + tempFuel + " fuelies to get there at Warp " + warpSpeed);
+                    dialogList.Items.Add("And will take " + tempTime + " years.");
+                    bool canTravel = travelCheck(tempTime, tempFuel, player, ship, dialogList);
+                    string answer = "n";
+                    if (canTravel)
+                    {
+                        dialogList.Items.Add("Do you want to go now? Y/N: ");
+                        numChar = Console.ReadKey(true);
+                        answer = numChar.KeyChar.ToString();
+                    }
+
+                    if (answer == "y")
                     {
                         done = true;
-                        travelYes = false;
+                        travelYes = true;
+                    }
+                    else
+                    {
+                        dialogList.Items.Add("Do you want to try a different Warp speed? Y/N: ");
+                        numChar = Console.ReadKey(true);
+                        answer = numChar.KeyChar.ToString();
+                        if (answer == "n")
+                        {
+                            done = true;
+                            travelYes = false;
+                        }
                     }
                 };
 

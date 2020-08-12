@@ -31,7 +31,7 @@ namespace SpaceGameTUI
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = "Zaphod Beeblebrox";
-            //           string name = Console.ReadLine();
+            //TODO           string name = Console.ReadLine();
             var player = new Player(name);
 
             // Application.Init();
@@ -71,15 +71,13 @@ namespace SpaceGameTUI
 
             planetList.Clicked += (s, e) =>
             {
-                //TODO: clean up the uglies of the interface, send the text to the game dialog box
-
                 int warpSpeed = 8;
                 bool travelYes = false;
                 newLocation = planets[planetList.SelectedIndex].location;
 
                 warpSpeedBox.Show();
 
-                (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player);
+                (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player, dialogList);
 
                 warpSpeedBox.Hide();
 
@@ -105,20 +103,18 @@ namespace SpaceGameTUI
             };
 
             // PURCHASE SECTION
-            showBuyButton.Clicked += (s, e) => { buyBox.Show(); 
-            
-            // Need a list of things you hit enter and it shows what you bought in the game dialog
+            showBuyButton.Clicked += (s, e) =>
+            {
+                buyBox.Show();
+
+                // Need a list of things you hit enter and it shows what you bought in the game dialog
             };
-            // create the purchase section
+            // TODO create the purchase section
             // TODO: create the Transactions class
-
-
-            //      var showBuyOptions = new DisplayShipInventory(displayPlanetList) { Text = "Inventory", Width = 43, Height = 8, Top = 1, Left = 0, Border = BorderStyle.Thin, Visible = false };
 
             // SELLING SECTION
             showSellButton.Clicked += (s, e) => { sellBox.Show(); };
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
-
 
             //STORY SECTION
             showStoryButton.Clicked += (s, e) => { storyBox.Show(); };
@@ -131,12 +127,6 @@ namespace SpaceGameTUI
             //USER WANTS TO QUIT
             showQuitButton.Clicked += (s, e) => { quitBox.Show(); };
             // TODO: Have a way to exit the program and give the user a final goodbye
-
-
-            //    void getindex(int index)
-            //    {
-            //        ship.location = planets[index].location;
-            //    }
 
             root.Run();
         }
@@ -201,7 +191,7 @@ namespace SpaceGameTUI
             warpButton = new Button(warpSpeedBox) { Text = "Travel", Width = 10, Height = 3, Top = 1, Left = 4, Visible = true, Enabled = true };
         }
 
-        private static (int, bool) GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player)
+        private static (int, bool) GetWarpSpeed(Location oldLocation, Location newLocation, Ship ship, Player player, DialogListBox dialogList)
         {
             //TODO list of warp speed and it shows you the list of calculations
 
@@ -211,32 +201,35 @@ namespace SpaceGameTUI
 
             do
             {
-                Console.Write("What is your warp speed of choice: ");
-                warpSpeed = int.Parse(Console.ReadLine());
+                dialogList.Items.Clear();
+                dialogList.Items.Add("What is your warp speed of choice: ");
+                var numChar = Console.ReadKey(true);
+                warpSpeed = int.Parse(numChar.KeyChar.ToString());
                 double tempTime, tempFuel, tempDistance = 42.9;
                 tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
                 (tempTime, tempFuel) = SpaceTravel.WarpSpeedCalcuation(tempDistance, warpSpeed);
-                Console.WriteLine("That is " + tempDistance + " lightyears away");
-                Console.WriteLine("You will use " + tempFuel + " fuelies to get there at Warp " + warpSpeed);
-                Console.WriteLine("And will take " + tempTime + " years.");
-                bool canTravel = travelCheck(tempTime, tempFuel, player, ship);
+                dialogList.Items.Add("That is " + tempDistance + " lightyears away");
+                dialogList.Items.Add("You will use " + tempFuel + " fuelies to get there at Warp " + warpSpeed);
+                dialogList.Items.Add("And will take " + tempTime + " years.");
+                bool canTravel = travelCheck(tempTime, tempFuel, player, ship, dialogList);
                 string answer = "n";
                 if (canTravel)
                 {
-                    Console.Write("Do you want to go now? Y/N: ");
-                    answer = Console.ReadLine();
+                    dialogList.Items.Add("Do you want to go now? Y/N: ");
+                    numChar = Console.ReadKey(true);
+                    answer = numChar.KeyChar.ToString();
                 }
 
                 if (answer == "y")
                 {
-                    //                 done = travelCheck(tempTime, tempFuel, player, ship);
                     done = true;
                     travelYes = true;
                 }
                 else
                 {
-                    Console.Write("Do you want to try a different Warp speed? Y/N: ");
-                    answer = Console.ReadLine();
+                    dialogList.Items.Add("Do you want to try a different Warp speed? Y/N: ");
+                    numChar = Console.ReadKey(true);
+                    answer = numChar.KeyChar.ToString();
                     if (answer == "n")
                     {
                         done = true;
@@ -249,7 +242,7 @@ namespace SpaceGameTUI
             return (warpSpeed, travelYes);
         }
 
-        private static bool travelCheck(double tempTime, double tempFuel, Player player, Ship ship)
+        private static bool travelCheck(double tempTime, double tempFuel, Player player, Ship ship, DialogListBox dialogList)
         {
             if (((tempTime + player.Age) <= 70) && (tempFuel < ship.fuelLevel))
             {
@@ -259,11 +252,11 @@ namespace SpaceGameTUI
             {
                 if ((tempTime + player.Age) > 70)
                 {
-                    Console.WriteLine("Sorry, you are too old for that trip!  Use more Warp speed, or just retire!");
+                    dialogList.Items.Add("Sorry, you are too old for that trip!  Use more Warp speed, or just retire!");
                 }
                 else
                 {
-                    Console.WriteLine("You don't have enough fuel to make the trip at that warp speed. Try something slower");
+                    dialogList.Items.Add("You don't have enough fuel to make the trip at that warp speed. Try something slower");
                 }
                 return (false);
 
@@ -354,7 +347,7 @@ namespace SpaceGameTUI
         {
             foreach (var planet in planets)
             {
-                // add an if statement here to make the selected planet a spinner
+                // TODO add an if statement here to make the selected planet a spinner
                 new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
             }
         }

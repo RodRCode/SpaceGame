@@ -116,6 +116,10 @@ namespace SpaceGameTUI
             showBuyButton.Clicked += (s, e) =>
             {
                 buyBox.Show();
+                //            buyBox.SetFocus();
+                //            buyList.Show();
+                buyList.SetFocus();
+
                 string currentShipPlanetName = ship.planetName;
                 var currentIndex = planets.FindIndex(x => x.name.Contains(currentShipPlanetName));
 
@@ -127,16 +131,15 @@ namespace SpaceGameTUI
                     buyList.Items.Add(textForInventory);
                 }
 
-//                inventoryList.Show();
-//                buyList.SetFocus();
+                //             buyList.Show();
+                //             buyList.SetFocus();
 
                 Console.ReadLine();
+
                 buyBox.Hide();
-                status.Items.Clear();
-                foreach (var item in statusitems)
-                {
-                    status.Items.Add(item);
-                }
+
+                UpdateStatusBox(status, statusitems);
+
                 root.Run();
 
                 // Need a list of things you hit enter and it shows what you bought in the game dialog
@@ -161,6 +164,15 @@ namespace SpaceGameTUI
             // TODO: Have a way to exit the program and give the user a final goodbye
 
             root.Run();
+        }
+
+        private static void UpdateStatusBox(StatusListBox status, List<string> statusitems)
+        {
+            status.Items.Clear();
+            foreach (var item in statusitems)
+            {
+                status.Items.Add(item);
+            }
         }
 
         private static void ReturnInfoFromButtons(RootWindow root, Button returnFromSell, Button returnFromBuy, Button returnFromStory, Button returnFromRetire, Button returnFromQuit, DisplayMainStatus buyBox, DisplayMainStatus sellBox, DisplayMainStatus storyBox, DisplayMainStatus retireBox, DisplayMainStatus quitBox)
@@ -215,7 +227,6 @@ namespace SpaceGameTUI
             buyBox = new DisplayMainStatus(displayMap) { Text = "Buy", Width = 75, Height = 26, Top = 6, Left = 20, Border = BorderStyle.Thick, Visible = false };
             returnFromBuy = new Button(buyBox) { Text = "Exit", Width = 10, Height = 3, Top = 10, Left = 4, Visible = true, Enabled = true };
             buyList = new ListBox(buyBox) { Top = 1, Left = 1, Width = 43, Height = 8, Border = BorderStyle.Thin, Visible = true };
-            Console.ReadLine();
         }
 
         private static void WarpSpeedPopBox(DisplayMap displayMap, out Button warpButton, out DisplayMainStatus warpSpeedBox)

@@ -29,12 +29,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             earthItemList.Add(water);
             earthItemList.Add(iceCream);
             earthItemList.Add(cigars);
             earthItemList.Add(blackMarket);
             earthItemList.Add(dysentery);
             earthItemList.Add(happiness);
+            earthItemList.Add(fuel);
 
             return earthItemList;
         }
@@ -48,6 +50,7 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             shipItemList.Add(water);
             shipItemList.Add(iceCream);
             shipItemList.Add(cigars);
@@ -67,12 +70,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             alphaProximaItemList.Add(water);
             alphaProximaItemList.Add(iceCream);
             alphaProximaItemList.Add(cigars);
             alphaProximaItemList.Add(blackMarket);
             alphaProximaItemList.Add(dysentery);
             alphaProximaItemList.Add(happiness);
+            alphaProximaItemList.Add(fuel);
 
             return alphaProximaItemList;
         }
@@ -86,12 +91,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             velanItemList.Add(water);
             velanItemList.Add(iceCream);
             velanItemList.Add(cigars);
             velanItemList.Add(blackMarket);
             velanItemList.Add(dysentery);
             velanItemList.Add(happiness);
+            velanItemList.Add(fuel);
 
             return velanItemList;
         }
@@ -105,12 +112,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             rigelItemList.Add(water);
             rigelItemList.Add(iceCream);
             rigelItemList.Add(cigars);
             rigelItemList.Add(blackMarket);
             rigelItemList.Add(dysentery);
             rigelItemList.Add(happiness);
+            rigelItemList.Add(fuel);
 
             return rigelItemList;
         }
@@ -124,12 +133,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             eddoreItemList.Add(water);
             eddoreItemList.Add(iceCream);
             eddoreItemList.Add(cigars);
             eddoreItemList.Add(blackMarket);
             eddoreItemList.Add(dysentery);
             eddoreItemList.Add(happiness);
+            eddoreItemList.Add(fuel);
 
             return eddoreItemList;
         }
@@ -143,12 +154,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             palainItemList.Add(water);
             palainItemList.Add(iceCream);
             palainItemList.Add(cigars);
             palainItemList.Add(blackMarket);
             palainItemList.Add(dysentery);
             palainItemList.Add(happiness);
+            palainItemList.Add(fuel);
 
             return palainItemList;
         }
@@ -162,12 +175,14 @@ namespace SGClasses
             var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
             var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
             var happiness = new Item("Happiness         ", 1, 2, 6, 1);
+            var fuel = new Item("Fuel              ");
             arisiaItemList.Add(water);
             arisiaItemList.Add(iceCream);
             arisiaItemList.Add(cigars);
             arisiaItemList.Add(blackMarket);
             arisiaItemList.Add(dysentery);
             arisiaItemList.Add(happiness);
+            arisiaItemList.Add(fuel);
 
             return arisiaItemList;
         }

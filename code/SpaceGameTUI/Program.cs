@@ -136,6 +136,8 @@ namespace SpaceGameTUI
                         cost = 1;
                         if (EnoughMoney(player, cost))
                         {
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You bought some " + currentItemName);
                             ship.fuelLevel += 10; ;
                             player.Money--;
                         }
@@ -152,6 +154,8 @@ namespace SpaceGameTUI
                         if (shipItemIndex >= 0)
                         {
                             ship.cargoList[shipItemIndex].quantity++;
+                            dialogList.Items.Clear();
+                            dialogList.Items.Add("You bought some "+ currentItemName);
                             UpdateInventoryList(ship, inventoryList);
                             player.Money -= cost;
                         }

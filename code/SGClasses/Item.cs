@@ -23,13 +23,13 @@ namespace SGClasses
         public static List<Item> earthItemList()
         {
             List<Item> earthItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 1);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 1);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 1);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 1);
-            var fuel = new Item("Fuel              ");
+            var water = new Item("Water             ", 1, 8, 1, 1.0);
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 1.0);
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 1.0);
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1.0);
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1.0);
+            var happiness = new Item("Happiness         ", 1, 2, 6, 1.0);
+            var fuel = new Item("Fuel              ", 1, 0, 1.0, 1.0);
             earthItemList.Add(water);
             earthItemList.Add(iceCream);
             earthItemList.Add(cigars);
@@ -44,13 +44,13 @@ namespace SGClasses
         public static List<Item> shipItemList()
         {
             List<Item> shipItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 2);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 2);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 2);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 2);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 2);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 2);
-            var fuel = new Item("Fuel              ");
+            var water = new Item("Water             ", 1, 8, 1, 1.0);
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 1.0);
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 1.0);
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 1.0);
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 1.0);
+            var happiness = new Item("Happiness         ", 1, 2, 6, 1.0);
+            var fuel = new Item("Fuel              ", 1, 0, 1.0, 1.0);
             shipItemList.Add(water);
             shipItemList.Add(iceCream);
             shipItemList.Add(cigars);
@@ -63,13 +63,14 @@ namespace SGClasses
 
         public static List<Item> alphaProximaItemList()
         {
+            Random randoCost = new Random();
             List<Item> alphaProximaItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 3);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 3);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 3);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 3);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 3);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 3);
+            var water = new Item("Water             ", 1, 8, 1, 3 * (double)randoCost.NextDouble());
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 3 * (double)randoCost.NextDouble());
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 3 * (double)randoCost.NextDouble());
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 3 * (double)randoCost.NextDouble());
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 3 * (double)randoCost.NextDouble());
+            var happiness = new Item("Happiness         ", 1, 2, 6, 3 * (double)randoCost.NextDouble());
             var fuel = new Item("Fuel              ");
             alphaProximaItemList.Add(water);
             alphaProximaItemList.Add(iceCream);
@@ -84,13 +85,14 @@ namespace SGClasses
 
         public static List<Item> velanItemList()
         {
+            Random randoCost = new Random();
             List<Item> velanItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 4);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 4);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 4);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 4);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 4);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 4);
+            var water = new Item("Water             ", 1, 8, 1, 4 * (double)randoCost.NextDouble());
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 4 * (double)randoCost.NextDouble());
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 4 * (double)randoCost.NextDouble());
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 4 * (double)randoCost.NextDouble());
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 4 * (double)randoCost.NextDouble());
+            var happiness = new Item("Happiness         ", 1, 2, 6, 4 * (double)randoCost.NextDouble());
             var fuel = new Item("Fuel              ");
             velanItemList.Add(water);
             velanItemList.Add(iceCream);
@@ -105,13 +107,14 @@ namespace SGClasses
 
         public static List<Item> rigelItemList()
         {
+            Random randoCost = new Random();
             List<Item> rigelItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 5);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 5);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 5);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 5);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 5);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 5);
+            var water = new Item("Water             ", 1, 8, 1, 5 * (double)randoCost.NextDouble());
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 5 * (double)randoCost.NextDouble());
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 5 * (double)randoCost.NextDouble());
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 5 * (double)randoCost.NextDouble());
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 5 * (double)randoCost.NextDouble());
+            var happiness = new Item("Happiness         ", 1, 2, 6, 5 * (double)randoCost.NextDouble());
             var fuel = new Item("Fuel              ");
             rigelItemList.Add(water);
             rigelItemList.Add(iceCream);
@@ -126,13 +129,14 @@ namespace SGClasses
 
         public static List<Item> eddoreItemList()
         {
+            Random randoCost = new Random();
             List<Item> eddoreItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 6);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 6);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 6);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 6);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 6);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 6);
+            var water = new Item("Water             ", 1, 8, 1, 6 * (double)randoCost.NextDouble());
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 6 * (double)randoCost.NextDouble());
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 6 * (double)randoCost.NextDouble());
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 6 * (double)randoCost.NextDouble());
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 6 * (double)randoCost.NextDouble());
+            var happiness = new Item("Happiness         ", 1, 2, 6, 6 * (double)randoCost.NextDouble());
             var fuel = new Item("Fuel              ");
             eddoreItemList.Add(water);
             eddoreItemList.Add(iceCream);
@@ -147,13 +151,14 @@ namespace SGClasses
 
         public static List<Item> palainItemList()
         {
+            Random randoCost = new Random();
             List<Item> palainItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 7);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 7);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 7);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 7);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 7);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 7);
+            var water = new Item("Water             ", 1, 8, 1, 7 * (double)randoCost.NextDouble());
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 7 * (double)randoCost.NextDouble());
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 7 * (double)randoCost.NextDouble());
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 7 * (double)randoCost.NextDouble());
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 7 * (double)randoCost.NextDouble());
+            var happiness = new Item("Happiness         ", 1, 2, 6, 7 * (double)randoCost.NextDouble());
             var fuel = new Item("Fuel              ");
             palainItemList.Add(water);
             palainItemList.Add(iceCream);
@@ -168,13 +173,14 @@ namespace SGClasses
 
         public static List<Item> arisiaItemList()
         {
+            Random randoCost = new Random();
             List<Item> arisiaItemList = new List<Item>();
-            var water = new Item("Water             ", 1, 8, 1, 8);
-            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 8);
-            var cigars = new Item("Space Cigars      ", 1, 2, 3, 8);
-            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 8);
-            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 8);
-            var happiness = new Item("Happiness         ", 1, 2, 6, 8);
+            var water = new Item("Water             ", 1, 8, 1, 20 * (double)randoCost.NextDouble());
+            var iceCream = new Item("Ice Cream         ", 1, 1, 4, 20 * (double)randoCost.NextDouble());
+            var cigars = new Item("Space Cigars      ", 1, 2, 3, 20 * (double)randoCost.NextDouble());
+            var blackMarket = new Item("Black Market Goods", 1, 30, 300, 20 * (double)randoCost.NextDouble());
+            var dysentery = new Item("Space Dysentery   ", 1, 2, 3, 20 * (double)randoCost.NextDouble());
+            var happiness = new Item("Happiness         ", 1, 2, 6, 20 * (double)randoCost.NextDouble());
             var fuel = new Item("Fuel              ");
             arisiaItemList.Add(water);
             arisiaItemList.Add(iceCream);

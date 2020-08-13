@@ -14,7 +14,7 @@ namespace SGClasses
             StatusList.Add($"Name: {player.Name}" );
             StatusList.Add($"Charcter Type: {player.CharacterType}");
             StatusList.Add($"Age: {player.Age:f1}");
-            StatusList.Add($"Money: {player.Money}");
+            StatusList.Add($"Money: {player.Money:f1}");
             StatusList.Add($"Ship Name: {ship.shipName}");
             StatusList.Add($"Ship Location: {ship.planetName}");
             StatusList.Add($"Fuel: {ship.fuelLevel:f1}");

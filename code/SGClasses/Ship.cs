@@ -21,7 +21,7 @@ namespace SGClasses
         public string planetName;
 
         
-        public Ship(Location location, List<Item> cargoList, int shipType = 1, string shipName = "The Heart of Gold (II)", double totalCapacity = 100, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100, string planetName = "Earth")
+        public Ship(Location location, List<Item> cargoList, int shipType = 1, string shipName = "The Heart of Gold (II)", double totalCapacity = 250, double speed = 1, double fuelLevel = 100, double offence = 100, double defense = 100, double shield = 100, string planetName = "Earth")
         {
             this.shipType = shipType;
             this.cargoList = cargoList;

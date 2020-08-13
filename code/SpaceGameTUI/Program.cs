@@ -40,7 +40,7 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
-            ForAQuickIntroCommentMeOut();
+ //           ForAQuickIntroCommentMeOut();
 
             name = Console.ReadLine();
 

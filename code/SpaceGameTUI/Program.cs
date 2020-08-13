@@ -40,9 +40,7 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
- //           ForAQuickIntroCommentMeOut();
-
-            name = Console.ReadLine();
+//            name = ForAQuickIntroCommentMeOut();
 
             var player = new Player(name);
 
@@ -337,8 +335,9 @@ namespace SpaceGameTUI
             root.Run();
         }
 
-        private static void ForAQuickIntroCommentMeOut()
+        private static string ForAQuickIntroCommentMeOut()
         {
+            string name;
             Note[] Mary = PlayMaryHadALittleLamb();
             Play(Mary);
             StarWars();
@@ -347,6 +346,9 @@ namespace SpaceGameTUI
 
             Console.Clear();
             Console.Write("\n\nWhat is the name of our most resent cannonfodder.... er, recruit? ");
+
+            name = Console.ReadLine();
+            return name;
         }
 
         private static void KilledByPirates(Ship ship, Player player)

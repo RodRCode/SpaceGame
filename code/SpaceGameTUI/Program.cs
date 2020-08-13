@@ -30,6 +30,8 @@ namespace SpaceGameTUI
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation, Item.shipItemList());
 
+
+
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = "Zaphod Beeblebrox";

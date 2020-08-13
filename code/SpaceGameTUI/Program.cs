@@ -35,7 +35,7 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
-      //      name = ForAQuickIntroCommentMeOut();
+            name = ForAQuickIntroCommentMeOut();
 
             var player = new Player(name);
 
@@ -488,7 +488,7 @@ namespace SpaceGameTUI
             foreach (var item in planets[currentIndex].itemList)
             {
                 double cost = item.planetCostFactor * item.value;
-                string textForInventory = item.name + " wt: " + item.weight + " cost: " + cost;
+                string textForInventory = item.name + " wt: " + item.weight + " cost: " + string.Format("{0:0.0}", cost);
                 sellList.Items.Add(textForInventory);
             }
         }

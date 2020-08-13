@@ -40,18 +40,10 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
-/*
-            Note[] Mary = PlayMaryHadALittleLamb();
-            Play(Mary);
-            StarWars();
-
-            Console.ReadLine();
-
-            Console.Clear();
-            Console.Write("\n\nWhat is the name of our most resent cannonfodder.... er, recruit? ");
+            ForAQuickIntroCommentMeOut();
 
             name = Console.ReadLine();
-*/
+
             var player = new Player(name);
 
             // Application.Init();
@@ -261,7 +253,7 @@ namespace SpaceGameTUI
                             dialogList.Items.Add("You sold some " + currentItemName);
                             ship.fuelLevel -= 100; ;
                             player.Money++;
-                            if (player.Money>100000)
+                            if (player.Money > 100000)
                             {
                                 TheRichEnding(ship, player);
                             }
@@ -343,6 +335,18 @@ namespace SpaceGameTUI
             };
 
             root.Run();
+        }
+
+        private static void ForAQuickIntroCommentMeOut()
+        {
+            Note[] Mary = PlayMaryHadALittleLamb();
+            Play(Mary);
+            StarWars();
+
+            Console.ReadLine();
+
+            Console.Clear();
+            Console.Write("\n\nWhat is the name of our most resent cannonfodder.... er, recruit? ");
         }
 
         private static void KilledByPirates(Ship ship, Player player)

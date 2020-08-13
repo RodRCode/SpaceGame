@@ -343,7 +343,26 @@ namespace SpaceGameTUI
             showRetireButton.Clicked += (s, e) =>
             {
                 TurnOffSpinners(spinny, tinyspin);
-                retireBox.Show();
+
+                Console.Clear();
+                Console.ResetColor();
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Clear();
+                Console.WriteLine("\n\n\n\nLooking around at the Universe you have suddenly wondered WHY you have done all this.\n");
+                Console.WriteLine("You have lost so much time just wandering between planets in the dark nothingness that is the long cold");
+                Console.WriteLine("void between the lonely stars.  Maybe there is something more, something deeper that you want.");
+                Console.WriteLine($"\n\nYou find a nice place on {ship.planetName} that you manage to buy with your earnings");
+                Console.WriteLine($"\"{player.Money:f0} Galactic Patrol credits for this place isn't too bad\" you think to yourself.");
+                Console.WriteLine($"\n\nAfter some time (not too long, you decided to retire at {player.Age:f0} after all) you find someone");
+                Console.WriteLine("who puts up with your hardbitten space louse ways.  You move in together, and eventually you both grow old together");
+                Console.WriteLine($"and after {70-player.Age:f0} years you pass away peacefully in your sleep.  Not screaming in terror like your passengers.");
+                Console.WriteLine($"\n\n\nYou had a mostly good life {player.Name}.  Congrats!\n\n\n\n\nPlease play again.");
+                Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
+                Console.ReadLine();
+
+                Environment.Exit(8675309);
+                // retireBox.Show();
             };
             // TODO: Have a way to exit the program and give the user a final screen/window
 
@@ -359,12 +378,9 @@ namespace SpaceGameTUI
                 Console.Clear();
                 Console.WriteLine("\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!\n\nI hope you try again soon!\n\n\n");
 
-
-
-                //                quitBox.Show();
+                // quitBox.Show();
                 Environment.Exit(90210);
             };
-            // TODO: Have a way to exit the program and give the user a final goodbye
 
             root.Run();
         }

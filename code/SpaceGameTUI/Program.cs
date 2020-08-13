@@ -530,7 +530,7 @@ namespace SpaceGameTUI
             foreach (var item in planets[currentIndex].itemList)
             {
                 double cost = item.planetCostFactor * item.value;
-                string textForInventory = item.name + " wt: " + item.weight + " cost: " + cost;
+                string textForInventory = item.name + " wt: " + item.weight + " cost: " + string.Format("{0:0.0}", cost);
                 buyList.Items.Add(textForInventory);
             }
         }

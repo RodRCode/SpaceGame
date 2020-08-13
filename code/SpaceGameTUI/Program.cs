@@ -348,19 +348,18 @@ namespace SpaceGameTUI
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Clear();
-            Console.WriteLine("\n\n\n\nLooking around at the Universe you have suddenly wondered WHY you have done all this.\n");
-            Console.WriteLine("You have lost so much time just wandering between planets in the dark nothingness that is the long cold");
-            Console.WriteLine("void between the lonely stars.  Maybe there is something more, something deeper that you want.");
-            Console.WriteLine($"\n\nYou find a nice place on {ship.planetName} that you manage to buy with your earnings");
-            Console.WriteLine($"\"{player.Money:f0} Galactic Patrol credits for this place isn't too bad\" you think to yourself.");
-            Console.WriteLine("You take it easy, catch up on the space videos you have missed while working and play some O.G. Mario.");
-            Console.WriteLine($"\n\nAfter some time (not too long, you decided to retire at {player.Age:f0} after all) you find someone");
-            Console.WriteLine("who puts up with your hardbitten space louse ways.  You move in together, and eventually you both grow old together");
-            Console.WriteLine($"and after {70 - player.Age:f0} years you pass away peacefully in your sleep.  Not screaming in terror like your passengers.");
+
+            string lyric = "\n\n\nAnd you may find yourself\nLiving in a shotgun shack\nAnd you may find yourself\nIn another part of the world\nAnd you may find yourself\nBehind the wheel of a large automobile\nAnd you may find yourself in a beautiful house\nWith a beautiful wife\nAnd you may ask yourself, well\nHow did I get here ?\n\n";
+            Console.WriteLine(lyric);
+            Console.WriteLine($"Well, {player.Name} you got here because you were a MAGNIFICENT trader!  You got over {player.Money:f0} credits");
+            Console.WriteLine($"and decided it was time to sell the {ship.shipName} and settle down on {ship.planetName}");
+            Console.WriteLine($"\nSit back, relax, play some Tetris, you earned it at the ripe old age of {player.Age:f0}."); 
+            Console.WriteLine($"Lets be real, you only had about {70 - player.Age:f0} years left in you anyway.");
             Console.WriteLine($"\n\n\nYou had a mostly good life {player.Name}.  Congrats!\n\n\n\n\nPlease play again.");
             Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
             PlayTetrisSong();
             Console.ReadLine();
+            Environment.Exit(666);
         }
 
         private static void ReadPlanetInfoToTheConsole(List<Planet> planets)

@@ -5,6 +5,7 @@ using SGClasses;
 using CLRCLI;
 using CLRCLI.Widgets;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 //todo  STRETCH GOAL, what happens if we add Tribbles to this? Cargo capacity increases over time?  Ship bursts during travel
 
@@ -25,6 +26,25 @@ namespace SpaceGameTUI
             var root = new RootWindow();
             var planets = Planet.PopulatePlanets();
 
+            // Declare the first few notes of the song, "Mary Had A Little Lamb".
+            Note[] Mary =
+                {
+        new Note(Tone.B, Duration.QUARTER),
+        new Note(Tone.A, Duration.QUARTER),
+        new Note(Tone.GbelowC, Duration.QUARTER),
+        new Note(Tone.A, Duration.QUARTER),
+        new Note(Tone.B, Duration.QUARTER),
+        new Note(Tone.B, Duration.QUARTER),
+        new Note(Tone.B, Duration.HALF),
+        new Note(Tone.A, Duration.QUARTER),
+        new Note(Tone.A, Duration.QUARTER),
+        new Note(Tone.A, Duration.HALF),
+        new Note(Tone.B, Duration.QUARTER),
+        new Note(Tone.D, Duration.QUARTER),
+        new Note(Tone.D, Duration.HALF)
+        };
+            // Play the song
+
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
             Location shipLocation = new Location(1, 1);
@@ -34,11 +54,17 @@ namespace SpaceGameTUI
             Console.Write("Enter Your Name:  ");
             string name = "Zaphod Beeblebrox";
 
-         // string name = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine(Planet.Backstory());
+            Play(Mary);
+            Console.ReadLine();
+
+            Console.Clear();
+            Console.Write("\n\nWhat is the name of our most resent cannonfodder.... er, recruit? ");
+
+            name = Console.ReadLine();
             var player = new Player(name);
 
-
-            
             // Application.Init();
 
             // Create the windows on the display
@@ -71,13 +97,13 @@ namespace SpaceGameTUI
 
             ConsoleColor colorRed = (ConsoleColor)4;
             ConsoleColor colorBlue = (ConsoleColor)1;
-           Spinner spinny = new Spinner(displayMap) { Top = 0, Left = 1, Spinning = true, Visible = true , Foreground = colorRed};
-            TinySpinner tinyspin = new TinySpinner(displayMap) { Top = 1, Left = 2, Spinning = true, Visible = true , Background = colorBlue};
+            Spinner spinny = new Spinner(displayMap) { Top = 0, Left = 1, Spinning = true, Visible = true, Foreground = colorRed };
+            TinySpinner tinyspin = new TinySpinner(displayMap) { Top = 1, Left = 2, Spinning = true, Visible = true, Background = colorBlue };
 
             ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox, tinyspin, spinny);
 
 
-            
+
 
 
 
@@ -292,15 +318,18 @@ namespace SpaceGameTUI
             showStoryButton.Clicked += (s, e) =>
             {
                 TurnOffSpinners(spinny, tinyspin);
+
+
+
                 storyBox.Show();
             };
             // TODO: Get the story to the user
 
             //USER WANTS TO LIVE THE GOOD LIFE AND RETIRE
-            showRetireButton.Clicked += (s, e) => 
+            showRetireButton.Clicked += (s, e) =>
             {
                 TurnOffSpinners(spinny, tinyspin);
-                retireBox.Show(); 
+                retireBox.Show();
             };
             // TODO: Have a way to exit the program and give the user a final screen/window
 
@@ -382,34 +411,34 @@ namespace SpaceGameTUI
         private static void ReturnInfoFromButtons(RootWindow root, Button returnFromSell, Button returnFromBuy, Button returnFromStory, Button returnFromRetire, Button returnFromQuit, DisplayMainStatus buyBox, DisplayMainStatus sellBox, DisplayMainStatus storyBox, DisplayMainStatus retireBox, DisplayMainStatus quitBox, TinySpinner tinyspin, Spinner spinny)
         {
             returnFromBuy.Clicked += (s, e) =>
-            { 
+            {
                 buyBox.Hide();
                 TurnOnSpinners(spinny, tinyspin);
-                root.Run(); 
+                root.Run();
             };
             returnFromSell.Clicked += (s, e) =>
-            { 
+            {
                 sellBox.Hide();
                 TurnOnSpinners(spinny, tinyspin);
                 root.Run();
             };
-            returnFromStory.Clicked += (s, e) => 
+            returnFromStory.Clicked += (s, e) =>
             {
                 storyBox.Hide();
-                TurnOnSpinners(spinny, tinyspin); 
+                TurnOnSpinners(spinny, tinyspin);
                 root.Run();
             };
-            returnFromRetire.Clicked += (s, e) => 
+            returnFromRetire.Clicked += (s, e) =>
             {
                 retireBox.Hide();
                 TurnOnSpinners(spinny, tinyspin);
-                root.Run(); 
+                root.Run();
             };
-            returnFromQuit.Clicked += (s, e) => 
+            returnFromQuit.Clicked += (s, e) =>
             {
                 quitBox.Hide();
                 TurnOnSpinners(spinny, tinyspin);
-                root.Run(); 
+                root.Run();
             };
         }
 
@@ -644,33 +673,93 @@ namespace SpaceGameTUI
             }
         }
 
+        // Play the notes in a song.
+        protected static void Play(Note[] tune)
+        {
+            foreach (Note n in tune)
+            {
+                if (n.NoteTone == Tone.REST)
+                    Thread.Sleep((int)n.NoteDuration);
+                else
+                    Console.Beep((int)n.NoteTone, (int)n.NoteDuration);
+            }
+        }
 
+        // Define the frequencies of notes in an octave, as well as
+        // silence (rest).
+        protected enum Tone
+        {
+            REST = 0,
+            GbelowC = 196,
+            A = 220,
+            Asharp = 233,
+            B = 247,
+            C = 262,
+            Csharp = 277,
+            D = 294,
+            Dsharp = 311,
+            E = 330,
+            F = 349,
+            Fsharp = 370,
+            G = 392,
+            Gsharp = 415,
+        }
 
+        // Define the duration of a note in units of milliseconds.
+        protected enum Duration
+        {
+            WHOLE = 1600,
+            HALF = WHOLE / 2,
+            QUARTER = HALF / 2,
+            EIGHTH = QUARTER / 2,
+            SIXTEENTH = EIGHTH / 2,
+        }
+
+        // Define a note as a frequency (tone) and the amount of
+        // time (duration) the note plays.
+        protected struct Note
+        {
+            Tone toneVal;
+            Duration durVal;
+
+            // Define a constructor to create a specific note.
+            public Note(Tone frequency, Duration time)
+            {
+                toneVal = frequency;
+                durVal = time;
+            }
+
+            // Define properties to return the note's tone and duration.
+            public Tone NoteTone { get { return toneVal; } }
+            public Duration NoteDuration { get { return durVal; } }
+        }
     }
 
-    /*
-            *var root = new RootWindow();
-           //list.Clicked += button_Clicked;
-           var dialog = new Dialog(root) { Text = "Hello World!", Width = 60, Height = 32, Top = 4, Left = 4, Border = BorderStyle.Thick };
-           new Label(dialog) {Text = "This is a dialog!", Top = 2, Left = 2};
-           var button = new Button(dialog) { Text = "Oooooh", Top = 4, Left = 6 };
-           var button2 = new Button(dialog) { Text = "Click", Top = 4, Left = 18 };
-           var list = new ListBox(dialog) { Top = 10, Left = 4, Width = 32, Height = 6, Border = BorderStyle.Thin };
-           var line = new VerticalLine(dialog) { Top = 4, Left = 40, Width = 1, Height = 6, Border = BorderStyle.Thick };
-
-           var dialog2 = new Dialog(root) { Text = "ooooh", Width = 32, Height = 5, Top = 6, Left = 6, Border = BorderStyle.Thick, Visible = false };
-           var button3 = new Button(dialog2) { Text = "Bye!", Width = 8, Height = 3, Top = 1, Left = 1 };
-           var button = new Button(dialog) { Text = "Oooooh", Top = 4, Left = 6 };
-           button3.Clicked += (s, e) => { dialog2.Hide(); dialog.Show(); };
-           button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
-
-           for (var i = 0; i < 25; i++ )
-           {
-               list.Items.Add("Item " + i.ToString());
-           }
-
-           button.Clicked += button_Clicked;
-
-           root.Run();
-            * */
 }
+
+/*
+        *var root = new RootWindow();
+       //list.Clicked += button_Clicked;
+       var dialog = new Dialog(root) { Text = "Hello World!", Width = 60, Height = 32, Top = 4, Left = 4, Border = BorderStyle.Thick };
+       new Label(dialog) {Text = "This is a dialog!", Top = 2, Left = 2};
+       var button = new Button(dialog) { Text = "Oooooh", Top = 4, Left = 6 };
+       var button2 = new Button(dialog) { Text = "Click", Top = 4, Left = 18 };
+       var list = new ListBox(dialog) { Top = 10, Left = 4, Width = 32, Height = 6, Border = BorderStyle.Thin };
+       var line = new VerticalLine(dialog) { Top = 4, Left = 40, Width = 1, Height = 6, Border = BorderStyle.Thick };
+
+       var dialog2 = new Dialog(root) { Text = "ooooh", Width = 32, Height = 5, Top = 6, Left = 6, Border = BorderStyle.Thick, Visible = false };
+       var button3 = new Button(dialog2) { Text = "Bye!", Width = 8, Height = 3, Top = 1, Left = 1 };
+       var button = new Button(dialog) { Text = "Oooooh", Top = 4, Left = 6 };
+       button3.Clicked += (s, e) => { dialog2.Hide(); dialog.Show(); };
+       button2.Clicked += (s, e) => { dialog.Hide(); dialog2.Show(); };
+
+       for (var i = 0; i < 25; i++ )
+       {
+           list.Items.Add("Item " + i.ToString());
+       }
+
+       button.Clicked += button_Clicked;
+
+       root.Run();
+        * */
+

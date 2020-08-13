@@ -33,9 +33,12 @@ namespace SpaceGameTUI
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
             string name = "Zaphod Beeblebrox";
-            //TODO           string name = Console.ReadLine();
+
+         // string name = Console.ReadLine();
             var player = new Player(name);
 
+
+            
             // Application.Init();
 
             // Create the windows on the display
@@ -47,6 +50,7 @@ namespace SpaceGameTUI
             // TODO figure out how to have the window close when the "done" button is selected
 
             Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton, warpButton, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit;
+
             ActionButtonBox(root, out showTravelButton, out showBuyButton, out showSellButton, out showStoryButton, out showRetireButton, out showQuitButton);
 
             DisplayPlanetList displayPlanetList;
@@ -65,12 +69,28 @@ namespace SpaceGameTUI
 
             AllPopUpBoxes(displayMap, out warpButton, out returnFromSell, out returnFromBuy, out returnFromStory, out returnFromRetire, out returnFromQuit, out warpSpeedBox, out buyBox, out sellBox, out storyBox, out retireBox, out quitBox);
 
-            ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox);
+            ConsoleColor colorRed = (ConsoleColor)4;
+            ConsoleColor colorBlue = (ConsoleColor)1;
+           Spinner spinny = new Spinner(displayMap) { Top = 0, Left = 1, Spinning = true, Visible = true , Foreground = colorRed};
+            TinySpinner tinyspin = new TinySpinner(displayMap) { Top = 1, Left = 2, Spinning = true, Visible = true , Background = colorBlue};
+
+            ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox, tinyspin, spinny);
+
+
+            
+
+
 
             // Start the business of what happens when they use enters stuff
 
             //TRAVEL BUTTON SELECTION
-            showTravelButton.Clicked += (s, e) => { planetList.Show(); planetList.SetFocus(); };
+            showTravelButton.Clicked += (s, e) =>
+            {
+                //   showTravelButton.Hide();
+
+
+                planetList.Show(); planetList.SetFocus();
+            };
             string planetName;
             List<string> statusitems;
             PrepWorkForTravel(out oldLocation, planets, ship, player, status, planetList, out planetName, out statusitems);
@@ -93,6 +113,11 @@ namespace SpaceGameTUI
 
                     SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
+                    spinny.Top = newLocation.y - 1;
+                    spinny.Left = newLocation.x;
+                    tinyspin.Top = newLocation.y;
+                    tinyspin.Left = newLocation.x + 1;
+
                     ship.planetName = planets[planetList.SelectedIndex].name;
                 }
 
@@ -112,6 +137,7 @@ namespace SpaceGameTUI
             // PURCHASE SECTION
             showBuyButton.Clicked += (s, e) =>
             {
+                TurnOffSpinners(spinny, tinyspin);
                 buyBox.Show();
 
                 ListBox buyList;
@@ -189,6 +215,7 @@ namespace SpaceGameTUI
             // SELLING SECTION
             showSellButton.Clicked += (s, e) =>
             {
+                TurnOffSpinners(spinny, tinyspin);
                 sellBox.Show();
 
                 ListBox sellList;
@@ -262,21 +289,42 @@ namespace SpaceGameTUI
             //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             //STORY SECTION
-            showStoryButton.Clicked += (s, e) => { storyBox.Show(); };
+            showStoryButton.Clicked += (s, e) =>
+            {
+                TurnOffSpinners(spinny, tinyspin);
+                storyBox.Show();
+            };
             // TODO: Get the story to the user
 
             //USER WANTS TO LIVE THE GOOD LIFE AND RETIRE
-            showRetireButton.Clicked += (s, e) => { retireBox.Show(); };
+            showRetireButton.Clicked += (s, e) => 
+            {
+                TurnOffSpinners(spinny, tinyspin);
+                retireBox.Show(); 
+            };
             // TODO: Have a way to exit the program and give the user a final screen/window
 
             //USER WANTS TO QUIT
             showQuitButton.Clicked += (s, e) =>
             {
+                TurnOffSpinners(spinny, tinyspin);
                 quitBox.Show();
             };
             // TODO: Have a way to exit the program and give the user a final goodbye
 
             root.Run();
+        }
+
+        private static void TurnOnSpinners(Spinner spinny, TinySpinner tinyspin)
+        {
+            spinny.Visible = true;
+            tinyspin.Visible = true;
+        }
+
+        private static void TurnOffSpinners(Spinner spinny, TinySpinner tinyspin)
+        {
+            spinny.Visible = false;
+            tinyspin.Visible = false;
         }
 
         private static void CreateAndPopulateSellList(List<Planet> planets, ListBox sellList, int currentIndex)
@@ -331,13 +379,38 @@ namespace SpaceGameTUI
 
 
 
-        private static void ReturnInfoFromButtons(RootWindow root, Button returnFromSell, Button returnFromBuy, Button returnFromStory, Button returnFromRetire, Button returnFromQuit, DisplayMainStatus buyBox, DisplayMainStatus sellBox, DisplayMainStatus storyBox, DisplayMainStatus retireBox, DisplayMainStatus quitBox)
+        private static void ReturnInfoFromButtons(RootWindow root, Button returnFromSell, Button returnFromBuy, Button returnFromStory, Button returnFromRetire, Button returnFromQuit, DisplayMainStatus buyBox, DisplayMainStatus sellBox, DisplayMainStatus storyBox, DisplayMainStatus retireBox, DisplayMainStatus quitBox, TinySpinner tinyspin, Spinner spinny)
         {
-            returnFromBuy.Clicked += (s, e) => { buyBox.Hide(); root.Run(); };
-            returnFromSell.Clicked += (s, e) => { sellBox.Hide(); root.Run(); };
-            returnFromStory.Clicked += (s, e) => { storyBox.Hide(); root.Run(); };
-            returnFromRetire.Clicked += (s, e) => { retireBox.Hide(); root.Run(); };
-            returnFromQuit.Clicked += (s, e) => { quitBox.Hide(); root.Run(); };
+            returnFromBuy.Clicked += (s, e) =>
+            { 
+                buyBox.Hide();
+                TurnOnSpinners(spinny, tinyspin);
+                root.Run(); 
+            };
+            returnFromSell.Clicked += (s, e) =>
+            { 
+                sellBox.Hide();
+                TurnOnSpinners(spinny, tinyspin);
+                root.Run();
+            };
+            returnFromStory.Clicked += (s, e) => 
+            {
+                storyBox.Hide();
+                TurnOnSpinners(spinny, tinyspin); 
+                root.Run();
+            };
+            returnFromRetire.Clicked += (s, e) => 
+            {
+                retireBox.Hide();
+                TurnOnSpinners(spinny, tinyspin);
+                root.Run(); 
+            };
+            returnFromQuit.Clicked += (s, e) => 
+            {
+                quitBox.Hide();
+                TurnOnSpinners(spinny, tinyspin);
+                root.Run(); 
+            };
         }
 
         private static void AllPopUpBoxes(DisplayMap displayMap, out Button warpButton, out Button returnFromSell, out Button returnFromBuy, out Button returnFromStory, out Button returnFromRetire, out Button returnFromQuit, out DisplayMainStatus warpSpeedBox, out DisplayMainStatus buyBox, out DisplayMainStatus sellBox, out DisplayMainStatus storyBox, out DisplayMainStatus retireBox, out DisplayMainStatus quitBox)
@@ -552,7 +625,6 @@ namespace SpaceGameTUI
         {
             foreach (var planet in planets)
             {
-                // TODO add an if statement here to make the selected planet a spinner
                 new Label(displayMap) { Text = "██ - " + planet.name, Top = planet.location.y, Left = planet.location.x };
             }
         }

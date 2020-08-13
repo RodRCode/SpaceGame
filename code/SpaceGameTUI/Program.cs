@@ -111,8 +111,6 @@ namespace SpaceGameTUI
                 bool travelYes = false;
                 newLocation = planets[planetList.SelectedIndex].location;
 
-                //         warpSpeedBox.Show();
-
                 (warpSpeed, travelYes) = GetWarpSpeed(oldLocation, newLocation, ship, player, dialogList);
 
                 warpSpeedBox.Hide();
@@ -122,6 +120,14 @@ namespace SpaceGameTUI
                     TravelDataToDialogBox(oldLocation, newLocation, warpSpeed, planets, ship, player, dialogList, planetList);
 
                     SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
+
+                    Random getAttacked = new Random();
+                    int attacked = getAttacked.Next(0, 20);
+                    if (attacked == 19)
+                    {
+                        TurnOffSpinners(spinny, tinyspin);
+                        KilledByPirates(ship, player);
+                    }
 
                     spinny.Top = newLocation.y - 1;
                     spinny.Left = newLocation.x;
@@ -321,7 +327,7 @@ namespace SpaceGameTUI
 
                 UserMadeAGreatChoiceAndRetired(ship, player);
 
-                Environment.Exit(8675309);
+                Environment.Exit(42);
                 // retireBox.Show();
             };
 
@@ -337,6 +343,28 @@ namespace SpaceGameTUI
             };
 
             root.Run();
+        }
+
+        private static void KilledByPirates(Ship ship, Player player)
+        {
+            Console.Clear();
+            Console.ResetColor();
+            Console.Clear();
+            Console.ResetColor();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Clear();
+
+            Console.WriteLine($"\n\n\n\n\nWell, {player.Name} your ship was attacked by the Dread Pirate Roberts who never leaves captives alive.");
+            Console.WriteLine($"\nAnd that is exactly what happened here.  He took your {player.Money:f0} credits, ransacked the");
+            Console.WriteLine($"{ship.shipName} and thought about marooning your on {ship.planetName}, but thought better of it and");
+            Console.WriteLine($"simply threw you out the airlock at the tender age of {player.Age:f0}.\n");
+            Console.WriteLine($"Lets be real, you only had about {70 - player.Age:f0} years left in you anyway.");
+            Console.WriteLine($"\n\n\nYou had a \"meh\" life {player.Name}.  Next time don't push your luck.\n\n\n\n\nPlease play again.");
+            Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
+            StarWars();
+            Console.ReadLine();
+            Environment.Exit(666);
         }
 
         private static void TheRichEnding(Ship ship, Player player)
@@ -359,7 +387,7 @@ namespace SpaceGameTUI
             Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
             PlayTetrisSong();
             Console.ReadLine();
-            Environment.Exit(666);
+            Environment.Exit(8675309);
         }
 
         private static void ReadPlanetInfoToTheConsole(List<Planet> planets)

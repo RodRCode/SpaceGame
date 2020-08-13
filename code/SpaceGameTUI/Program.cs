@@ -7,6 +7,7 @@ using CLRCLI.Widgets;
 using System.Runtime.InteropServices;
 using System.Threading;
 
+
 //todo  STRETCH GOAL, what happens if we add Tribbles to this? Cargo capacity increases over time?  Ship bursts during travel
 
 namespace SpaceGameTUI
@@ -26,22 +27,6 @@ namespace SpaceGameTUI
             var planets = Planet.PopulatePlanets();
 
             // Declare the first few notes of the song, "Mary Had A Little Lamb".
-            Note[] Mary =
-                {
-        new Note(Tone.B, Duration.QUARTER),
-        new Note(Tone.A, Duration.QUARTER),
-        new Note(Tone.GbelowC, Duration.QUARTER),
-        new Note(Tone.A, Duration.QUARTER),
-        new Note(Tone.B, Duration.QUARTER),
-        new Note(Tone.B, Duration.QUARTER),
-        new Note(Tone.B, Duration.HALF),
-        new Note(Tone.A, Duration.QUARTER),
-        new Note(Tone.A, Duration.QUARTER),
-        new Note(Tone.A, Duration.HALF),
-        new Note(Tone.B, Duration.QUARTER),
-        new Note(Tone.D, Duration.QUARTER),
-        new Note(Tone.D, Duration.HALF)
-        };
 
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
@@ -54,13 +39,19 @@ namespace SpaceGameTUI
 
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
-            //          Play(Mary);
-            //          Console.ReadLine();
+
+/*
+            Note[] Mary = PlayMaryHadALittleLamb();
+            Play(Mary);
+            StarWars();
+
+            Console.ReadLine();
 
             Console.Clear();
             Console.Write("\n\nWhat is the name of our most resent cannonfodder.... er, recruit? ");
 
-            //            name = Console.ReadLine();
+            name = Console.ReadLine();
+*/
             var player = new Player(name);
 
             // Application.Init();
@@ -71,7 +62,6 @@ namespace SpaceGameTUI
             DialogListBox dialogList = GameDialogBox(root); //Game Dialog Box
 
             //Creates the box for the Action buttons
-            // TODO figure out how to have the window close when the "done" button is selected
 
             Button showTravelButton, showBuyButton, showSellButton, showStoryButton, showRetireButton, showQuitButton, warpButton, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit;
 
@@ -96,18 +86,10 @@ namespace SpaceGameTUI
             ConsoleColor colorRed = (ConsoleColor)4;
             ConsoleColor colorBlue = (ConsoleColor)1;
 
-
-
-
             Spinner spinny = new Spinner(displayMap) { Top = 0, Left = 1, Spinning = true, Visible = true, Foreground = colorRed };
             TinySpinner tinyspin = new TinySpinner(displayMap) { Top = 1, Left = 2, Spinning = true, Visible = true, Background = colorBlue };
 
             ReturnInfoFromButtons(root, returnFromSell, returnFromBuy, returnFromStory, returnFromRetire, returnFromQuit, buyBox, sellBox, storyBox, retireBox, quitBox, tinyspin, spinny);
-
-
-
-
-
 
             // Start the business of what happens when they use enters stuff
 
@@ -237,8 +219,6 @@ namespace SpaceGameTUI
                     statusitems = UpdateStatusBox(planets, ship, player, status);
                 };
             };
-            // TODO create the purchase section
-            // TODO: create the Transactions class
 
             // SELLING SECTION
             showSellButton.Clicked += (s, e) =>
@@ -275,6 +255,10 @@ namespace SpaceGameTUI
                             dialogList.Items.Add("You sold some " + currentItemName);
                             ship.fuelLevel -= 100; ;
                             player.Money++;
+                            if (player.Money>100000)
+                            {
+                                TheRichEnding(ship, player);
+                            }
                         }
                         else
                         {
@@ -297,6 +281,11 @@ namespace SpaceGameTUI
                                 dialogList.Items.Add("You sold some " + currentItemName);
                                 UpdateInventoryList(ship, inventoryList);
                                 player.Money += sellPrice;
+
+                                if (player.Money > 100000)
+                                {
+                                    TheRichEnding(ship, player);
+                                }
                             }
                             else
                             {
@@ -350,6 +339,30 @@ namespace SpaceGameTUI
             root.Run();
         }
 
+        private static void TheRichEnding(Ship ship, Player player)
+        {
+            Console.Clear();
+            Console.ResetColor();
+            Console.Clear();
+            Console.ResetColor();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Clear();
+            Console.WriteLine("\n\n\n\nLooking around at the Universe you have suddenly wondered WHY you have done all this.\n");
+            Console.WriteLine("You have lost so much time just wandering between planets in the dark nothingness that is the long cold");
+            Console.WriteLine("void between the lonely stars.  Maybe there is something more, something deeper that you want.");
+            Console.WriteLine($"\n\nYou find a nice place on {ship.planetName} that you manage to buy with your earnings");
+            Console.WriteLine($"\"{player.Money:f0} Galactic Patrol credits for this place isn't too bad\" you think to yourself.");
+            Console.WriteLine("You take it easy, catch up on the space videos you have missed while working and play some O.G. Mario.");
+            Console.WriteLine($"\n\nAfter some time (not too long, you decided to retire at {player.Age:f0} after all) you find someone");
+            Console.WriteLine("who puts up with your hardbitten space louse ways.  You move in together, and eventually you both grow old together");
+            Console.WriteLine($"and after {70 - player.Age:f0} years you pass away peacefully in your sleep.  Not screaming in terror like your passengers.");
+            Console.WriteLine($"\n\n\nYou had a mostly good life {player.Name}.  Congrats!\n\n\n\n\nPlease play again.");
+            Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
+            PlayTetrisSong();
+            Console.ReadLine();
+        }
+
         private static void ReadPlanetInfoToTheConsole(List<Planet> planets)
         {
             Console.Clear();
@@ -373,6 +386,8 @@ namespace SpaceGameTUI
         {
             Console.Clear();
             Console.ResetColor();
+            Console.Clear();
+            Console.ResetColor();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Clear();
@@ -381,6 +396,7 @@ namespace SpaceGameTUI
             Console.WriteLine("void between the lonely stars.  Maybe there is something more, something deeper that you want.");
             Console.WriteLine($"\n\nYou find a nice place on {ship.planetName} that you manage to buy with your earnings");
             Console.WriteLine($"\"{player.Money:f0} Galactic Patrol credits for this place isn't too bad\" you think to yourself.");
+            Console.WriteLine("You take it easy, catch up on the space videos you have missed while working and play some O.G. Mario.");
             Console.WriteLine($"\n\nAfter some time (not too long, you decided to retire at {player.Age:f0} after all) you find someone");
             Console.WriteLine("who puts up with your hardbitten space louse ways.  You move in together, and eventually you both grow old together");
             Console.WriteLine($"and after {70 - player.Age:f0} years you pass away peacefully in your sleep.  Not screaming in terror like your passengers.");
@@ -388,11 +404,6 @@ namespace SpaceGameTUI
             Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
             PlaySomeRetirementMusic();
             Console.ReadLine();
-        }
-
-        private static void PlaySomeRetirementMusic()
-        {
-            Console.Beep(659, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(523, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(375); Console.Beep(392, 125); Thread.Sleep(375); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(375); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125); Thread.Sleep(1125); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125);
         }
 
         private static void UserDecidedToQuit()
@@ -734,7 +745,56 @@ namespace SpaceGameTUI
             }
         }
 
+        private static void StarWars()
+        {
+            Console.Beep(300, 500);
+            Thread.Sleep(50);
+            Console.Beep(300, 500);
+            Thread.Sleep(50);
+            Console.Beep(300, 500);
+            Thread.Sleep(50);
+            Console.Beep(250, 500);
+            Thread.Sleep(50);
+            Console.Beep(350, 250);
+            Console.Beep(300, 500);
+            Thread.Sleep(50);
+            Console.Beep(250, 500);
+            Thread.Sleep(50);
+            Console.Beep(350, 250);
+            Console.Beep(300, 500);
+            Thread.Sleep(50);
+        }
+
+        private static void PlaySomeRetirementMusic()
+        {
+            Console.Beep(659, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(523, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(375); Console.Beep(392, 125); Thread.Sleep(375); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(375); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125); Thread.Sleep(1125); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125);
+        }
+
+        private static void PlayTetrisSong()
+        {
+            Console.Beep(1320, 500); Console.Beep(990, 250); Console.Beep(1056, 250); Console.Beep(1188, 250); Console.Beep(1320, 125); Console.Beep(1188, 125); Console.Beep(1056, 250); Console.Beep(990, 250); Console.Beep(880, 500); Console.Beep(880, 250); Console.Beep(1056, 250); Console.Beep(1320, 500); Console.Beep(1188, 250); Console.Beep(1056, 250); Console.Beep(990, 750); Console.Beep(1056, 250); Console.Beep(1188, 500); Console.Beep(1320, 500); Console.Beep(1056, 500); Console.Beep(880, 500); Console.Beep(880, 500); System.Threading.Thread.Sleep(250); Console.Beep(1188, 500); Console.Beep(1408, 250); Console.Beep(1760, 500); Console.Beep(1584, 250); Console.Beep(1408, 250); Console.Beep(1320, 750); Console.Beep(1056, 250); Console.Beep(1320, 500); Console.Beep(1188, 250); Console.Beep(1056, 250); Console.Beep(990, 500); Console.Beep(990, 250); Console.Beep(1056, 250); Console.Beep(1188, 500); Console.Beep(1320, 500); Console.Beep(1056, 500); Console.Beep(880, 500); Console.Beep(880, 500);
+        }
         // Play the notes in a song.
+        private static Note[] PlayMaryHadALittleLamb()
+        {
+            Note[] Mary =
+            {
+             new Note(Tone.B, Duration.QUARTER),
+             new Note(Tone.A, Duration.QUARTER),
+             new Note(Tone.GbelowC, Duration.QUARTER),
+             new Note(Tone.A, Duration.QUARTER),
+             new Note(Tone.B, Duration.QUARTER),
+             new Note(Tone.B, Duration.QUARTER),
+             new Note(Tone.B, Duration.HALF),
+             new Note(Tone.A, Duration.QUARTER),
+             new Note(Tone.A, Duration.QUARTER),
+             new Note(Tone.A, Duration.HALF),
+             new Note(Tone.B, Duration.QUARTER),
+             new Note(Tone.D, Duration.QUARTER),
+             new Note(Tone.D, Duration.HALF)
+             };
+            return (Mary);
+        }
         protected static void Play(Note[] tune)
         {
             foreach (Note n in tune)

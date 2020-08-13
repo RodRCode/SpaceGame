@@ -173,8 +173,8 @@ namespace SpaceGameTUI
                         {
                             dialogList.Items.Clear();
                             dialogList.Items.Add("You bought some " + currentItemName);
-                            ship.fuelLevel += 250; ;
-                            player.Money -= 10;
+                            ship.fuelLevel += 500; ;
+                            player.Money -= 25;
                         }
                         else
                         {

@@ -22,7 +22,6 @@ namespace SpaceGameTUI
             int consoleHeight = 52;
             Location oldLocation = new Location(1, 1);
             Location newLocation = new Location();
-            int warpSpeed;
             var root = new RootWindow();
             var planets = Planet.PopulatePlanets();
 
@@ -315,20 +314,15 @@ namespace SpaceGameTUI
                     statusitems = UpdateStatusBox(planets, ship, player, status);
                 };
             };
-            //       showSellButton.Clicked += (s, e) => { planetList.Hide(); inventoryList.Show(); inventoryList.SetFocus(); };
 
             //STORY SECTION
             showStoryButton.Clicked += (s, e) =>
             {
                 TurnOffSpinners(spinny, tinyspin);
 
-                var storyText = new SingleLineTextbox(storyBox) { Text = "Story!", Width = 75, Height = 10, Top = 0, Left = 0, Border = BorderStyle.Thick, Visible = false };
-
                 storyBox.Show();
 
-                storyText.Text = "Well, here we go!";
-
-               Console.Clear();
+                Console.Clear();
                 Console.ResetColor();
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -344,7 +338,6 @@ namespace SpaceGameTUI
                     Console.ReadLine();
                 }
             };
-            // TODO: Get the story to the user
 
             //USER WANTS TO LIVE THE GOOD LIFE AND RETIRE
             showRetireButton.Clicked += (s, e) =>
@@ -358,7 +351,18 @@ namespace SpaceGameTUI
             showQuitButton.Clicked += (s, e) =>
             {
                 TurnOffSpinners(spinny, tinyspin);
-                quitBox.Show();
+
+                Console.Clear();
+                Console.ResetColor();
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Clear();
+                Console.WriteLine("\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!\n\nI hope you try again soon!\n\n\n");
+
+
+
+                //                quitBox.Show();
+                Environment.Exit(90210);
             };
             // TODO: Have a way to exit the program and give the user a final goodbye
 

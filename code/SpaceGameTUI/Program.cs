@@ -7,9 +7,6 @@ using CLRCLI.Widgets;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-
-//todo  STRETCH GOAL, what happens if we add Tribbles to this? Cargo capacity increases over time?  Ship bursts during travel
-
 namespace SpaceGameTUI
 {
     class Program
@@ -40,7 +37,7 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
-                        name = ForAQuickIntroCommentMeOut();
+            name = ForAQuickIntroCommentMeOut();
 
             var player = new Player(name);
 
@@ -112,11 +109,16 @@ namespace SpaceGameTUI
                     SpaceTravel.TravelToNewPlanet(oldLocation, newLocation, ship, player, warpSpeed);
 
                     Random getAttacked = new Random();
-                    int attacked = getAttacked.Next(0, 50);
-                    if (attacked == 19)
+                    int randomEvent = getAttacked.Next(0, 50);
+                    if (randomEvent == 19)
                     {
                         TurnOffSpinners(spinny, tinyspin);
                         KilledByPirates(ship, player);
+                    }
+                    if (randomEvent == 42)
+                    {
+                        TurnOffSpinners(spinny, tinyspin);
+                        KilledByTribbles(ship, player);
                     }
 
                     spinny.Top = newLocation.y - 1;
@@ -333,6 +335,28 @@ namespace SpaceGameTUI
             };
 
             root.Run();
+        }
+
+        private static void KilledByTribbles(Ship ship, Player player)
+        {
+            Console.Clear();
+            Console.ResetColor();
+            Console.Clear();
+            Console.ResetColor();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Clear();
+
+            Console.WriteLine($"\n\n\n\n\nWell, {player.Name} you remember those Black Market goods you picked up?");
+            Console.WriteLine($"\nTurns out you were transporting Tribbles.  Cute and cuddly and hating Klingons, but voracious");
+            Console.WriteLine($"and extremly prolific reproducers.  The {ship.shipName} couldn't hold them all and the hull");
+            Console.WriteLine($"ripped like a rotten tomato.  Here you float in the vastness of the void at Age {player.Age:f0}.\n");
+            Console.WriteLine($"\n\nMaybe don't take questionable cargo in your future lives");
+            Console.WriteLine($"\n\n\nYou had a \"meh\" life {player.Name}.  Next time don't push your luck.\n\n\n\n\nPlease play again.");
+            Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
+            StarWars();
+            Console.ReadLine();
+            Environment.Exit(215);
         }
 
         private static string ForAQuickIntroCommentMeOut()
@@ -659,7 +683,7 @@ namespace SpaceGameTUI
             ConsoleKeyInfo numChar;
             numChar = Console.ReadKey(true);
             string numString = "";
-             try
+            try
             {
                 numString = numChar.KeyChar.ToString();
             }
@@ -861,7 +885,7 @@ namespace SpaceGameTUI
         }
 
         // Got the Mario Console.Beep() music from https://hashtagakash.wordpress.com/2014/01/22/182/
-        private static void PlaySomeRetirementMusic() 
+        private static void PlaySomeRetirementMusic()
         {
             Console.Beep(659, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(523, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(375); Console.Beep(392, 125); Thread.Sleep(375); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(375); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125); Thread.Sleep(1125); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125);
         }

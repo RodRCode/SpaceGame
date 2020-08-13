@@ -43,7 +43,6 @@ namespace SpaceGameTUI
         new Note(Tone.D, Duration.QUARTER),
         new Note(Tone.D, Duration.HALF)
         };
-            // Play the song
 
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
@@ -56,13 +55,13 @@ namespace SpaceGameTUI
 
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
-            Play(Mary);
-            Console.ReadLine();
+            //          Play(Mary);
+            //          Console.ReadLine();
 
             Console.Clear();
             Console.Write("\n\nWhat is the name of our most resent cannonfodder.... er, recruit? ");
 
-            name = Console.ReadLine();
+            //            name = Console.ReadLine();
             var player = new Player(name);
 
             // Application.Init();
@@ -97,6 +96,10 @@ namespace SpaceGameTUI
 
             ConsoleColor colorRed = (ConsoleColor)4;
             ConsoleColor colorBlue = (ConsoleColor)1;
+
+
+
+
             Spinner spinny = new Spinner(displayMap) { Top = 0, Left = 1, Spinning = true, Visible = true, Foreground = colorRed };
             TinySpinner tinyspin = new TinySpinner(displayMap) { Top = 1, Left = 2, Spinning = true, Visible = true, Background = colorBlue };
 
@@ -319,9 +322,27 @@ namespace SpaceGameTUI
             {
                 TurnOffSpinners(spinny, tinyspin);
 
-
+                var storyText = new SingleLineTextbox(storyBox) { Text = "Story!", Width = 75, Height = 10, Top = 0, Left = 0, Border = BorderStyle.Thick, Visible = false };
 
                 storyBox.Show();
+
+                storyText.Text = "Well, here we go!";
+
+               Console.Clear();
+                Console.ResetColor();
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Clear();
+                string textFromPlanet = "";
+                Console.WriteLine(textFromPlanet);
+
+                for (int i = 0; i < 7; i++)
+                {
+                    textFromPlanet = planets[i].planetInfo;
+                    Console.Clear();
+                    Console.WriteLine(textFromPlanet);
+                    Console.ReadLine();
+                }
             };
             // TODO: Get the story to the user
 

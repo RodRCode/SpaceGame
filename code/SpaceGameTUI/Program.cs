@@ -23,14 +23,10 @@ namespace SpaceGameTUI
             var root = new RootWindow();
             var planets = Planet.PopulatePlanets();
 
-            // Declare the first few notes of the song, "Mary Had A Little Lamb".
-
             Console.SetWindowSize(consoleWidth, consoleHeight);
 
             Location shipLocation = new Location(1, 1);
             var ship = new Ship(shipLocation, Item.shipItemList());
-
-
 
             Console.WriteLine();
             Console.Write("Enter Your Name:  ");
@@ -39,7 +35,7 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
-            name = ForAQuickIntroCommentMeOut();
+      //      name = ForAQuickIntroCommentMeOut();
 
             var player = new Player(name);
 

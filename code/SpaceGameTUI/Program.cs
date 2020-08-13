@@ -40,7 +40,7 @@ namespace SpaceGameTUI
             Console.Clear();
             Console.WriteLine(Planet.Backstory());
 
-//            name = ForAQuickIntroCommentMeOut();
+            //            name = ForAQuickIntroCommentMeOut();
 
             var player = new Player(name);
 
@@ -387,7 +387,7 @@ namespace SpaceGameTUI
             Console.WriteLine(lyric);
             Console.WriteLine($"Well, {player.Name} you got here because you were a MAGNIFICENT trader!  You got over {player.Money:f0} credits");
             Console.WriteLine($"and decided it was time to sell the {ship.shipName} and settle down on {ship.planetName}");
-            Console.WriteLine($"\nSit back, relax, play some Tetris, you earned it at the ripe old age of {player.Age:f0}."); 
+            Console.WriteLine($"\nSit back, relax, play some Tetris, you earned it at the ripe old age of {player.Age:f0}.");
             Console.WriteLine($"Lets be real, you only had about {70 - player.Age:f0} years left in you anyway.");
             Console.WriteLine($"\n\n\nYou had a mostly good life {player.Name}.  Congrats!\n\n\n\n\nPlease play again.");
             Console.WriteLine("\n\n\n\n\nThis has been a Jay and Rod production.\n\n\nHit enter to exit\n\n");
@@ -607,8 +607,9 @@ namespace SpaceGameTUI
                 dialogList.Items.Clear();
                 dialogList.Items.Add("Enter 'q' to exit the warp speed selection");
                 dialogList.Items.Add("What is your warp speed of choice (1-9): ");
-                var numChar = Console.ReadKey(true);
-                var numString = numChar.KeyChar.ToString();
+
+                string numString = CheckIfValidNumOrQ(dialogList);
+
                 if (numString == "q")
                 {
                     done = true;
@@ -616,7 +617,7 @@ namespace SpaceGameTUI
                 }
                 else
                 {
-                    warpSpeed = int.Parse(numChar.KeyChar.ToString());
+                    warpSpeed = int.Parse(numString);
                     double tempTime, tempFuel, tempDistance = 42.9;
                     tempDistance = SpaceTravel.DistanceCalculation(oldLocation, newLocation);
                     (tempTime, tempFuel) = SpaceTravel.WarpSpeedCalcuation(tempDistance, warpSpeed);
@@ -628,8 +629,7 @@ namespace SpaceGameTUI
                     if (canTravel)
                     {
                         dialogList.Items.Add("Do you want to go now? Y/N: ");
-                        numChar = Console.ReadKey(true);
-                        answer = numChar.KeyChar.ToString();
+                        answer = CheckIfValidYorN(dialogList);
                     }
 
                     if (answer == "y")
@@ -639,9 +639,8 @@ namespace SpaceGameTUI
                     }
                     else
                     {
-                        dialogList.Items.Add("Do you want to try a different Warp speed? Y/N: ");
-                        numChar = Console.ReadKey(true);
-                        answer = numChar.KeyChar.ToString();
+                        dialogList.Items.Add("Do you want to try a different Warp speed? y/n: ");
+                        answer = CheckIfValidYorN(dialogList);
                         if (answer == "n")
                         {
                             done = true;
@@ -653,6 +652,68 @@ namespace SpaceGameTUI
             } while (!done);
 
             return (warpSpeed, travelYes);
+        }
+
+        private static string CheckIfValidYorN(DialogListBox dialogList)
+        {
+            ConsoleKeyInfo numChar;
+            numChar = Console.ReadKey(true);
+            string numString = "";
+             try
+            {
+                numString = numChar.KeyChar.ToString();
+            }
+            catch (Exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                dialogList.Items.Add("That is not what we were looking for. Some");
+                Console.ResetColor();
+                return ("n");
+            }
+            return (numString);
+        }
+
+        private static string CheckIfValidNumOrQ(DialogListBox dialogList)
+        {
+            ConsoleKeyInfo numChar;
+            numChar = Console.ReadKey(true);
+            string numString = "";
+            int numInt = 0;
+            try
+            {
+                numString = numChar.KeyChar.ToString();
+            }
+            catch (Exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                dialogList.Items.Add("That is not what we were looking for.  Please enter a number 1 to 9 or the letter 'q'.");
+                dialogList.Items.Add("Giving you default value of '1'");
+                Console.ResetColor();
+                return ("1");
+            }
+            if (numString == "q")
+            {
+                return (numString);
+            }
+
+            try
+            {
+                numInt = int.Parse(numString);
+            }
+            catch (Exception)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                dialogList.Items.Add("That is not what we were looking for.  Please enter a number 1 to 9 or the letter 'q'.");
+                Console.ResetColor();
+            }
+            if (numInt > 0 && numInt < 10)
+            {
+                return (numString);
+            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            dialogList.Items.Add("You set a wrong value, so your warp value is set to 1.");
+            Console.ResetColor();
+            return ("1");
         }
 
         private static bool travelCheck(double tempTime, double tempFuel, Player player, Ship ship, DialogListBox dialogList)
